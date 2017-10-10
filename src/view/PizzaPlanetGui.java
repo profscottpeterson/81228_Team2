@@ -99,8 +99,8 @@ public class PizzaPlanetGui extends JFrame {
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// This code sets the Frame to Fullscreen.						IF FULL SCREEN DOESNT WORK, COMMENT THE 4 LINES BELOW
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		this.setUndecorated(true);
+		//this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		//this.setUndecorated(true);
 		this.setVisible(true);
 		contentPane.setLayout(null);
 		

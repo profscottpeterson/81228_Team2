@@ -12,7 +12,7 @@ public class PizzaPlanet {
 	User user;
 
 	public PizzaPlanet() {
-		this.view = new Quinn(this);
+//		this.view = new Quinn(this);
 		this.user = getThisUser();
 		this.menu = getMenu();
 		
