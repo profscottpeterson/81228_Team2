@@ -1,65 +1,64 @@
 package model;
 
 import view.Quinn;
+
+import java.util.List;
+
 import model.*;
 
 public class PizzaPlanet {
-	Quinn view;
+	//	Quinn view;
 	String name;
 	String address;
 
 	Menu menu;
 	User user;
+	MenuItem m;
 
 	public PizzaPlanet() {
-//		this.view = new Quinn(this);
-		this.user = getThisUser();
-		this.menu = getMenu();
+
 		
+		view.PizzaPlanetGui.userMenu(null);
+
 		System.out.println("This is Pizza Planet constructor, reporting for duty.");
 	}
 
-	private Menu getMenu() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public void handleUserClick(String usernameIn, String passwordIn) {
+		//If this is called, check the db for username and password
+		String username = "";
+		String password = "";
 
-	/*
-	 * USER: getType
-	 * @return Guest or Login 
-	 */
-	private User getThisUser() {
-		User user;
-		String userSelect = view.getUserType();
+		if (usernameIn == ""  && passwordIn == "")
+		{
+			callCategoryScreen();
+		}
 
-		switch (userSelect) {
-		case "GUEST":
-			user = new User("GUEST");
-			break;
-		case "LOGIN":
-			user = validateUser();
-			break;
-		default: 
-			user = null;
-		}
-		
-		if(user != null) {
-			return user;
-		}
 		else {
-			return null;
+			String ValidUser = Api.validateUser(username, password);
+
+			if (ValidUser == null) 
+			{
+				view.PizzaPlanetGui.userMenu("Invalid User");
+			}
+			else
+			{
+				user = new User(ValidUser);
+				callCategoryScreen();
+			}
 		}
 	}
 
 	/*
-	 * USER: get
-	 * validate the Users username and password
-	 * if its valid, return that User
-	 * else, return null
+	 * API call: Get ALL menuItems
+	 * create a list using the catagory from each item
+	 * creatin a new Menu from that catagory
 	 */
-	private User validateUser() {
-		view.userLogin();
-		return null;
+	private void callCategoryScreen() {
+		// TODO Auto-generated method stub
+		String menu = Api.getAllMenuItems();
+		view.PizzaPlanetGui.menuCats(menu, this.user);
+		
 	}
+
 
 }

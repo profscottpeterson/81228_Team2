@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTextField;
+import model.*;
 
 public class PizzaPlanetGui extends JFrame {
 
@@ -78,6 +79,16 @@ public class PizzaPlanetGui extends JFrame {
 	{
 		initComponents();
 		createEvents();
+	}
+	
+	public static void userMenu(String user)
+	{
+		
+	}
+	
+	public static void menuCats(String menu, User user)
+	{
+		
 	}
 	
 	////////////////////////////////////////////////////////////////////
