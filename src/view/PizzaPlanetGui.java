@@ -81,13 +81,30 @@ public class PizzaPlanetGui extends JFrame {
 		createEvents();
 	}
 	
+	/**
+	 * Instantiates the main menu (first screen)
+	 * @param user String optional; may have an error message
+	 */
 	public static void userMenu(String user)
 	{
+		// All the coded needed to turn this panel on and any others off
+		// EVENT: When User clicks a button, call 
+		// controller.handleUserClick("","") if GUEST
+		// controller.handleUserClick("username", "password") if LOGIN
 		
 	}
 	
+	/**
+	 * Instantiates the category menu screen (second screen) 
+	 * Shows all the categories (pizza, wings, subs) for User to choose 
+	 * @param menu List; contains the MenuItems to list
+	 * @param user User; if a User is logged in, display their info
+	 */
 	public static void menuCats(String menu, User user)
 	{
+		// All the coded needed to turn this panel on and any others off
+		// EVENT: When User clicks a menu category, let the controller know...
+		// controller.handleCatMenuClick("PIZZA"); pass in category chosen
 		
 	}
 	
