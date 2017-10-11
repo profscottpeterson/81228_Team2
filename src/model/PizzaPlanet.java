@@ -50,6 +50,10 @@ public class PizzaPlanet {
 			}
 		}
 	}
+	
+	public void handleUserClick() {
+		
+	}
 
 	/*
 	 * Controller: demand that View display the menuCats screen
