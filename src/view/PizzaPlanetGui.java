@@ -1,14 +1,13 @@
 package view;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.UIManager;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -53,7 +52,7 @@ public class PizzaPlanetGui extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) 
+/*	public static void main(String[] args) 
 	{
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -75,7 +74,7 @@ public class PizzaPlanetGui extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 
 	// Calls InitComponents and CreateEvents
@@ -91,18 +90,61 @@ public class PizzaPlanetGui extends JFrame {
 	 * @param user String optional; may have an error message
 	 */
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//////////////          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          
+	//////////////  -->        NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public static void userMenu(String user)
+	/**
+	 * ===================NAVIGATION=========================== -->
+	 */
+	public void getUserPage()
 	{
-		// All the code needed to turn this panel on and any others off
 		pnlMenuPage.setVisible(false);
 		pnlLoginPage.setVisible(true);
 		pnlTabs.setVisible(false);
 		pnlShoppingPage.setVisible(false);
-			
-		// EVENT: When User clicks a button, call 		
-		// controller.handleUserClick("","") if GUEST						
+		pnlPayment.setVisible(false);
+		pnlConfirm.setVisible(false);
+		pnlMenuPage2.setVisible(false);
+	}
+	
+	public void get1stMenuPage()
+	{
+		pnlMenuPage.setVisible(true);
+		pnlLoginPage.setVisible(false);
+		pnlTabs.setVisible(true);
+		pnlShoppingPage.setVisible(false);
+	}
+	
+	public void get2ndMenuPage()
+	{
+		
+	}
+	
+	public void getDetailsPage()
+	{
+		
+	}
+	
+	public void getShoppingPage()
+	{
+		
+	}
+	
+	public void getPaymentPage()
+	{
+		
+	}
+	
+	public void getConfirmationPage()
+	{
+		
+	}
+	/**
+	 * ===================NAVIGATION=========================== <--
+	 */
+	
+	public static void userMenu(String user)
+	{
+		// All the code needed to turn this panel on and any others off							
 			btnGuest.addActionListener(new ActionListener() 
 			{
 				public void actionPerformed(ActionEvent e) 
@@ -115,8 +157,7 @@ public class PizzaPlanetGui extends JFrame {
 					pnlConfirm.setVisible(false);
 				}
 			});
-			
-			//controller.handleUserClick("txtUserName.Text", "txtPassword.Text") if LOGIN		
+				
 			// This Event exists on pnlLogin
 			btnLogin.addActionListener(new ActionListener() 
 			{	
@@ -154,7 +195,7 @@ public class PizzaPlanetGui extends JFrame {
 		
 	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//////////////          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS       
+	//////////////   <--       NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS       
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 
@@ -175,11 +216,11 @@ public class PizzaPlanetGui extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		// This code sets the Frame to Fullscreen.						IF FULL SCREEN DOESNT WORK, COMMENT THE 4 LINES BELOW
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		// This code sets the Frame to Fullscreen.						IF FULL SCREEN DOESNT WORK, COMMENT THE 2 LINES BELOW
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setUndecorated(true);
+		
 		this.setVisible(true);
 		contentPane.setLayout(null);
 		
@@ -231,8 +272,7 @@ public class PizzaPlanetGui extends JFrame {
 		
 		// Adding the Button to the Panel
 		pnlTabs.add(btnMenu);
-		
-		
+			
 		// Account Button (Top Right of the UI)
 		btnAccount = new JButton("New button");
 		btnAccount.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Account.png")));
@@ -278,8 +318,7 @@ public class PizzaPlanetGui extends JFrame {
 		
 		// Adding Submit Panel to the Login Page
 		pnlLoginPage.add(pnlSubmit);
-		
-		
+			
 		// Setting txtUserName with Name/Font/Bounds
 		txtUserName = new JTextField();
 		txtUserName.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
@@ -300,11 +339,11 @@ public class PizzaPlanetGui extends JFrame {
 		pnlSubmit.add(lblPassword);
 		
 		// Setting txtPassword Name/Font/Bounds
-		txtPassword = new JTextField();
+		txtPassword = new JPasswordField(30);
 		txtPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
 		txtPassword.setColumns(10);
+		((JPasswordField) txtPassword).setEchoChar('*');
 		txtPassword.setBounds(311, 214, 383, 64);
-		
 		pnlSubmit.add(txtPassword);
 		
 		// Setting btnLoginS Foreground/Background
@@ -331,8 +370,7 @@ public class PizzaPlanetGui extends JFrame {
 		// Setting lblSumbit Bounds/Icon/Name
 		lblSubmit = new JLabel("");
 		lblSubmit.setBounds(6, 6, 738, 482);
-		lblSubmit.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Submit.jpg")));
-		
+		lblSubmit.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Submit.jpg")));		
 		// Adding Lbl to Panel
 		pnlSubmit.add(lblSubmit);
 				
@@ -340,6 +378,7 @@ public class PizzaPlanetGui extends JFrame {
 		JLabel lblBackgroundLogin = new JLabel("");
 		lblBackgroundLogin.setBounds(-8, 0, 2000, 1103);
 		lblBackgroundLogin.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Login_Final.png")));
+		pnlLoginPage.setVisible(false);
 		
 		// Adding Label to panel
 		pnlLoginPage.add(lblBackgroundLogin);

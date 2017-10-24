@@ -1,10 +1,11 @@
 package model;
 
+import view.PizzaPlanetGui;
 import view.Quinn;
 import model.*;
 
 public class PizzaPlanet {
-	static Quinn view;
+	PizzaPlanetGui frame;
 	String name;
 	String address;
 
@@ -12,9 +13,10 @@ public class PizzaPlanet {
 	User user;
 
 	public PizzaPlanet() {
-		PizzaPlanet.view = new Quinn(this);
-		this.user = getThisUser();
+		frame = new PizzaPlanetGui();
+//		this.user = getThisUser();
 		this.menu = getMenu();
+		frame.getUserPage();
 		
 		System.out.println("This is Pizza Planet constructor, reporting for duty.");
 	}
@@ -28,7 +30,7 @@ public class PizzaPlanet {
 	 * USER: getType
 	 * @return Guest or Login 
 	 */
-	private User getThisUser() {
+/*	private User getThisUser() {
 		User user;
 		String userSelect = view.getUserType();
 
@@ -49,7 +51,7 @@ public class PizzaPlanet {
 		else {
 			return null;
 		}
-	}
+	}*/
 
 	/*
 	 * USER: get
