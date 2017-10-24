@@ -95,20 +95,18 @@ public class PizzaPlanetGui extends JFrame {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static void userMenu(String user)
 	{
-		// All the coded needed to turn this panel on and any others off
+		// All the code needed to turn this panel on and any others off
 		pnlMenuPage.setVisible(false);
 		pnlLoginPage.setVisible(true);
 		pnlTabs.setVisible(false);
 		pnlShoppingPage.setVisible(false);
-		
-		System.out.println("We're Inside the UserMenu Method"); // TEST (Where am I?)		
+			
 		// EVENT: When User clicks a button, call 		
 		// controller.handleUserClick("","") if GUEST						
 			btnGuest.addActionListener(new ActionListener() 
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
-					model.PizzaPlanet.handleUserClick("","");
 					pnlMenuPage.setVisible(true);
 					pnlLoginPage.setVisible(false);
 					pnlTabs.setVisible(true);
@@ -121,12 +119,10 @@ public class PizzaPlanetGui extends JFrame {
 			//controller.handleUserClick("txtUserName.Text", "txtPassword.Text") if LOGIN		
 			// This Event exists on pnlLogin
 			btnLogin.addActionListener(new ActionListener() 
-			{
+			{	
 				public void actionPerformed(ActionEvent e) 
-				{			
-					model.PizzaPlanet.handleUserClick(txtUserName.getText(), txtPassword.getText());
-					System.out.println("Username: " + txtUserName.getText());
-					System.out.println("Password: " + txtPassword.getText());
+				{		
+					model.PizzaPlanet.validateUser();
 					pnlMenuPage.setVisible(true);
 					pnlLoginPage.setVisible(false);
 					pnlTabs.setVisible(true);
@@ -182,8 +178,8 @@ public class PizzaPlanetGui extends JFrame {
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// This code sets the Frame to Fullscreen.						IF FULL SCREEN DOESNT WORK, COMMENT THE 4 LINES BELOW
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		//this.setUndecorated(true);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		this.setUndecorated(true);
 		this.setVisible(true);
 		contentPane.setLayout(null);
 		
