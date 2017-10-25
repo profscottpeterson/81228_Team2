@@ -115,7 +115,9 @@ public class Api {
 	 * @param password String
 	 * @return String || null
 	 */
-	public static String validateUser(String username, String password){
+	public static User validateUser(String[] creds){
+		String username = "";
+		
 		Connection c = CreateConnection();
 		ResultSet rs = null;
 		Statement st = null;
@@ -123,7 +125,7 @@ public class Api {
 		{
 			try {
 				st = c.createStatement(); //sql query
-				String sql = "Select * From Users where UserName = " +username;
+				String sql = "Select * From Users where UserName = " + username;
 				rs = st.executeQuery(sql);
 			}catch(SQLException se) {
 				System.out.println("You got this SQL error: " +se);
@@ -147,6 +149,7 @@ public class Api {
 		//Result Set comes back needs to append into correct UserValues
 		
 		//if user is valid, return a new User("User info")
+		System.out.println("This was API getValidUser");
 		return null;
 	}//validateUser	
 	/**
@@ -156,4 +159,5 @@ public class Api {
 	public static String getAllMenuItems() {
 		return null;
 	}//getAllMenuItems
+
 }//API

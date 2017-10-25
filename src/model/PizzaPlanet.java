@@ -34,7 +34,7 @@ public class PizzaPlanet {
 	 * else, return null
 	 */
 	public User apiValidateUser(String[] creds) {
-		
+		System.out.println("pp.apiValitateIUser");
 		/*we have a GUEST */
 		if (creds == null) {
 			this.displayFirstMenu();
@@ -67,11 +67,13 @@ public class PizzaPlanet {
 
 	/* Call to view - User Page*/
 	private void displyUserPage() {
+		System.out.println("pp.displayUserPage");
 		view.UserPage(this.user, this);
 	}
 	
 	/* Call to view - First Menu Page*/
 	private void displayFirstMenu() {
+		System.out.println("pp.displayFirstPage");
 		//Menu cats = Api.GetFoodTypes();
 		view.get1stMenuPage(this.getUser(), null, this);
 	}

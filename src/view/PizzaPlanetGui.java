@@ -69,17 +69,15 @@ public class PizzaPlanetGui extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String[] creds = new String[2];
-				
+				String[] creds = null;
+
 				//[username. password]
 				pp.apiValidateUser(creds);
-				
-//				pnlMenuPage.setVisible(true);
-//				pnlLoginPage.setVisible(false);
-//				pnlTabs.setVisible(true);
-//				pnlShoppingPage.setVisible(false);
-//				pnlPayment.setVisible(false);
-//				pnlConfirm.setVisible(false);
+
+				//				pnlMenuPage.setVisible(true);
+				//				pnlLoginPage.setVisible(false);
+				//				pnlTabs.setVisible(true);
+				//				pnlShoppingPage.setVisible(false);
 			}
 		});
 
@@ -89,17 +87,17 @@ public class PizzaPlanetGui extends JFrame {
 		{	
 			public void actionPerformed(ActionEvent e) 
 			{		
-				String[] creds = null;
-				
+				String[] creds = new String[2];
+
 				//[username. password]
 				pp.apiValidateUser(creds);
-				
+
+
 				pnlMenuPage.setVisible(true);
 				pnlLoginPage.setVisible(false);
 				pnlTabs.setVisible(true);
 				pnlShoppingPage.setVisible(false);
-				pnlPayment.setVisible(false);
-				pnlConfirm.setVisible(false);
+
 			}
 		});
 	}
@@ -116,35 +114,10 @@ public class PizzaPlanetGui extends JFrame {
 		pnlLoginPage.setVisible(false);
 		pnlTabs.setVisible(true);
 		pnlShoppingPage.setVisible(false);
-		pnlPayment.setVisible(false);
-		pnlConfirm.setVisible(false);
-		
-					
-		btnGuest.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				pnlMenuPage.setVisible(true);
-				pnlLoginPage.setVisible(false);
-				pnlTabs.setVisible(true);
-				pnlShoppingPage.setVisible(false);
-				pnlPayment.setVisible(false);
-				pnlConfirm.setVisible(false);
-			}
-		});
 
-		btnLogin.addActionListener(new ActionListener() 
-		{	
-			public void actionPerformed(ActionEvent e) 
-			{		
-				pnlMenuPage.setVisible(true);
-				pnlLoginPage.setVisible(false);
-				pnlTabs.setVisible(true);
-				pnlShoppingPage.setVisible(false);
-				pnlPayment.setVisible(false);
-				pnlConfirm.setVisible(false);
-			}
-		});
+
+
+
 	}		
 
 	/**

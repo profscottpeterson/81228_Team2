@@ -19,9 +19,9 @@ public class User {
 		this.userType = "GUEST";
 	}
 	
-	public User(String string) {
+	public User(String name) {
 		// TODO Auto-generated constructor stub
-		//this.userType =
+		this.firstName = name;
 		this.userType = "REGISTERED";
 		this.payment.put("type", "value");
 		this.payment.put("number", "value");
