@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTextField;
@@ -85,19 +86,53 @@ public class PizzaPlanetGui extends JFrame {
 		// This Event exists on pnlLogin
 		btnLogin.addActionListener(new ActionListener() 
 		{	
+			
+			
 			public void actionPerformed(ActionEvent e) 
 			{		
-				String[] creds = new String[2];
-
-				//[username. password]
-				pp.apiValidateUser(creds);
-
-
-				pnlMenuPage.setVisible(true);
-				pnlLoginPage.setVisible(false);
-				pnlTabs.setVisible(true);
-				pnlShoppingPage.setVisible(false);
-
+				String[] creds = new String[2];	
+				creds[0] = txtUserName.getText();
+				creds[1] = txtPassword.getText();
+				
+				//Validate Username
+				if (creds[0].length() < 5)
+				{
+					System.out.println("Please Enter a Large Enough Username! (RANGE 5 - 15)");
+				}
+				else
+				{
+					if (creds[0].length() > 15)
+					{
+						System.out.println("Your Username is to large! (RANGE 5 - 15)");
+					}
+					else
+					{
+						System.out.println("USERNAME:" + " " + creds[0]);
+						
+						//Validate Password				
+						if (creds[1].length() < 5) 
+						{
+							System.out.println("Please Enter a Large Enough Password!");
+						}
+						else
+						{
+							if (creds[1].length() > 25)
+							{
+								System.out.println("Your Password is too Large! (Range 5 - 25)");
+							}
+							else
+							{
+								System.out.println("PASSWORD:" + " " + creds[1]);
+								//[username. password]
+								pp.apiValidateUser(creds);
+								pnlMenuPage.setVisible(true);
+								pnlLoginPage.setVisible(false);
+								pnlTabs.setVisible(true);
+								pnlShoppingPage.setVisible(false);
+							}
+						}
+					}
+				}
 			}
 		});
 	}
@@ -109,17 +144,44 @@ public class PizzaPlanetGui extends JFrame {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void get1stMenuPage(User user, Object o,  PizzaPlanet pp) {
+	public void get1stMenuPage(User user, Object o,  PizzaPlanet pp) 
+	{
 		pnlMenuPage.setVisible(true);
 		pnlLoginPage.setVisible(false);
 		pnlTabs.setVisible(true);
 		pnlShoppingPage.setVisible(false);
+	}	
+	
+	public void get2ndMenuPage(User user, List<Menu> pizza, PizzaPlanet pp)
+	{
+		
+	}
+	
+	public void getMenuItemsDetailPage(User user, MenuItem pizza, PizzaPlanet pp)
+	{
+		
+	}
+	
+	public void getOrdersPage(User user, ShoppingCart cart, PizzaPlanet pp)
+	{
+		
+	}
+	
+	public void getPaymentPage(User user, ShoppingCart cart, PizzaPlanet pp)
+	{
+		
+	}
 
-
-
-
-	}		
-
+	public void getConfirmationPage(User user, Payment pay, PizzaPlanet pp)
+	{
+		
+	}
+	
+	public void getAccountPage(User user, PizzaPlanet pp)
+	{
+		
+	}
+	
 	/**
 	 * Instantiates the category menu screen (second screen) 
 	 * Shows all the categories (pizza, wings, subs) for User to choose 
@@ -163,9 +225,9 @@ public class PizzaPlanetGui extends JFrame {
 		setContentPane(contentPane);
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		// This code sets the Frame to Fullscreen.						IF FULL SCREEN DOESNT WORK, COMMENT THE 4 LINES BELOW
+		// This code sets the Frame to Fullscreen.						IF FULL SCREEN DOESNT WORK, COMMENT THE 2 LINES BELOW
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		//this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setUndecorated(true);
 		this.setVisible(true);
 		contentPane.setLayout(null);
@@ -430,7 +492,7 @@ public class PizzaPlanetGui extends JFrame {
 	}
 
 	////////////////////////////////////////////////////////////////////
-	///// This Method contains all of the code for creating Events
+	///// This Method contains all of the code for creating Events 
 	////////////////////////////////////////////////////////////////////
 	private void createEvents() 
 	{	

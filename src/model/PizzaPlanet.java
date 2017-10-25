@@ -2,12 +2,16 @@ package model;
 
 import view.PizzaPlanetGui;
 import view.Quinn;
+
+import java.util.List;
+
 import model.*;
 
 public class PizzaPlanet {
 	PizzaPlanetGui view;
 	String name;
 	String address;
+	ShoppingCart cart;
 
 	Menu menu;
 	User user = null;
@@ -57,6 +61,14 @@ public class PizzaPlanet {
 		return null;
 	}
 	
+	public ShoppingCart getCart(){
+		return this.cart;
+	}
+	
+	public void setCart(ShoppingCart cart){
+		this.cart = cart;
+	}
+	
 	public User getUser() {
 		return this.user;
 	}
@@ -64,20 +76,56 @@ public class PizzaPlanet {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	/* Payment Transaction */
+	private String paymentTransaction(Payment pay){
+		
+		return null;
+	}
+	
+	/* Call to view - Account Page*/
+	private void displayAccountPage() {
+		view.getAccountPage(this.user, this);
+	}
 
 	/* Call to view - User Page*/
 	private void displyUserPage() {
-		System.out.println("pp.displayUserPage");
 		view.UserPage(this.user, this);
 	}
 	
 	/* Call to view - First Menu Page*/
 	private void displayFirstMenu() {
-		System.out.println("pp.displayFirstPage");
-		//Menu cats = Api.GetFoodTypes();
-		view.get1stMenuPage(this.getUser(), null, this);
+		Menu cats = null;
+		view.get1stMenuPage(this.getUser(), cats, this);
+	}
+	
+	/* Call to view - Second Menu Page*/
+	private void displaySecondMenu() {
+		List<Menu> Pizza = null;
+		view.get2ndMenuPage(this.getUser(), Pizza, this);
 	}
 
+	/* Call to view - Menu Items Detail Page*/
+	private void displayMenuItemsDetail() {
+		MenuItem peperoniPizza = null;
+		view.getMenuItemsDetailPage(this.getUser(), peperoniPizza, this);
+	}
+	
+	/* Call to view - Orders Page*/
+	private void displayOrders() {
+		view.getOrdersPage(this.getUser(), this.getCart(), this);
+	}
 
+	/* Call to view - Payment Page*/
+	private void displayPayment() {
+		view.getPaymentPage(this.getUser(), this.getCart(), this);
+	}
+	
+	/* Call to view - Confirmation Page*/
+	private void displayConfirmation() {
+		Payment pay = null;
+		view.getConfirmationPage(this.getUser(), pay, this);
+	}
+	
 
 }
