@@ -30,7 +30,7 @@ public class Api {
 		return con;
 	}//CreateConnection
 	
-	private static ArrayList<String> GetFoodTypes()
+	public static ArrayList<String> GetFoodTypes()
 	{
 		Connection c = CreateConnection();
 		ResultSet rs = null;
@@ -74,11 +74,18 @@ public class Api {
 		return fType;
 	}//GetFoodTypes
 	
-	private static ResultSet GetPizza()
+	
+	/**
+	 * 
+	 * @return Menu
+	 */
+	public static Menu GetMenu()
 	{
 		Connection c = CreateConnection();
 		ResultSet rs = null;
 		Statement st = null;
+		Menu dontuse = null;
+		
 		if(c !=null)
 		{
 			try {
@@ -104,8 +111,11 @@ public class Api {
 				}catch(SQLException s) {s.printStackTrace();}
 			}//finally
 		}//if
-		else {return rs = null;}
-		return rs;
+		else {return dontuse = null;}
+		
+		
+		return dontuse;
+		
 	}//GetPizza
 		
 	 /**
