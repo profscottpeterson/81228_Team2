@@ -4,7 +4,7 @@ import model.PizzaPlanet;
 import model.User;
 
 public class Quinn {
-	/* Pass in the PizzaPlant so we can call its methods to update the state */
+	/* Pass in the PizzaPlanet so we can call its methods to update the state */
 	PizzaPlanet pp;
 	
 	public Quinn(PizzaPlanet pp) {
@@ -25,13 +25,12 @@ public class Quinn {
 	/*
 	 * User:
 	 */
-	public String[] userLogin() {
+	public static String[] userLogin() {
 		String[] credentials = new String[2];
 		String user = ""; //get user input
 		String pass = ""; //get user input
 		credentials[0] = user;
-		credentials[1] = pass;
-		
+		credentials[1] = pass;		
 		return credentials;
 	}
 	
