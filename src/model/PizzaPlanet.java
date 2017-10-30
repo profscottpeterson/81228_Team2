@@ -21,9 +21,7 @@ public class PizzaPlanet {
 		view = new PizzaPlanetGui();
 		this.displyUserPage();
 		System.out.println("This is Pizza Planet constructor, reporting for duty.");
-	}
-
-	
+	}	
 	/*
 	 * USER: get
 	 * validate the Users username and password
@@ -38,7 +36,14 @@ public class PizzaPlanet {
 		} 
 		/*we have a USER */
 		else {
-			User returnedUser = Api.validateUser(creds);
+			String u = creds[0];
+			String p = creds[1];
+			User returnedUser = null;
+			boolean validUser = Api.IsThisValidUser(u,p);
+			if(validUser)
+			{
+				returnedUser = Api.CreateUserInformation(u);
+			}
 			
 			/* Invalid User or Password*/
 			if(returnedUser == null) {
