@@ -110,7 +110,6 @@ public class Api {
 		if(uName.equals(username) && pass.equals(password))
 		{validUserPassCombo = true;}
 		else {validUserPassCombo = false;}
-		System.out.println(validUserPassCombo);
 		return validUserPassCombo;
 	}//IsThisValidUser
 	
@@ -143,9 +142,7 @@ public class Api {
 					phone = rs.getString("Phone");
 				}//while
 				u = new User(userType,firstName,lastName,street,city,state,zip,userId,phone);
-				System.out.println("Valid in User");
-			}else {u = null;
-			System.out.println("Error in User");}
+			}else {u = null;}
 		}catch(SQLException s) {s.printStackTrace();}
 		return u;
 	}//CreateUserInformation
