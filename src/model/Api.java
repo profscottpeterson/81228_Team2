@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public class Api {
 	
 	//Database variables and connection information from the School Server if it ever works
-	//DO NOT UPDATE THIS
-	//private static final String DB_URL = "jdbc:mysql://bitweb3.nwtc.edu:3306/dbsoftdev1";
-	//private static final String DB_URL = "jdbc:mysql://11.0.6251.0:3306/dbsoftdev1";
-	//private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	//private static final String USER = "softdevuser1";
-	//private static final String PASS = "XZ36KrMB}n";
+//	//DO NOT UPDATE THIS
+//	private static final String DB_URL = "jdbc:sqlserver://bitweb3.nwtc.edu;databaseName=dbsoftdev1;integratedSecurity=true";
+//	//private static final String DB_URL = "jdbc:sqlserver://11.0.6251.0:1433/dbsoftdev1";
+//	private static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+//	private static final String USER = "softdevuser1";
+//	private static final String PASS = "XZ36KrMB}n";
 	
 	//this is from the phpmyadmin
 	//DO NOT UPDATE THIS
