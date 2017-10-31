@@ -19,6 +19,20 @@ public class User {
 		this.userType = "GUEST";
 	}
 	
+	public User(String userT, String fName, String lName, String strt, String cty, String stte, 
+				String zp, String uID, String phn)
+	{
+		userType = userT;
+		firstName = fName;
+		lastName = lName;
+		street = strt;
+		city = cty;
+		state = stte;
+		zip = zp;
+		userId= uID;
+		phone = phn;
+	}//User(all variables)
+	
 	public User(String name) {
 		// TODO Auto-generated constructor stub
 		this.firstName = name;
