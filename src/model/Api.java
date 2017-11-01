@@ -2,6 +2,7 @@ package model;
 import java.awt.List;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Api {
 	
@@ -130,25 +131,29 @@ public class Api {
 		return u;
 	}//CreateUserInformation
 
-	public static ArrayList<String> GetFoodTypes()
+	public static ArrayList<Map<String,String>> GetFoodTypes()
 	{
 		ResultSet rs = GetResultSet("Select * from Food_Types");
-		ArrayList<String> fType = new ArrayList<String>();
+		ArrayList<Map<String, String>> fType = new ArrayList<Map<String,String>>();
 		try {
 			if(rs != null) 
 			{
 				while(rs.next())
 				{
 					String name = rs.getString("FType_name");
-					fType.add(name);
+					
+//					fType.add(name);
+					
+					
 				}//while
 			}else {fType = null;}
 		}catch(SQLException s) {s.printStackTrace();}
 		return fType;
 	}//GetFoodTypes
 	
-	public static Menu GetMenu()
-	{
+	public static Menu GetMenu(String catID)
+	{	
+		/* Henry, we are passing in the ID of the Menu to retrieve, return me a Menu*/
 		Menu dontuse = null;
 		
 		if(c !=null)
