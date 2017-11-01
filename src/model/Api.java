@@ -60,7 +60,6 @@ public class Api {
 		}//if
 		if(rs == null)
 		{rs = null;}//if created to stop java from yelling about rs never being used.
-		CloseStuff();//close the resultset
 		return rs;
 	}//GetResults
 	
