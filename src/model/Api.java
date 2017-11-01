@@ -19,6 +19,9 @@ public class Api {
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	private static final String USER = "sql9202256";
 	private static final String PASS = "5NUvUnrQ2g";
+	private static Connection c = CreateConnection();
+	private static ResultSet rs = null;
+	private static Statement st = null;
 	
 	private static Connection CreateConnection()
 	{
@@ -40,9 +43,6 @@ public class Api {
 	
 	private static ResultSet GetResultSet(String sql)
 	{
-		Connection c = CreateConnection();
-		ResultSet rs = null;
-		Statement st = null;
 		if(c !=null)
 		{
 			System.out.println("Into the database...");
@@ -55,68 +55,50 @@ public class Api {
 			}catch(Exception e){
 				System.out.println("You got this error: " +e);
 				rs = null;
-			}//finally {
-//				//close the SQL Statement
-//				try {
-//					if(st !=null)
-//					{st.close();}//if
-//				}catch(SQLException se) {}//nothing we can do
-//				//close the connection
-//				try {
-//					if(c != null)
-//					{c.close();}//if
-//				}catch(SQLException s) {s.printStackTrace();}
-//			}//finally
+			}
 		}//if
 		if(rs == null)
 		{rs = null;}//if created to stop java from yelling about rs never being used.
+		CloseStuff();//close the resultset
 		return rs;
 	}//GetResults
 	
-	public static ArrayList<String> GetFoodTypes()
+	public static boolean IsThisValidUser(String username, String password)
 	{
-		ResultSet rs = GetResultSet("Select * from Food_Types");
-		ArrayList<String> fType = new ArrayList<String>();
+		rs = GetResultSet("Select u.Username, u.Password From Users u where u.Username = \'"+username+"\'");
+		boolean validUserPassCombo = false; //true only if they are equal to the username and password sent in;
+		String uName = null;
+		String pass = null;
 		try {
 			if(rs != null) 
 			{
 				while(rs.next())
 				{
-					String name = rs.getString("FType_name");
-					fType.add(name);
-				}//while
-			}else {fType = null;}
-		}catch(SQLException s) {s.printStackTrace();}
-		return fType;
-	}//GetFoodTypes
-	
-	public static boolean IsThisValidUser(String username, String password)
-	{
-		ResultSet r = GetResultSet("Select u.Username, u.Password From Users u where u.Username = \'"+username+"\'");
-		boolean validUserPassCombo = false; //true only if they are equal to the username and password sent in;
-		String uName = null;
-		String pass = null;
-		try {
-			if(r != null) 
-			{
-				while(r.next())
-				{
 					System.out.println("Testing UserName to database...");
-					uName = r.getString("Username");
-					pass = r.getString("Password");
+					uName = rs.getString("Username");
+					pass = rs.getString("Password");
 				}//while
 			}else {validUserPassCombo = false;} //turn this false because rs returned nothing so maybe incorrect casing for username
 		}catch(SQLException s) {s.printStackTrace();}
 		if(uName.equals(username) && pass.equals(password))
 		{validUserPassCombo = true;}
 		else {validUserPassCombo = false;}
+		CloseStuff();//close the resultset
 		return validUserPassCombo;
 	}//IsThisValidUser
+	
+	private static void CloseStuff()
+	{
+		try {
+			if(rs !=null)
+			{rs.close();}//if
+		}catch(SQLException se) {}//nothing we can do
+	}//CloseStuff
 	
 	public static User CreateUserInformation(String username)
 	{
 		User u = null;
-		ResultSet rs = GetResultSet("Select UserId,FName,LName,Address,Phone,City,State,ZipCode,UserType From Users where Username =\'" +username+"\'");
+		rs = GetResultSet("Select UserId,FName,LName,Address,Phone,City,State,ZipCode,UserType From Users where Username =\'" +username+"\'");
 		String userType = null;
 		String firstName = null;
 		String lastName = null;
@@ -144,14 +126,29 @@ public class Api {
 				u = new User(userType,firstName,lastName,street,city,state,zip,userId,phone);
 			}else {u = null;}
 		}catch(SQLException s) {s.printStackTrace();}
+		CloseStuff();
 		return u;
 	}//CreateUserInformation
 
+	public static ArrayList<String> GetFoodTypes()
+	{
+		ResultSet rs = GetResultSet("Select * from Food_Types");
+		ArrayList<String> fType = new ArrayList<String>();
+		try {
+			if(rs != null) 
+			{
+				while(rs.next())
+				{
+					String name = rs.getString("FType_name");
+					fType.add(name);
+				}//while
+			}else {fType = null;}
+		}catch(SQLException s) {s.printStackTrace();}
+		return fType;
+	}//GetFoodTypes
+	
 	public static Menu GetMenu()
 	{
-		Connection c = CreateConnection();
-		ResultSet rs = null;
-		Statement st = null;
 		Menu dontuse = null;
 		
 		if(c !=null)
