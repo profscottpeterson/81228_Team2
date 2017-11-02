@@ -2,6 +2,7 @@ package model;
 import java.awt.List;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Api {
 	
@@ -13,7 +14,7 @@ public class Api {
 //	private static final String USER = "softdevuser1";
 //	private static final String PASS = "XZ36KrMB}n";
 	
-	//this is from the phpmyadmin
+	//this is from the phpmyadmin this is the connection variables to access the pizzaplanet db
 	//DO NOT UPDATE THIS
 	private static final String DB_URL = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9202256";
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -59,7 +60,6 @@ public class Api {
 		}//if
 		if(rs == null)
 		{rs = null;}//if created to stop java from yelling about rs never being used.
-		CloseStuff();//close the resultset
 		return rs;
 	}//GetResults
 	
@@ -86,14 +86,6 @@ public class Api {
 		CloseStuff();//close the resultset
 		return validUserPassCombo;
 	}//IsThisValidUser
-	
-	private static void CloseStuff()
-	{
-		try {
-			if(rs !=null)
-			{rs.close();}//if
-		}catch(SQLException se) {}//nothing we can do
-	}//CloseStuff
 	
 	public static User CreateUserInformation(String username)
 	{
@@ -130,17 +122,18 @@ public class Api {
 		return u;
 	}//CreateUserInformation
 
-	public static ArrayList<String> GetFoodTypes()
+	//This will get the 2nd View displaying all the available categories of food
+		//Pizzas, Subs, Wings, Sodas [categories of food]
+	public static ArrayList<Map<String,String>> GetFoodTypes()
 	{
-		ResultSet rs = GetResultSet("Select * from Food_Types");
-		ArrayList<String> fType = new ArrayList<String>();
+		rs = GetResultSet("Select * from Food_Types");
+		ArrayList<Map<String, String>> fType = new ArrayList<Map<String,String>>();
 		try {
 			if(rs != null) 
 			{
 				while(rs.next())
 				{
 					String name = rs.getString("FType_name");
-					fType.add(name);
 				}//while
 			}else {fType = null;}
 		}catch(SQLException s) {s.printStackTrace();}
@@ -149,36 +142,7 @@ public class Api {
 	
 	public static Menu GetMenu()
 	{
-		Menu dontuse = null;
-		
-		if(c !=null)
-		{
-			try {
-				st = c.createStatement(); //sql query
-				String sql = "select * from foods where foods.FType_id = 1";
-				rs = st.executeQuery(sql);
-			}catch(SQLException se) {
-				System.out.println("You got this SQL error: " +se);
-				rs = null;
-			}catch(Exception e){
-				System.out.println("You got this error: " +e);
-				rs = null;
-			}finally {
-				//close the SQL Statement
-				try {
-					if(st !=null)
-					{st.close();}//if
-				}catch(SQLException se) {}//nothing we can do
-				//close the connection
-				try {
-					if(c != null)
-					{c.close();}//if
-				}catch(SQLException s) {s.printStackTrace();}
-			}//finally
-		}//if
-		else {return dontuse = null;}
-		
-		
+		Menu dontuse = null;		
 		return dontuse;
 		
 	}//GetPizza
@@ -186,5 +150,12 @@ public class Api {
 	public static String getAllMenuItems() {
 		return null;
 	}//getAllMenuItems
-
+	
+	private static void CloseStuff()
+	{
+		try {
+			if(rs !=null)
+			{rs.close();}//if
+		}catch(SQLException se) {}//nothing we can do
+	}//CloseStuff
 }//API

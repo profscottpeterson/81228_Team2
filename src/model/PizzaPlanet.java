@@ -5,6 +5,7 @@ import view.Quinn;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import model.*;
 
@@ -79,7 +80,7 @@ public class PizzaPlanet {
 	
 	/* Call to view - First Menu Page*/
 	private void displayFirstMenu() {
-		ArrayList<String> foodTypes;
+		ArrayList<Map<String,String>> foodTypes;
 		//TODO: if null, return error message
 		foodTypes = Api.GetFoodTypes() != null ? Api.GetFoodTypes() : null;
 		
