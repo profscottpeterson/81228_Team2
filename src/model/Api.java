@@ -2,6 +2,7 @@ package model;
 import java.awt.List;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Api {
@@ -100,6 +101,7 @@ public class Api {
 		String zip = null;
 		String userId = null;
 		String phone = null;
+		System.out.println("Creating User Name");
 		try {
 			if(rs != null) 
 			{
@@ -123,28 +125,51 @@ public class Api {
 	}//CreateUserInformation
 
 	//This will get the 2nd View displaying all the available categories of food
-		//Pizzas, Subs, Wings, Sodas [categories of food]
-	public static ArrayList<Map<String,String>> GetFoodTypes()
+	//Pizzas, Subs, Wings, Sodas [categories of food]
+	public static HashMap<String,String> GetFoodTypes()
 	{
 		rs = GetResultSet("Select * from Food_Types");
-		ArrayList<Map<String, String>> fType = new ArrayList<Map<String,String>>();
+		//ArrayList<Map<String, String>> fCategories = new ArrayList<Map<String,String>>();
+		HashMap<String,String> myMap = new HashMap<String,String>();
+		System.out.println("I'm looking it all the food categories");
 		try {
 			if(rs != null) 
 			{
 				while(rs.next())
 				{
+					String id = rs.getString("FType_ID");
 					String name = rs.getString("FType_name");
+					myMap.put(id, name);
 				}//while
-			}else {fType = null;}
+			}else {myMap = null;}
 		}catch(SQLException s) {s.printStackTrace();}
-		return fType;
+		CloseStuff();		
+		System.out.println(myMap);
+		return myMap;
 	}//GetFoodTypes
 	
-	public static Menu GetMenu()
+	//This is when you are getting a specific Menu Item group
+	//All pizza's or all subs returned but not both
+	public static Menu GetMenu(String indexFoodWanted)
 	{
-		Menu dontuse = null;		
+		Menu dontuse = null;
+		rs = GetResultSet("Select f.Food_ID, f.Food_Name from Foods f where f.FType_ID =\'"+indexFoodWanted+"\'" );
+		HashMap<String,String> myMap = new HashMap<String,String>();
+		System.out.println("I'm looking it all the food categories");
+		try {
+			if(rs != null) 
+			{
+				while(rs.next())
+				{
+					String foodId = rs.getString("Food_ID");
+					String name = rs.getString("Food_Name");
+					myMap.put(foodId,name);
+				}//while
+			}else {myMap = null;}
+		}catch(SQLException s) {s.printStackTrace();}
+		CloseStuff();	
+		System.out.println(myMap);
 		return dontuse;
-		
 	}//GetPizza
 
 	public static String getAllMenuItems() {

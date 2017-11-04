@@ -4,6 +4,7 @@ import view.PizzaPlanetGui;
 import view.Quinn;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,28 +63,31 @@ public class PizzaPlanet {
 	}
 	
 	
-	private Menu getMenu(String catMenu) {
+	private Menu getMenu(String catMenu) 
+	{
 		
 		if (catMenu != null) {
-			Menu menu = Api.GetMenu();
+			Menu menu = Api.GetMenu("1");
 		}
 		return null;
 	}
 
 
 	/* Call to view - User Page*/
-	private void displyUserPage() {
+	private void displyUserPage() 
+	{
 		
 		view.UserPage(this.user, this);
 		//View callback = pp.apiValidateUser()
 	}
 	
 	/* Call to view - First Menu Page*/
-	private void displayFirstMenu() {
-		ArrayList<Map<String,String>> foodTypes;
+	private void displayFirstMenu() 
+	{
+		HashMap<String,String> foodTypes;
 		//TODO: if null, return error message
-		foodTypes = Api.GetFoodTypes() != null ? Api.GetFoodTypes() : null;
-		
+		foodTypes = Api.GetFoodTypes();
+		//foodTypes = Api.GetFoodTypes() != null ? Api.GetFoodTypes() : null;
 		view.get1stMenuPage(this.getUser(), foodTypes, this);
 		//View callback = pp.getMenu()
 	}
