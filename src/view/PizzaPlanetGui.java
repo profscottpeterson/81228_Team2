@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTextField;
 import model.*;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class PizzaPlanetGui extends JFrame {
 
@@ -37,7 +39,6 @@ public class PizzaPlanetGui extends JFrame {
 	private JLabel lblBackgroundMenu;
 	private JPanel pnlCat;
 	private static JPanel pnlTabs;
-	private JLabel lblTabs;
 	private JButton btnShopping;
 	private JButton btnMenu;
 	private JButton btnAccount;
@@ -45,11 +46,37 @@ public class PizzaPlanetGui extends JFrame {
 	private JLabel lblBackgroundShop;
 	private JPanel pnlMenuPage2;
 	private JLabel lblBackgroundMenu2;
-	private JLabel label_3;
 	private JPanel pnlCat2;
-	private JLabel label_2;
+	private JLabel lblBackgroundCat;
 	private static JPanel pnlPayment;
 	private static JPanel pnlConfirm;
+	private JButton btnHome;
+	private JPanel pnlAccountPage;
+	private JLabel lblBackground;
+	private JPanel pnlCat3;
+	private JLabel lblBackgroundCat2;
+	private JLabel lblUserAnswer;
+	private JButton btnSignUp;
+	private static JPanel pnlSignUpPage;
+	private JLabel lblUserError;
+	private JLabel lblPassError;
+	private JLabel lblUsername;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JTextField txtUserSign;
+	private JLabel lblPassword2;
+	private JTextField txtPassSign;
+	private JLabel lblRewritePass;
+	private JTextField txtPassSign2;
+	private JLabel lblEmailSign;
+	private JTextField txtEmailSign;
+	private JLabel lblCitySign;
+	private JTextField txtCitySign;
+	private JLabel lblStreet;
+	private JTextField txtStreetSign;
+	private JLabel lblLOGO;
+
+
 
 	// Calls InitComponents and CreateEvents
 	public PizzaPlanetGui() 
@@ -64,6 +91,8 @@ public class PizzaPlanetGui extends JFrame {
 		pnlLoginPage.setVisible(true);
 		pnlTabs.setVisible(false);
 		pnlShoppingPage.setVisible(false);
+		pnlSignUpPage.setVisible(false);
+		pnlAccountPage.setVisible(false);
 
 		// EVENT: When User clicks a button, call 		
 		// controller.handleUserClick("","") if GUEST						
@@ -98,13 +127,16 @@ public class PizzaPlanetGui extends JFrame {
 				//Validate Username
 				if (creds[0].length() < 5)
 				{
-					System.out.println("Please Enter a Large Enough Username! (RANGE 5 - 15)");
+					String Error1 = "<html>Please Enter a Large Enough Username! <br>(Range 5 - 15)</html>";
+					lblUserError.setText(Error1);
 				}
 				else
 				{
 					if (creds[0].length() > 15)
 					{
 						System.out.println("Your Username is to large! (RANGE 5 - 15)");
+						String Error2 = "<html>Your Username is to large!</html>";
+						lblUserError.setText(Error2);
 					}
 					else
 					{
@@ -114,12 +146,17 @@ public class PizzaPlanetGui extends JFrame {
 						if (creds[1].length() < 5) 
 						{
 							System.out.println("Please Enter a Large Enough Password!");
+							String Error3 = "<html>Please Enter a Large Enough Password! <br>(Range 5-25)</html>";
+							lblPassError.setText(Error3);
+							lblUserError.setText("");
 						}
 						else
 						{
 							if (creds[1].length() > 25)
 							{
 								System.out.println("Your Password is too Large! (Range 5 - 25)");
+								String Error4 = "<html>Your Password is too Large! <br>(Range 5 - 25)</html>";
+								lblPassError.setText(Error4);
 							}
 							else
 							{
@@ -148,17 +185,18 @@ public class PizzaPlanetGui extends JFrame {
 	public void get1stMenuPage(User user, List<Map<String,String>> foodtypes,  PizzaPlanet pp) 
 	{
 		
-		/*
-		 * Loop through the foodtypes...
-		 * for(int i = 0; i < foodtypes.length(); i++{
-		 * 		
-		 * 	foodtypes.get(i).id = "1", 
-		 * 	foodtypes.get(i).name = "PIZZA"
-		 * 
-		 * 	foodtypes.get(i).id = "2", 
-		 * 	foodtypes.get(i).name = "WING"
-		 * 
-		 * }
+		
+		  //Loop through the foodtypes...
+		  //for(int i = 0; i < ((CharSequence) foodtypes).length(); i++)
+		  //{
+		  	//Map<String, String> Test = foodtypes.get(i); 
+		  	//Test = "1"; 
+		  	//foodtypes.get(i).name = "PIZZA"
+
+		  	//foodtypes.get(i).id = "2", 
+		 	//foodtypes.get(i).name = "WING"
+		  
+		  //}
 		
 		pnlMenuPage.setVisible(true);
 		pnlLoginPage.setVisible(false);
@@ -217,6 +255,7 @@ public class PizzaPlanetGui extends JFrame {
 		pnlShoppingPage.setVisible(false);
 		pnlPayment.setVisible(false);
 		pnlConfirm.setVisible(false);
+		pnlSignUpPage.setVisible(false);
 
 		// EVENT: When User clicks a menu category, let the controller know...
 		// controller.handleCatMenuClick("PIZZA"); pass in category chosen
@@ -272,31 +311,21 @@ public class PizzaPlanetGui extends JFrame {
 		btnExit.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
 		btnExit.setForeground(new Color(153, 0, 0));
 		pnlTabs.setBackground(new Color(250, 240, 230));
-		pnlTabs.setBounds(1483, 6, 407, 101);
+		pnlTabs.setBounds(1359, 6, 531, 101);
 		contentPane.add(pnlTabs);
-
-		// Label Within the Tabs panel (Top Right of the UI)
-		lblTabs = new JLabel("");
-		lblTabs.setBounds(0, 0, 407, 107);
-		lblTabs.setVisible(false);
 		pnlTabs.setLayout(null);
-		lblTabs.setBackground(new Color(250, 240, 230));
-
-		// Adding the Label inside the Panel
-		pnlTabs.add(lblTabs);
 
 		// Shopping Cart Button (Top Right of the UI)
 		btnShopping = new JButton("New button");
 		btnShopping.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Shopping Cart.jpg")));
-		btnShopping.setBounds(297, 6, 104, 89);
-
+		btnShopping.setBounds(409, 6, 104, 89);
 		// Adding the Button to the Panel
 		pnlTabs.add(btnShopping);
 
 		// Menu Button (Top Right of the UI)
 		btnMenu = new JButton("New button");
 		btnMenu.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Menu.png")));
-		btnMenu.setBounds(156, 6, 104, 89);
+		btnMenu.setBounds(268, 6, 104, 89);
 
 		// Adding the Button to the Panel
 		pnlTabs.add(btnMenu);
@@ -305,13 +334,263 @@ public class PizzaPlanetGui extends JFrame {
 		// Account Button (Top Right of the UI)
 		btnAccount = new JButton("New button");
 		btnAccount.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Account.png")));
-		btnAccount.setBounds(18, 6, 104, 89);
+		btnAccount.setBounds(138, 6, 104, 89);
 
 		// Adding the Button to the Panel
 		pnlTabs.add(btnAccount);
+		
+	    btnHome = new JButton("New button");
+		btnHome.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Home.png")));
+		btnHome.setBounds(14, 6, 104, 89);
+		pnlTabs.add(btnHome);
 
 		pnlMenuPage2 = new JPanel();
 		pnlMenuPage2.setVisible(false);
+		
+		// Login Page Panel 
+		pnlLoginPage = new JPanel();
+		pnlLoginPage.setVisible(false);
+		
+		pnlSignUpPage = new JPanel();
+		pnlSignUpPage.setBounds(0, -11, 1914, 1091);
+		contentPane.add(pnlSignUpPage);
+		pnlSignUpPage.setLayout(null);
+		pnlSignUpPage.setVisible(false);
+		
+		lblUsername = new JLabel("Username:");
+		lblUsername.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
+		lblUsername.setBounds(372, 422, 266, 84);
+		pnlSignUpPage.add(lblUsername);
+		
+		lblNewLabel = new JLabel("------------------------------------------------------");
+		lblNewLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 50));
+		lblNewLabel.setBounds(372, 371, 1222, 59);
+		pnlSignUpPage.add(lblNewLabel);
+		
+		JButton btnSignUpSign = new JButton("LOGIN");
+		btnSignUpSign.setForeground(new Color(204, 0, 0));
+		btnSignUpSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+		btnSignUpSign.setBackground(new Color(250, 240, 230));
+		btnSignUpSign.setBounds(1217, 929, 223, 74);
+		pnlSignUpPage.add(btnSignUpSign);
+		
+		lblNewLabel_1 = new JLabel("Welcome Guest!");
+		lblNewLabel_1.setFont(new Font("Comic Sans MS", Font.BOLD, 70));
+		lblNewLabel_1.setBounds(372, 275, 557, 122);
+		pnlSignUpPage.add(lblNewLabel_1);
+		
+		txtUserSign = new JTextField();
+		txtUserSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		txtUserSign.setBounds(641, 432, 373, 59);
+		pnlSignUpPage.add(txtUserSign);
+		txtUserSign.setColumns(10);
+		
+		lblPassword2 = new JLabel("Password:");
+		lblPassword2.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
+		lblPassword2.setBounds(372, 511, 238, 84);
+		pnlSignUpPage.add(lblPassword2);
+		
+		txtPassSign = new JPasswordField();
+		txtPassSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		txtPassSign.setColumns(10);
+		((JPasswordField) txtPassSign).setEchoChar('*');
+		txtPassSign.setBounds(622, 518, 392, 64);
+		pnlSignUpPage.add(txtPassSign);
+		
+		lblRewritePass = new JLabel("Re-write Pass:");
+		lblRewritePass.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
+		lblRewritePass.setBounds(372, 607, 367, 84);
+		pnlSignUpPage.add(lblRewritePass);
+		
+		txtPassSign2 = new JPasswordField();
+		txtPassSign2.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		txtPassSign2.setColumns(10);
+		((JPasswordField) txtPassSign2).setEchoChar('*');
+		txtPassSign2.setBounds(748, 619, 266, 59);
+		pnlSignUpPage.add(txtPassSign2);
+		
+		lblEmailSign = new JLabel("Email:");
+		lblEmailSign.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
+		lblEmailSign.setBounds(372, 703, 156, 84);
+		pnlSignUpPage.add(lblEmailSign);
+		
+		txtEmailSign = new JTextField();
+		txtEmailSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		txtEmailSign.setColumns(10);
+		txtEmailSign.setBounds(534, 716, 480, 59);
+		pnlSignUpPage.add(txtEmailSign);
+		
+		lblCitySign = new JLabel("City:");
+		lblCitySign.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
+		lblCitySign.setBounds(372, 809, 126, 84);
+		pnlSignUpPage.add(lblCitySign);
+		
+		txtCitySign = new JTextField();
+		txtCitySign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		txtCitySign.setColumns(10);
+		txtCitySign.setBounds(504, 822, 235, 59);
+		pnlSignUpPage.add(txtCitySign);
+		
+		JComboBox cBoxState = new JComboBox();
+		cBoxState.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
+		cBoxState.setModel(new DefaultComboBoxModel(new String[] {"WI"}));
+		cBoxState.setBounds(925, 822, 89, 59);
+		pnlSignUpPage.add(cBoxState);
+		
+		JLabel lblStateSign = new JLabel("State:");
+		lblStateSign.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
+		lblStateSign.setBounds(750, 809, 163, 84);
+		pnlSignUpPage.add(lblStateSign);
+		
+		lblStreet = new JLabel("Street:");
+		lblStreet.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
+		lblStreet.setBounds(372, 919, 185, 84);
+		pnlSignUpPage.add(lblStreet);
+		
+		txtStreetSign = new JTextField();
+		txtStreetSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		txtStreetSign.setColumns(10);
+		txtStreetSign.setBounds(561, 929, 453, 59);
+		pnlSignUpPage.add(txtStreetSign);
+		
+		lblLOGO = new JLabel("");
+		lblLOGO.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Planet.png")));
+		lblLOGO.setBounds(1170, 493, 306, 247);
+		pnlSignUpPage.add(lblLOGO);
+		
+		JLabel lblBackgroundSign = new JLabel("");
+		lblBackgroundSign.setBounds(0, 0, 2000, 1103);
+		lblBackgroundSign.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Menu_Final.png")));
+		pnlSignUpPage.add(lblBackgroundSign);
+		pnlLoginPage.setBounds(0, -11, 1914, 1091);
+		contentPane.add(pnlLoginPage);
+		pnlLoginPage.setLayout(null);
+		
+		// Setting pnlSubmit Background/Border/Color/Bounds
+		JPanel pnlSubmit = new JPanel();
+		pnlSubmit.setBackground(new Color(0, 0, 0));
+		pnlSubmit.setOpaque(true);
+		pnlSubmit.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(0, 0, 0), new Color(0, 0, 0), new Color(0, 0, 0), new Color(0, 0, 0)));
+		pnlSubmit.setBounds(560, 460, 750, 494);
+		pnlSubmit.setLayout(null);
+		
+		// Adding Submit Panel to the Login Page
+	    pnlLoginPage.add(pnlSubmit);
+	    
+	    
+	    // Setting txtUserName with Name/Font/Bounds
+		txtUserName = new JTextField();
+		txtUserName.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+		txtUserName.setBounds(311, 77, 383, 64);
+		pnlSubmit.add(txtUserName);
+		txtUserName.setColumns(10);
+		
+		lblUserError = new JLabel("");
+		lblUserError.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblUserError.setBounds(311, 145, 383, 64);
+		pnlSubmit.add(lblUserError);
+		
+		// Setting lblUserName with Font/Bounds/Name
+		JLabel lblUserName = new JLabel("Username:");
+		lblUserName.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+		lblUserName.setBounds(68, 66, 200, 82);
+		pnlSubmit.add(lblUserName);
+		
+		// Setting lblPassword Name/Font/Bounds
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+		lblPassword.setBounds(68, 203, 200, 82);
+		pnlSubmit.add(lblPassword);
+		
+		lblPassError = new JLabel("");
+		lblPassError.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		lblPassError.setBounds(311, 282, 383, 64);
+		pnlSubmit.add(lblPassError);
+		
+		// Setting txtPassword Name/Font/Bounds
+		txtPassword = new JPasswordField();
+		txtPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+		txtPassword.setColumns(10);
+		((JPasswordField) txtPassword).setEchoChar('*');
+		txtPassword.setBounds(311, 214, 383, 64);
+		
+		pnlSubmit.add(txtPassword);
+		
+		// Setting btnLoginS Foreground/Background
+		btnLogin = new JButton("LOGIN");
+		btnLogin.setForeground(new Color(204, 0, 0));
+		btnLogin.setBackground(new Color(250, 240, 230));
+		btnLogin.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+		btnLogin.setBounds(274, 353, 223, 74);
+		
+		// Adding Button to Panel
+		pnlSubmit.add(btnLogin);
+		
+	    // Setting btnSignup Foreground/Background/Font
+		btnGuest = new JButton("GUEST");
+		
+		btnGuest.setForeground(new Color(204, 0, 0));
+		btnGuest.setBackground(new Color(250, 240, 230));
+		btnGuest.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		btnGuest.setBounds(196, 439, 121, 34);
+		
+		// Adding btnSignUp to pnlSubmit
+		pnlSubmit.add(btnGuest);
+		
+		btnSignUp = new JButton("SIGN UP");
+		
+				btnSignUp.setForeground(new Color(204, 0, 0));
+				btnSignUp.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+				btnSignUp.setBackground(new Color(250, 240, 230));
+				btnSignUp.setBounds(444, 439, 121, 34);
+				pnlSubmit.add(btnSignUp);
+				
+		// Setting lblSumbit Bounds/Icon/Name
+		lblSubmit = new JLabel("");
+		lblSubmit.setBounds(6, 6, 738, 482);
+		lblSubmit.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Submit.jpg")));
+		
+		// Adding Lbl to Panel
+		pnlSubmit.add(lblSubmit);
+		
+		// Setting lblBackgroundLogin Bounds/Icon/Name
+		JLabel lblBackgroundLogin = new JLabel("");
+		lblBackgroundLogin.setBounds(-8, 0, 2000, 1103);
+		lblBackgroundLogin.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Login_Final.png")));
+		
+		// Adding Label to panel
+		pnlLoginPage.add(lblBackgroundLogin);
+		
+		pnlAccountPage = new JPanel();
+		pnlAccountPage.setVisible(false);
+		pnlAccountPage.setBounds(0, -11, 1914, 1091);
+		contentPane.add(pnlAccountPage);
+		pnlAccountPage.setLayout(null);
+		
+		pnlCat3 = new JPanel();
+		pnlCat3.setBounds(322, 262, 1297, 779);
+		pnlCat3.setLayout(null);
+		pnlAccountPage.add(pnlCat3);
+		
+		JLabel lblUser = new JLabel("USER:");
+		lblUser.setBounds(30, 43, 157, 117);
+		pnlCat3.add(lblUser);
+		lblUser.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
+		
+		lblUserAnswer = new JLabel("");
+		lblUserAnswer.setBounds(199, 43, 593, 106);
+		pnlCat3.add(lblUserAnswer);
+		lblUserAnswer.setFont(new Font("Comic Sans MS", Font.ITALIC, 50));
+		
+		lblBackgroundCat2 = new JLabel("");
+		lblBackgroundCat2.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/MenuInside_Final.png")));
+		lblBackgroundCat2.setBounds(0, 0, 1297, 779);
+		pnlCat3.add(lblBackgroundCat2);
+		
+		lblBackground = new JLabel("");
+		lblBackground.setBounds(-8, 0, 2000, 1103);
+		lblBackground.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Menu_Final.png")));
+		pnlAccountPage.add(lblBackground);
 		pnlMenuPage2.setBounds(0, -11, 1914, 1091);
 		contentPane.add(pnlMenuPage2);
 		pnlMenuPage2.setLayout(null);
@@ -321,104 +600,20 @@ public class PizzaPlanetGui extends JFrame {
 		lblBackgroundMenu2.setVisible(false);
 		lblBackgroundMenu2.setBounds(-8, 0, 2000, 1103);
 		pnlMenuPage2.add(lblBackgroundMenu2);
-
+		
 		pnlCat2 = new JPanel();
-		pnlCat2.setLayout(null);
-		pnlCat2.setBounds(322, 262, 1297, 779);
+		pnlCat2.setBounds(0, 0, 1297, 779);
 		pnlMenuPage2.add(pnlCat2);
-
-		label_2 = new JLabel("");
-		label_2.setBounds(0, 0, 1297, 779);
-		pnlCat2.add(label_2);
-
-		// Login Page Panel 
-		pnlLoginPage = new JPanel();
-		pnlLoginPage.setBounds(0, -11, 1914, 1091);
-		contentPane.add(pnlLoginPage);
-		pnlLoginPage.setVisible(false);
-		pnlLoginPage.setLayout(null);
-
-		// Setting pnlSubmit Background/Border/Color/Bounds
-		JPanel pnlSubmit = new JPanel();
-		pnlSubmit.setBackground(new Color(0, 0, 0));
-		pnlSubmit.setOpaque(true);
-		pnlSubmit.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(0, 0, 0), new Color(0, 0, 0), new Color(0, 0, 0), new Color(0, 0, 0)));
-		pnlSubmit.setBounds(560, 460, 750, 494);
-		pnlSubmit.setLayout(null);
-
-		// Adding Submit Panel to the Login Page
-		pnlLoginPage.add(pnlSubmit);
-
-
-		// Setting txtUserName with Name/Font/Bounds
-		txtUserName = new JTextField();
-		txtUserName.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
-		txtUserName.setBounds(311, 77, 383, 64);
-		pnlSubmit.add(txtUserName);
-		txtUserName.setColumns(10);
-
-		// Setting lblUserName with Font/Bounds/Name
-		JLabel lblUserName = new JLabel("Username:");
-		lblUserName.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
-		lblUserName.setBounds(68, 66, 200, 82);
-		pnlSubmit.add(lblUserName);
-
-		// Setting lblPassword Name/Font/Bounds
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
-		lblPassword.setBounds(68, 203, 200, 82);
-		pnlSubmit.add(lblPassword);
-
-		// Setting txtPassword Name/Font/Bounds
-		txtPassword = new JPasswordField();
-		txtPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
-		txtPassword.setColumns(10);
-		((JPasswordField) txtPassword).setEchoChar('*');
-		txtPassword.setBounds(311, 214, 383, 64);
-
-		pnlSubmit.add(txtPassword);
-
-		// Setting btnLoginS Foreground/Background
-		btnLogin = new JButton("Login");
-		btnLogin.setForeground(new Color(204, 0, 0));
-		btnLogin.setBackground(new Color(250, 240, 230));
-		btnLogin.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
-		btnLogin.setBounds(270, 320, 223, 74);
-
-		// Adding Button to Panel
-		pnlSubmit.add(btnLogin);
-
-		// Setting btnSignup Foreground/Background/Font
-		btnGuest = new JButton("GUEST");
-
-		btnGuest.setForeground(new Color(204, 0, 0));
-		btnGuest.setBackground(new Color(250, 240, 230));
-		btnGuest.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		btnGuest.setBounds(323, 406, 121, 34);
-
-		// Adding btnSignUp to pnlSubmit
-		pnlSubmit.add(btnGuest);
-
-		// Setting lblSumbit Bounds/Icon/Name
-		lblSubmit = new JLabel("");
-		lblSubmit.setBounds(6, 6, 738, 482);
-		lblSubmit.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Submit.jpg")));
-
-		// Adding Lbl to Panel
-		pnlSubmit.add(lblSubmit);
-
-		// Setting lblBackgroundLogin Bounds/Icon/Name
-		JLabel lblBackgroundLogin = new JLabel("");
-		lblBackgroundLogin.setBounds(-8, 0, 2000, 1103);
-		lblBackgroundLogin.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Login_Final.png")));
-
-		// Adding Label to panel
-		pnlLoginPage.add(lblBackgroundLogin);
+		pnlCat2.setLayout(null);
+				
+		lblBackgroundCat = new JLabel("");
+		lblBackgroundCat.setBounds(0, 0, 1297, 779);
+		pnlCat2.add(lblBackgroundCat);
 
 		// Setting Visibility/Bounds 
 		JPanel pnlSelectDetails = new JPanel();
 		pnlSelectDetails.setVisible(false);
-		pnlSelectDetails.setBounds(0, 0, 1914, 1091);
+		pnlSelectDetails.setBounds(0, -11, 1914, 1091);
 		contentPane.add(pnlSelectDetails);
 		pnlSelectDetails.setLayout(null);
 
@@ -494,11 +689,6 @@ public class PizzaPlanetGui extends JFrame {
 		lblBackgroundMenu.setBackground(new Color(250, 240, 230));
 		pnlMenuPage.add(lblBackgroundMenu);
 
-		label_3 = new JLabel("");
-		label_3.setBackground(new Color(250, 240, 230));
-		label_3.setBounds(0, 0, 2000, 1103);
-		pnlMenuPage.add(label_3);
-
 		JPanel pnlConfirm = new JPanel();
 		pnlConfirm.setVisible(false);
 		pnlConfirm.setBounds(0, -11, 1914, 1091);
@@ -514,8 +704,11 @@ public class PizzaPlanetGui extends JFrame {
 	////////////////////////////////////////////////////////////////////
 	///// This Method contains all of the code for creating Events 
 	////////////////////////////////////////////////////////////////////
+	
+
+	
 	private void createEvents() 
-	{	
+	{				
 		// This Event exists on pnlExit
 		btnExit.addActionListener(new ActionListener() 
 		{
@@ -527,6 +720,19 @@ public class PizzaPlanetGui extends JFrame {
 
 			}
 		});
+		
+		btnSignUp.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				pnlTabs.setVisible(true);
+				pnlMenuPage.setVisible(false);
+				pnlLoginPage.setVisible(false);
+				pnlShoppingPage.setVisible(false);
+				pnlAccountPage.setVisible(false);
+				pnlSignUpPage.setVisible(true);
+			}
+		});
 
 		// This Event exists on the pnlTabs
 		btnAccount.addActionListener(new ActionListener() 
@@ -534,12 +740,15 @@ public class PizzaPlanetGui extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				// Altering Panels so the correct ones show
-				pnlTabs.setVisible(false);
+				pnlTabs.setVisible(true);
 				pnlMenuPage.setVisible(false);
-				pnlLoginPage.setVisible(true);
+				pnlLoginPage.setVisible(false);
 				pnlShoppingPage.setVisible(false);
-				txtUserName.setText("");
-				txtPassword.setText("");
+				pnlAccountPage.setVisible(true);
+				pnlSignUpPage.setVisible(false);
+				
+				String Name = txtUserName.getText(); 
+				lblUserAnswer.setText(Name); 
 			}
 		});
 
@@ -553,6 +762,8 @@ public class PizzaPlanetGui extends JFrame {
 				pnlMenuPage.setVisible(true);
 				pnlLoginPage.setVisible(false);
 				pnlShoppingPage.setVisible(false);
+				pnlAccountPage.setVisible(false);
+				pnlSignUpPage.setVisible(false);
 			}
 		});
 
@@ -567,6 +778,25 @@ public class PizzaPlanetGui extends JFrame {
 				pnlLoginPage.setVisible(false);
 				pnlShoppingPage.setVisible(false);
 				pnlShoppingPage.setVisible(true);
+				pnlAccountPage.setVisible(false);
+				pnlSignUpPage.setVisible(false);
+			}
+		});
+		
+		btnHome.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				pnlTabs.setVisible(false);
+				pnlMenuPage.setVisible(false);
+				pnlLoginPage.setVisible(true);
+				pnlShoppingPage.setVisible(false);
+				pnlAccountPage.setVisible(false);
+				pnlSignUpPage.setVisible(false);
+				txtUserName.setText("");
+				txtPassword.setText("");
+				lblUserError.setText("");
+				lblPassError.setText("");
 			}
 		});
 	}
