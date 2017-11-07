@@ -8,19 +8,11 @@ import java.util.Map;
 public class Api {
 	
 	//Database variables and connection information from the School Server if it ever works
-//	//DO NOT UPDATE THIS
-	private static final String DB_URL = "jdbc:sqlserver://bitweb3.nwtc.edu;databaseName=dbsoftdev1;";//integratedSecurity=true";
-	//private static final String DB_URL = "jdbc:sqlserver://11.0.6251.0:1433/dbsoftdev1";
-	private static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private static final String USER = "softdevuser1";
-	private static final String PASS = "XZ36KrMB}n";
-	
-	//this is from the phpmyadmin this is the connection variables to access the pizzaplanet db
 	//DO NOT UPDATE THIS
-//	private static final String DB_URL = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9202256";
-//	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-//	private static final String USER = "sql9202256";
-//	private static final String PASS = "5NUvUnrQ2g";
+	private static final String DB_URL = "jdbc:sqlserver://bitweb3.nwtc.edu;databaseName=dbsoftdev1";//integratedSecurity=true";
+	private static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	private static final String USER = "dbsoftdev1";
+	private static final String PASS = "XZ36KrMB}n";
 	private static Connection c = CreateConnection();
 	private static ResultSet rs = null;
 	private static Statement st = null;
@@ -32,7 +24,6 @@ public class Api {
 			Class.forName(JDBC_DRIVER);
 			System.out.println("Connecting to database...");
 			con = DriverManager.getConnection(DB_URL,USER,PASS);
-			//con.close(); //this is the last thing that needs to be completed once we want to close the DB Connection
 		}catch(SQLException se) {
 			System.out.println("You got this SQL error: " +se);
 			con = null;
@@ -91,7 +82,7 @@ public class Api {
 	public static User CreateUserInformation(String username)
 	{
 		User u = null;
-		rs = GetResultSet("Select UserId,FName,LName,Address,Phone,City,State,ZipCode,UserType From Users where Username =\'" +username+"\'");
+		rs = GetResultSet("Select UserId,FName,LName,Address,PhoneNum,City,State,ZipCode,UserType From Users where Username =\'" +username+"\'");
 		String userType = null;
 		String firstName = null;
 		String lastName = null;
@@ -115,7 +106,7 @@ public class Api {
 					state = rs.getString("State");
 					zip = rs.getString("ZipCode");
 					userId = rs.getString("UserId");
-					phone = rs.getString("Phone");
+					phone = rs.getString("PhoneNum");
 				}//while
 				u = new User(userType,firstName,lastName,street,city,state,zip,userId,phone);
 			}else {u = null;}
