@@ -30,10 +30,12 @@ public class PizzaPlanet {
 	 * if its valid, return that User
 	 * else, return null
 	 */
-	public User apiValidateUser(String[] creds) {
+	public void apiValidateUser(String[] creds) {
 		System.out.println("pp.apiValitateIUser");
+		
 		/*we have a GUEST */
 		if (creds == null) {
+		
 			this.displayFirstMenu();
 		} 
 		/*we have a USER */
@@ -59,9 +61,7 @@ public class PizzaPlanet {
 			}
 		}
 		
-		return null;
 	}
-	
 	
 	private Menu getMenu(String catMenu) 
 	{
@@ -69,7 +69,17 @@ public class PizzaPlanet {
 		if (catMenu != null) {
 			Menu menu = Api.GetMenu("1");
 		}
-		return null;
+		else {
+			Menu menu = Api.GetMenu(catID);
+			if(menu == null) {
+				/* Invalid menu - not found */
+				this.displayFirstMenu();
+			}
+			else {
+				this.displaySecondMenu(menu);
+			}
+		}
+		
 	}
 
 
@@ -89,19 +99,18 @@ public class PizzaPlanet {
 		foodTypes = Api.GetFoodTypes();
 		//foodTypes = Api.GetFoodTypes() != null ? Api.GetFoodTypes() : null;
 		view.get1stMenuPage(this.getUser(), foodTypes, this);
-		//View callback = pp.getMenu()
 	}
 	
 	/* Call to view - Second Menu Page*/
-	private void displaySecondMenu() {
-		List<Menu> Pizza = null;
+	private void displaySecondMenu(Menu selectedMenu) {
 		
-		view.get2ndMenuPage(this.getUser(), Pizza, this);
+		view.get2ndMenuPage(this.getUser(), selectedMenu, this);
 	}
 
 	/* Call to view - Menu Items Detail Page*/
 	private void displayMenuItemsDetail() {
 		MenuItem peperoniPizza = null;
+		//Should this be a Menu and just loop through MenuItems?
 		
 		view.getMenuItemsDetailPage(this.getUser(), peperoniPizza, this);
 	}
@@ -129,7 +138,7 @@ public class PizzaPlanet {
 	}
 	
 	
-	
+
 	/* Call to view - Account Page*/
 	private void displayAccountPage() {
 		view.getAccountPage(this.user, this);
