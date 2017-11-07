@@ -76,7 +76,11 @@ public class PizzaPlanetGui extends JFrame {
 	private JTextField txtCitySign;
 	private JLabel lblStreet;
 	private JTextField txtStreetSign;
-	private JLabel lblLOGO;
+	private JTextField txtFirstSign;
+	private JLabel lblLast;
+	private JTextField txtLastSign;
+	private JLabel lblPhone;
+	private JTextField txtPhoneSign;
 
 
 
@@ -107,18 +111,17 @@ public class PizzaPlanetGui extends JFrame {
 				//[username. password]
 				pp.apiValidateUser(creds);
 
-				//				pnlMenuPage.setVisible(true);
-				//				pnlLoginPage.setVisible(false);
-				//				pnlTabs.setVisible(true);
-				//				pnlShoppingPage.setVisible(false);
+				pnlMenuPage.setVisible(true);
+				pnlLoginPage.setVisible(false);
+				pnlTabs.setVisible(true);
+				pnlShoppingPage.setVisible(false);
 			}
 		});
 
 		//controller.handleUserClick("txtUserName.Text", "txtPassword.Text") if LOGIN		
 		// This Event exists on pnlLogin
 		btnLogin.addActionListener(new ActionListener() 
-		{	
-			
+		{		
 			
 			public void actionPerformed(ActionEvent e) 
 			{		
@@ -175,6 +178,20 @@ public class PizzaPlanetGui extends JFrame {
 				}
 			}
 		});
+		
+		btnSignUp.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				pnlTabs.setVisible(true);
+				pnlMenuPage.setVisible(false);
+				pnlLoginPage.setVisible(false);
+				pnlShoppingPage.setVisible(false);
+				pnlAccountPage.setVisible(false);
+				pnlSignUpPage.setVisible(true);
+				btnMenu.setVisible(false);
+			}
+		});
 	}
 
 	/**
@@ -207,14 +224,10 @@ public class PizzaPlanetGui extends JFrame {
 				}
 			});
 		    buttonList.add(btn); 
-		  }
-		  
+		  }	  
 		  
 		  placeButtons(buttonList);
-		  pnlMenuPage.setVisible(true);
-		  pnlLoginPage.setVisible(false);
 		  
-
 	}	
 	
 	public void placeButtons(List<JButton> buttons)
@@ -265,6 +278,7 @@ public class PizzaPlanetGui extends JFrame {
 	{
 		
 	}
+	
 	
 	/**
 	 * Instantiates the category menu screen (second screen) 
@@ -407,7 +421,7 @@ public class PizzaPlanetGui extends JFrame {
 		
 		txtUserSign = new JTextField();
 		txtUserSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
-		txtUserSign.setBounds(641, 432, 373, 59);
+		txtUserSign.setBounds(641, 432, 332, 59);
 		pnlSignUpPage.add(txtUserSign);
 		txtUserSign.setColumns(10);
 		
@@ -420,7 +434,7 @@ public class PizzaPlanetGui extends JFrame {
 		txtPassSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
 		txtPassSign.setColumns(10);
 		((JPasswordField) txtPassSign).setEchoChar('*');
-		txtPassSign.setBounds(622, 518, 392, 64);
+		txtPassSign.setBounds(622, 518, 351, 64);
 		pnlSignUpPage.add(txtPassSign);
 		
 		lblRewritePass = new JLabel("Re-write Pass:");
@@ -432,7 +446,7 @@ public class PizzaPlanetGui extends JFrame {
 		txtPassSign2.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
 		txtPassSign2.setColumns(10);
 		((JPasswordField) txtPassSign2).setEchoChar('*');
-		txtPassSign2.setBounds(748, 619, 266, 59);
+		txtPassSign2.setBounds(748, 619, 225, 59);
 		pnlSignUpPage.add(txtPassSign2);
 		
 		lblEmailSign = new JLabel("Email:");
@@ -443,7 +457,7 @@ public class PizzaPlanetGui extends JFrame {
 		txtEmailSign = new JTextField();
 		txtEmailSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
 		txtEmailSign.setColumns(10);
-		txtEmailSign.setBounds(534, 716, 480, 59);
+		txtEmailSign.setBounds(534, 716, 440, 59);
 		pnlSignUpPage.add(txtEmailSign);
 		
 		lblCitySign = new JLabel("City:");
@@ -454,18 +468,18 @@ public class PizzaPlanetGui extends JFrame {
 		txtCitySign = new JTextField();
 		txtCitySign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
 		txtCitySign.setColumns(10);
-		txtCitySign.setBounds(504, 822, 235, 59);
+		txtCitySign.setBounds(504, 822, 185, 59);
 		pnlSignUpPage.add(txtCitySign);
 		
 		JComboBox<?> cBoxState = new JComboBox<>();
 		cBoxState.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
 		cBoxState.setModel(new DefaultComboBoxModel(new String[] {"WI"}));
-		cBoxState.setBounds(925, 822, 89, 59);
+		cBoxState.setBounds(885, 822, 89, 59);
 		pnlSignUpPage.add(cBoxState);
 		
 		JLabel lblStateSign = new JLabel("State:");
 		lblStateSign.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
-		lblStateSign.setBounds(750, 809, 163, 84);
+		lblStateSign.setBounds(710, 809, 163, 84);
 		pnlSignUpPage.add(lblStateSign);
 		
 		lblStreet = new JLabel("Street:");
@@ -476,13 +490,41 @@ public class PizzaPlanetGui extends JFrame {
 		txtStreetSign = new JTextField();
 		txtStreetSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
 		txtStreetSign.setColumns(10);
-		txtStreetSign.setBounds(561, 929, 453, 59);
+		txtStreetSign.setBounds(561, 929, 414, 59);
 		pnlSignUpPage.add(txtStreetSign);
 		
-		lblLOGO = new JLabel("");
-		lblLOGO.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Planet.png")));
-		lblLOGO.setBounds(1170, 493, 306, 247);
-		pnlSignUpPage.add(lblLOGO);
+		JLabel lblFirst = new JLabel("First Name:");
+		lblFirst.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
+		lblFirst.setBounds(1005, 422, 315, 84);
+		pnlSignUpPage.add(lblFirst);
+		
+		txtFirstSign = new JTextField();
+		txtFirstSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		txtFirstSign.setColumns(10);
+		txtFirstSign.setBounds(1305, 432, 288, 59);
+		pnlSignUpPage.add(txtFirstSign);
+		
+		lblLast = new JLabel("Last Name:");
+		lblLast.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
+		lblLast.setBounds(1005, 553, 315, 84);
+		pnlSignUpPage.add(lblLast);
+		
+		txtLastSign = new JTextField();
+		txtLastSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		txtLastSign.setColumns(10);
+		txtLastSign.setBounds(1306, 560, 288, 59);
+		pnlSignUpPage.add(txtLastSign);
+		
+		lblPhone = new JLabel("Phone #:");
+		lblPhone.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
+		lblPhone.setBounds(1005, 691, 225, 84);
+		pnlSignUpPage.add(lblPhone);
+		
+		txtPhoneSign = new JTextField();
+		txtPhoneSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
+		txtPhoneSign.setColumns(10);
+		txtPhoneSign.setBounds(1240, 702, 354, 59);
+		pnlSignUpPage.add(txtPhoneSign);
 		
 		JLabel lblBackgroundSign = new JLabel("");
 		lblBackgroundSign.setBounds(0, 0, 2000, 1103);
@@ -571,13 +613,13 @@ public class PizzaPlanetGui extends JFrame {
 				btnSignUp.setBounds(444, 439, 121, 34);
 				pnlSubmit.add(btnSignUp);
 				
-		// Setting lblSumbit Bounds/Icon/Name
-		lblSubmit = new JLabel("");
-		lblSubmit.setBounds(6, 6, 738, 482);
-		lblSubmit.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Submit.jpg")));
-		
-		// Adding Lbl to Panel
-		pnlSubmit.add(lblSubmit);
+				// Setting lblSumbit Bounds/Icon/Name
+				lblSubmit = new JLabel("");
+				lblSubmit.setBounds(6, 6, 738, 482);
+				lblSubmit.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Submit.jpg")));
+				
+				// Adding Lbl to Panel
+				pnlSubmit.add(lblSubmit);
 		
 		// Setting lblBackgroundLogin Bounds/Icon/Name
 		JLabel lblBackgroundLogin = new JLabel("");
@@ -744,19 +786,6 @@ public class PizzaPlanetGui extends JFrame {
 				System.out.println("Exit is Pressed");
 				System.exit(0);
 
-			}
-		});
-		
-		btnSignUp.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				pnlTabs.setVisible(true);
-				pnlMenuPage.setVisible(false);
-				pnlLoginPage.setVisible(false);
-				pnlShoppingPage.setVisible(false);
-				pnlAccountPage.setVisible(false);
-				pnlSignUpPage.setVisible(true);
 			}
 		});
 
