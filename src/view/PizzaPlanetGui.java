@@ -10,7 +10,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.awt.event.ActionEvent;
@@ -184,30 +186,54 @@ public class PizzaPlanetGui extends JFrame {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void get1stMenuPage(User user, List<Map<String,String>> foodtypes,  PizzaPlanet pp) 
 	{
-		
+		List<JButton> buttonList = new ArrayList<>();
 		
 		  //Loop through the foodtypes...
-		  //for(int i = 0; i < ((CharSequence) foodtypes).length(); i++)
-		  //{
-		  	//Map<String, String> Test = foodtypes.get(i); 
-		  	//Test = "1"; 
-		  	//foodtypes.get(i).name = "PIZZA"
-
-		  	//foodtypes.get(i).id = "2", 
-		 	//foodtypes.get(i).name = "WING"
+		  for(int i = 0; i <  foodtypes.size(); i++)
+		  {
+		  	Map<String, String> type = foodtypes.get(i); 
+		  	
+		  	String id = type.get("id");
+		  	String name = type.get("name");
+		  	
+		    JButton btn = new JButton(name);
+		    
+			btn.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					//pp.getMenu(id);
+					System.out.println(id);
+				}
+			});
+		    buttonList.add(btn); 
+		  }
 		  
-		  //}
-		
-		pnlMenuPage.setVisible(true);
-		pnlLoginPage.setVisible(false);
-		pnlTabs.setVisible(true);
-		pnlShoppingPage.setVisible(false);
-		
-		/*
-		 * Need to call pp.getMenu() with the ID of the clicked category
-		 * example: pp.getMenu(1); //as a String
-		 */
+		  
+		  placeButtons(buttonList);
+		  pnlMenuPage.setVisible(true);
+		  pnlLoginPage.setVisible(false);
+		  
+
 	}	
+	
+	public void placeButtons(List<JButton> buttons)
+	{
+
+		int x = 50;
+		int y = 50;
+		
+		for (int i = 0; i < buttons.size(); ++i)
+		{
+			JButton button = buttons.get(i);
+			
+			button.setBounds(x, y, 200, 200);
+			button.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+			pnlCat.add(button);
+					
+			x = x + 500;
+		}
+	}
 	
 	public void get2ndMenuPage(User user, Menu selectedMenu, PizzaPlanet pp)
 	{
@@ -431,7 +457,7 @@ public class PizzaPlanetGui extends JFrame {
 		txtCitySign.setBounds(504, 822, 235, 59);
 		pnlSignUpPage.add(txtCitySign);
 		
-		JComboBox cBoxState = new JComboBox();
+		JComboBox<?> cBoxState = new JComboBox<>();
 		cBoxState.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
 		cBoxState.setModel(new DefaultComboBoxModel(new String[] {"WI"}));
 		cBoxState.setBounds(925, 822, 89, 59);
@@ -677,10 +703,10 @@ public class PizzaPlanetGui extends JFrame {
 		pnlMenuPage.add(pnlCat);
 
 		// Setting Label Bounds/Name/Source 
-		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/MenuInside_Final.png")));
-		label_1.setBounds(0, 0, 1297, 779);
-		pnlCat.add(label_1);
+		//JLabel label_1 = new JLabel("");
+		//label_1.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/MenuInside_Final.png")));
+		//label_1.setBounds(0, 0, 1297, 779);
+		//pnlCat.add(label_1);
 
 		// Setting Background/Name/Source/Bounds for Background Menu
 		lblBackgroundMenu = new JLabel("");

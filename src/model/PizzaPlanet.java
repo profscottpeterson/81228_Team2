@@ -4,6 +4,7 @@ import view.PizzaPlanetGui;
 import view.Quinn;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,7 +64,7 @@ public class PizzaPlanet {
 	}
 	
 	
-	private void getMenu(String catID) {
+	public void getMenu(String catID) {
 		System.out.println("pp.getMenu");
 		if (catID == null) {
 			// catMenu is null, send them back to the 1st menu
@@ -92,9 +93,19 @@ public class PizzaPlanet {
 	
 	/* Call to view - First Menu Page*/
 	private void displayFirstMenu() {
-		ArrayList<Map<String, String>> foodTypes;
+		ArrayList<Map<String, String>> foodTypes = new ArrayList<>();
 		//TODO: if null, return error message
-		foodTypes = Api.GetFoodTypes() != null ? Api.GetFoodTypes() : null;
+		//foodTypes = Api.GetFoodTypes() != null ? Api.GetFoodTypes() : null;
+		
+		HashMap<String, String> hm = new HashMap<>();
+		hm.put("id", "2");
+		hm.put("name", "PIZZA");
+		foodTypes.add(hm);
+		
+		HashMap<String, String> hm2 = new HashMap<>();
+		hm2.put("id", "3");
+		hm2.put("name", "WINGS");
+		foodTypes.add(hm2);
 		
 		view.get1stMenuPage(this.getUser(), foodTypes, this);
 	}
