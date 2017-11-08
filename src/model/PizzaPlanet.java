@@ -84,12 +84,12 @@ public class PizzaPlanet {
 	/* Call to view - First Menu Page*/
 	private void displayFirstMenu() 
 	{
-		HashMap<String,String> foodTypes;
+		HashMap<String,String> foodTypes = foodTypes = Api.GetFoodTypes();
 		//TODO: if null, return error message
-		foodTypes = Api.GetFoodTypes();
-		//foodTypes = Api.GetFoodTypes() != null ? Api.GetFoodTypes() : null;
-		view.get1stMenuPage(this.getUser(), foodTypes, this);
-		//View callback = pp.getMenu()
+		if(foodTypes != null)
+		{
+			view.get1stMenuPage(this.getUser(), foodTypes, this);
+		}//if
 	}
 	
 	/* Call to view - Second Menu Page*/
