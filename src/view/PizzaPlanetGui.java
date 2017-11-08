@@ -12,7 +12,6 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTextField;
@@ -145,35 +144,16 @@ public class PizzaPlanetGui extends JFrame {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void get1stMenuPage(User user, List<Map<String,String>> foodtypes,  PizzaPlanet pp) 
+	public void get1stMenuPage(User user, Object o,  PizzaPlanet pp) 
 	{
-		
-		/*
-		 * Loop through the foodtypes...
-		 * for(int i = 0; i < foodtypes.length(); i++{
-		 * 		
-		 * 	foodtypes.get(i).id = "1", 
-		 * 	foodtypes.get(i).name = "PIZZA"
-		 * 
-		 * 	foodtypes.get(i).id = "2", 
-		 * 	foodtypes.get(i).name = "WING"
-		 * 
-		 * }
-		
 		pnlMenuPage.setVisible(true);
 		pnlLoginPage.setVisible(false);
 		pnlTabs.setVisible(true);
 		pnlShoppingPage.setVisible(false);
-		
-		/*
-		 * Need to call pp.getMenu() with the ID of the clicked category
-		 * example: pp.getMenu(1); //as a String
-		 */
 	}	
 	
-	public void get2ndMenuPage(User user, Menu selectedMenu, PizzaPlanet pp)
+	public void get2ndMenuPage(User user, List<Menu> pizza, PizzaPlanet pp)
 	{
-		/* This displays a menu. Consits of a Menu with a List<MenuItems> */
 		
 	}
 	

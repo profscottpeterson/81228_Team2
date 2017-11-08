@@ -30,12 +30,10 @@ public class PizzaPlanet {
 	 * if its valid, return that User
 	 * else, return null
 	 */
-	public void apiValidateUser(String[] creds) {
+	public User apiValidateUser(String[] creds) {
 		System.out.println("pp.apiValitateIUser");
-		
 		/*we have a GUEST */
 		if (creds == null) {
-		
 			this.displayFirstMenu();
 		} 
 		/*we have a USER */
@@ -61,7 +59,9 @@ public class PizzaPlanet {
 			}
 		}
 		
+		return null;
 	}
+	
 	
 	private Menu getMenu(String catMenu) 
 	{
@@ -69,17 +69,7 @@ public class PizzaPlanet {
 		if (catMenu != null) {
 			Menu menu = Api.GetMenu("1");
 		}
-		else {
-			Menu menu = Api.GetMenu(catID);
-			if(menu == null) {
-				/* Invalid menu - not found */
-				this.displayFirstMenu();
-			}
-			else {
-				this.displaySecondMenu(menu);
-			}
-		}
-		
+		return null;
 	}
 
 
@@ -94,23 +84,24 @@ public class PizzaPlanet {
 	/* Call to view - First Menu Page*/
 	private void displayFirstMenu() 
 	{
-		HashMap<String,String> foodTypes;
+		HashMap<String,String> foodTypes = foodTypes = Api.GetFoodTypes();
 		//TODO: if null, return error message
-		foodTypes = Api.GetFoodTypes();
-		//foodTypes = Api.GetFoodTypes() != null ? Api.GetFoodTypes() : null;
-		view.get1stMenuPage(this.getUser(), foodTypes, this);
+		if(foodTypes != null)
+		{
+			view.get1stMenuPage(this.getUser(), foodTypes, this);
+		}//if
 	}
 	
 	/* Call to view - Second Menu Page*/
-	private void displaySecondMenu(Menu selectedMenu) {
+	private void displaySecondMenu() {
+		List<Menu> Pizza = null;
 		
-		view.get2ndMenuPage(this.getUser(), selectedMenu, this);
+		view.get2ndMenuPage(this.getUser(), Pizza, this);
 	}
 
 	/* Call to view - Menu Items Detail Page*/
 	private void displayMenuItemsDetail() {
 		MenuItem peperoniPizza = null;
-		//Should this be a Menu and just loop through MenuItems?
 		
 		view.getMenuItemsDetailPage(this.getUser(), peperoniPizza, this);
 	}
@@ -138,7 +129,7 @@ public class PizzaPlanet {
 	}
 	
 	
-
+	
 	/* Call to view - Account Page*/
 	private void displayAccountPage() {
 		view.getAccountPage(this.user, this);
