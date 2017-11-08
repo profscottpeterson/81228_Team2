@@ -125,19 +125,24 @@ public class PizzaPlanetGui extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) 
 			{		
-				String[] creds = new String[2];	
-				creds[0] = txtUserName.getText();
-				creds[1] = txtPassword.getText();
+				String username = txtUserName.getText();
+				String password = txtPassword.getText();
+				
+				User user = new User(username, password);
+				
+				//String[] creds = new String[2];	
+				//creds[0] = txtUserName.getText();
+				//creds[1] = txtPassword.getText();
 				
 				//Validate Username
-				if (creds[0].length() < 5)
+				if (username.length() < 5)
 				{
 					String Error1 = "<html>Please Enter a Large Enough Username! <br>(Range 5 - 15)</html>";
 					lblUserError.setText(Error1);
 				}
 				else
 				{
-					if (creds[0].length() > 15)
+					if (username.length() > 15)
 					{
 						System.out.println("Your Username is to large! (RANGE 5 - 15)");
 						String Error2 = "<html>Your Username is to large!</html>";
@@ -145,10 +150,10 @@ public class PizzaPlanetGui extends JFrame {
 					}
 					else
 					{
-						System.out.println("USERNAME:" + " " + creds[0]);
+						System.out.println("USERNAME:" + " " + username);
 						
 						//Validate Password				
-						if (creds[1].length() < 5) 
+						if (password.length() < 5) 
 						{
 							System.out.println("Please Enter a Large Enough Password!");
 							String Error3 = "<html>Please Enter a Large Enough Password! <br>(Range 5-25)</html>";
@@ -157,7 +162,7 @@ public class PizzaPlanetGui extends JFrame {
 						}
 						else
 						{
-							if (creds[1].length() > 25)
+							if (password.length() > 25)
 							{
 								System.out.println("Your Password is too Large! (Range 5 - 25)");
 								String Error4 = "<html>Your Password is too Large! <br>(Range 5 - 25)</html>";
@@ -165,9 +170,9 @@ public class PizzaPlanetGui extends JFrame {
 							}
 							else
 							{
-								System.out.println("PASSWORD:" + " " + creds[1]);
+								System.out.println("PASSWORD:" + " " + password);
 								//[username. password]
-								pp.apiValidateUser(creds);
+								pp.apiValidateUser(user);
 								pnlMenuPage.setVisible(true);
 								pnlLoginPage.setVisible(false);
 								pnlTabs.setVisible(true);
@@ -201,12 +206,13 @@ public class PizzaPlanetGui extends JFrame {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          NEW EVENTS          
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void get1stMenuPage(User user, List<Map<String,String>> foodtypes,  PizzaPlanet pp) 
+	public void get1stMenuPage(User user, Map<String,String> foodtypes,  PizzaPlanet pp) 
 	{
 		List<JButton> buttonList = new ArrayList<>();
+		//HashMap<String, String> 
 		
 		  //Loop through the foodtypes...
-		  for(int i = 0; i <  foodtypes.size(); i++)
+	/*	  for(int i = 0; i <  foodtypes.size(); i++)
 		  {
 		  	Map<String, String> type = foodtypes.get(i); 
 		  	
@@ -225,7 +231,26 @@ public class PizzaPlanetGui extends JFrame {
 			});
 		    buttonList.add(btn); 
 		  }	  
-		  
+		  */	
+		foodtypes.forEach((k, v) ->
+		{
+			String id = k;
+			String name = v;
+			
+		    JButton btn = new JButton(name);
+		    
+			btn.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					//pp.getMenu(id);
+					System.out.println(id);
+				}
+			});
+		    buttonList.add(btn); 
+			
+			
+		});
 		  placeButtons(buttonList);
 		  
 	}	
