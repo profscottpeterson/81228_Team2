@@ -2,23 +2,20 @@ package model;
 import java.awt.List;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Api {
 	
 	//Database variables and connection information from the School Server if it ever works
-//	//DO NOT UPDATE THIS
-//	private static final String DB_URL = "jdbc:sqlserver://bitweb3.nwtc.edu;databaseName=dbsoftdev1;integratedSecurity=true";
-//	//private static final String DB_URL = "jdbc:sqlserver://11.0.6251.0:1433/dbsoftdev1";
-//	private static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-//	private static final String USER = "softdevuser1";
-//	private static final String PASS = "XZ36KrMB}n";
-	
-	//this is from the phpmyadmin
 	//DO NOT UPDATE THIS
-	private static final String DB_URL = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9202256";
-	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String USER = "sql9202256";
-	private static final String PASS = "5NUvUnrQ2g";
+	private static final String DB_URL = "jdbc:sqlserver://bitweb3.nwtc.edu;databaseName=dbsoftdev1";//integratedSecurity=true";
+	private static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	private static final String USER = "dbsoftdev1";
+	private static final String PASS = "XZ36KrMB}n";
+	private static Connection c = CreateConnection();
+	private static ResultSet rs = null;
+	private static Statement st = null;
 	
 	private static Connection CreateConnection()
 	{
@@ -27,7 +24,6 @@ public class Api {
 			Class.forName(JDBC_DRIVER);
 			System.out.println("Connecting to database...");
 			con = DriverManager.getConnection(DB_URL,USER,PASS);
-			//con.close(); //this is the last thing that needs to be completed once we want to close the DB Connection
 		}catch(SQLException se) {
 			System.out.println("You got this SQL error: " +se);
 			con = null;
@@ -40,9 +36,6 @@ public class Api {
 	
 	private static ResultSet GetResultSet(String sql)
 	{
-		Connection c = CreateConnection();
-		ResultSet rs = null;
-		Statement st = null;
 		if(c !=null)
 		{
 			System.out.println("Into the database...");
@@ -55,68 +48,41 @@ public class Api {
 			}catch(Exception e){
 				System.out.println("You got this error: " +e);
 				rs = null;
-			}//finally {
-//				//close the SQL Statement
-//				try {
-//					if(st !=null)
-//					{st.close();}//if
-//				}catch(SQLException se) {}//nothing we can do
-//				//close the connection
-//				try {
-//					if(c != null)
-//					{c.close();}//if
-//				}catch(SQLException s) {s.printStackTrace();}
-//			}//finally
+			}
 		}//if
 		if(rs == null)
 		{rs = null;}//if created to stop java from yelling about rs never being used.
 		return rs;
 	}//GetResults
 	
-	public static ArrayList<String> GetFoodTypes()
+	public static boolean IsThisValidUser(String username, String password)
 	{
-		ResultSet rs = GetResultSet("Select * from Food_Types");
-		ArrayList<String> fType = new ArrayList<String>();
+		rs = GetResultSet("Select u.Username, u.Password From Users u where u.Username = \'"+username+"\'");
+		boolean validUserPassCombo = false; //true only if they are equal to the username and password sent in;
+		String uName = null;
+		String pass = null;
 		try {
 			if(rs != null) 
 			{
 				while(rs.next())
 				{
-					String name = rs.getString("FType_name");
-					fType.add(name);
-				}//while
-			}else {fType = null;}
-		}catch(SQLException s) {s.printStackTrace();}
-		return fType;
-	}//GetFoodTypes
-	
-	public static boolean IsThisValidUser(String username, String password)
-	{
-		ResultSet r = GetResultSet("Select u.Username, u.Password From Users u where u.Username = \'"+username+"\'");
-		boolean validUserPassCombo = false; //true only if they are equal to the username and password sent in;
-		String uName = null;
-		String pass = null;
-		try {
-			if(r != null) 
-			{
-				while(r.next())
-				{
 					System.out.println("Testing UserName to database...");
-					uName = r.getString("Username");
-					pass = r.getString("Password");
+					uName = rs.getString("Username");
+					pass = rs.getString("Password");
 				}//while
 			}else {validUserPassCombo = false;} //turn this false because rs returned nothing so maybe incorrect casing for username
 		}catch(SQLException s) {s.printStackTrace();}
 		if(uName.equals(username) && pass.equals(password))
 		{validUserPassCombo = true;}
 		else {validUserPassCombo = false;}
+		CloseStuff();//close the resultset
 		return validUserPassCombo;
 	}//IsThisValidUser
 	
 	public static User CreateUserInformation(String username)
 	{
 		User u = null;
-		ResultSet rs = GetResultSet("Select UserId,FName,LName,Address,Phone,City,State,ZipCode,UserType From Users where Username =\'" +username+"\'");
+		rs = GetResultSet("Select UserId,FName,LName,Address,PhoneNum,City,State,ZipCode,UserType From Users where Username =\'" +username+"\'");
 		String userType = null;
 		String firstName = null;
 		String lastName = null;
@@ -126,6 +92,7 @@ public class Api {
 		String zip = null;
 		String userId = null;
 		String phone = null;
+		System.out.println("Creating User Name");
 		try {
 			if(rs != null) 
 			{
@@ -139,55 +106,72 @@ public class Api {
 					state = rs.getString("State");
 					zip = rs.getString("ZipCode");
 					userId = rs.getString("UserId");
-					phone = rs.getString("Phone");
+					phone = rs.getString("PhoneNum");
 				}//while
-				u = new User(userType,firstName,lastName,street,city,state,zip,userId,phone);
+				//u = new User(userType,firstName,lastName,street,city,state,zip,userId,phone);
 			}else {u = null;}
 		}catch(SQLException s) {s.printStackTrace();}
+		CloseStuff();
 		return u;
 	}//CreateUserInformation
 
-	public static Menu GetMenu()
+	//This will get the 2nd View displaying all the available categories of food
+	//Pizzas, Subs, Wings, Sodas [categories of food]
+	public static HashMap<String,String> GetFoodTypes()
 	{
-		Connection c = CreateConnection();
-		ResultSet rs = null;
-		Statement st = null;
+		rs = GetResultSet("Select * from Food_Types");
+		//ArrayList<Map<String, String>> fCategories = new ArrayList<Map<String,String>>();
+		HashMap<String,String> myMap = new HashMap<String,String>();
+		System.out.println("I'm looking it all the food categories");
+		try {
+			if(rs != null) 
+			{
+				while(rs.next())
+				{
+					String id = rs.getString("FType_ID");
+					String name = rs.getString("FType_name");
+					myMap.put(id, name);
+				}//while
+			}else {myMap = null;}
+		}catch(SQLException s) {s.printStackTrace();}
+		CloseStuff();		
+		System.out.println(myMap);
+		return myMap;
+	}//GetFoodTypes
+	
+	//This is when you are getting a specific Menu Item group
+	//All pizza's or all subs returned but not both
+	public static Menu GetMenu(String indexFoodWanted)
+	{
 		Menu dontuse = null;
-		
-		if(c !=null)
-		{
-			try {
-				st = c.createStatement(); //sql query
-				String sql = "select * from foods where foods.FType_id = 1";
-				rs = st.executeQuery(sql);
-			}catch(SQLException se) {
-				System.out.println("You got this SQL error: " +se);
-				rs = null;
-			}catch(Exception e){
-				System.out.println("You got this error: " +e);
-				rs = null;
-			}finally {
-				//close the SQL Statement
-				try {
-					if(st !=null)
-					{st.close();}//if
-				}catch(SQLException se) {}//nothing we can do
-				//close the connection
-				try {
-					if(c != null)
-					{c.close();}//if
-				}catch(SQLException s) {s.printStackTrace();}
-			}//finally
-		}//if
-		else {return dontuse = null;}
-		
-		
+		rs = GetResultSet("Select f.Food_ID, f.Food_Name from Foods f where f.FType_ID =\'"+indexFoodWanted+"\'" );
+		HashMap<String,String> myMap = new HashMap<String,String>();
+		System.out.println("I'm looking it all the food categories");
+		try {
+			if(rs != null) 
+			{
+				while(rs.next())
+				{
+					String foodId = rs.getString("Food_ID");
+					String name = rs.getString("Food_Name");
+					myMap.put(foodId,name);
+				}//while
+			}else {myMap = null;}
+		}catch(SQLException s) {s.printStackTrace();}
+		CloseStuff();	
+		System.out.println(myMap);
 		return dontuse;
-		
 	}//GetPizza
 
 	public static String getAllMenuItems() {
 		return null;
 	}//getAllMenuItems
-
+	
+	private static void CloseStuff()
+	{
+		try {
+			if(rs !=null)
+			{rs.close();}//if
+		}catch(SQLException se) {}//nothing we can do
+	}//CloseStuff
 }//API

@@ -4,7 +4,9 @@ import view.PizzaPlanetGui;
 import view.Quinn;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.*;
 
@@ -28,21 +30,22 @@ public class PizzaPlanet {
 	 * if its valid, return that User
 	 * else, return null
 	 */
-	public User apiValidateUser(String[] creds) {
+	public User apiValidateUser(User user) {
 		System.out.println("pp.apiValitateIUser");
 		/*we have a GUEST */
-		if (creds == null) {
+		if (user == null) {
 			this.displayFirstMenu();
 		} 
 		/*we have a USER */
 		else {
-			String u = creds[0];
-			String p = creds[1];
+//			String u = creds[0];
+//			String p = creds[1];
+			
 			User returnedUser = null;
-			boolean validUser = Api.IsThisValidUser(u,p);
+			boolean validUser = Api.IsThisValidUser(user.userName, user.password);
 			if(validUser)
 			{
-				returnedUser = Api.CreateUserInformation(u);
+				returnedUser = Api.CreateUserInformation(user.userName);
 			}
 			
 			/* Invalid User or Password*/
@@ -61,37 +64,40 @@ public class PizzaPlanet {
 	}
 	
 	
-	private Menu getMenu(String catMenu) {
+	private Menu getMenu(String catMenu) 
+	{
 		
 		if (catMenu != null) {
-			Menu menu = Api.GetMenu();
+			Menu menu = Api.GetMenu("1");
 		}
 		return null;
 	}
 
 
 	/* Call to view - User Page*/
-	private void displyUserPage() {
+	private void displyUserPage() 
+	{
 		
 		view.UserPage(this.user, this);
 		//View callback = pp.apiValidateUser()
 	}
 	
 	/* Call to view - First Menu Page*/
-	private void displayFirstMenu() {
-		ArrayList<String> foodTypes;
+	private void displayFirstMenu() 
+	{
+		HashMap<String,String> foodTypes = foodTypes = Api.GetFoodTypes();
 		//TODO: if null, return error message
-		foodTypes = Api.GetFoodTypes() != null ? Api.GetFoodTypes() : null;
-		
-		view.get1stMenuPage(this.getUser(), foodTypes, this);
-		//View callback = pp.getMenu()
+		if(foodTypes != null)
+		{
+			view.get1stMenuPage(this.getUser(), foodTypes, this);
+		}//if
 	}
 	
 	/* Call to view - Second Menu Page*/
 	private void displaySecondMenu() {
-		List<Menu> Pizza = null;
+		Menu pizza = null;
 		
-		view.get2ndMenuPage(this.getUser(), Pizza, this);
+		view.get2ndMenuPage(this.getUser(), pizza, this);
 	}
 
 	/* Call to view - Menu Items Detail Page*/
