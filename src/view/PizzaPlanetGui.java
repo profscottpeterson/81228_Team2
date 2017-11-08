@@ -106,10 +106,10 @@ public class PizzaPlanetGui extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String[] creds = null;
+				User user = null;
 
 				//[username. password]
-				pp.apiValidateUser(creds);
+				pp.apiValidateUser(user);
 
 				pnlMenuPage.setVisible(true);
 				pnlLoginPage.setVisible(false);
