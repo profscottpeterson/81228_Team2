@@ -13,11 +13,11 @@ public class Api {
 	private static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	private static final String USER = "dbsoftdev1";
 	private static final String PASS = "XZ36KrMB}n";
-	private static Connection c = CreateConnection();
-	private static ResultSet rs = null;
-	private static Statement st = null;
+	protected static Connection c = CreateConnection();
+	protected static ResultSet rs = null;
+	protected static Statement st = null;
 	
-	private static Connection CreateConnection()
+	public static Connection CreateConnection()
 	{
 		Connection con; //holds connection to db
 		try {
@@ -34,7 +34,7 @@ public class Api {
 		return con;
 	}//CreateConnection
 	
-	private static ResultSet GetResultSet(String sql)
+	public static ResultSet GetResultSet(String sql)
 	{
 		if(c !=null)
 		{
