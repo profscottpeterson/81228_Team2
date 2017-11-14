@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionListener;
@@ -210,29 +211,7 @@ public class PizzaPlanetGui extends JFrame {
 	public void get1stMenuPage(User user, Map<String,String> foodtypes,  PizzaPlanet pp) 
 	{
 		List<JButton> buttonList = new ArrayList<>();
-		//HashMap<String, String> 
-		
-		  //Loop through the foodtypes...
-	/*	  for(int i = 0; i <  foodtypes.size(); i++)
-		  {
-		  	Map<String, String> type = foodtypes.get(i); 
-		  	
-		  	String id = type.get("id");
-		  	String name = type.get("name");
-		  	
-		    JButton btn = new JButton(name);
-		    
-			btn.addActionListener(new ActionListener() 
-			{
-				public void actionPerformed(ActionEvent e) 
-				{
-					//pp.getMenu(id);
-					System.out.println(id);
-				}
-			});
-		    buttonList.add(btn); 
-		  }	  
-		  */	
+
 		foodtypes.forEach((k, v) ->
 		{
 			String id = k;
@@ -244,13 +223,11 @@ public class PizzaPlanetGui extends JFrame {
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
-					//pp.getMenu(id);
-					System.out.println(id);
+					pp.getMenu(id);
 				}
 			});
 		    buttonList.add(btn); 
-			
-			
+				
 		});
 		  placeButtons(buttonList);
 		  
@@ -260,7 +237,9 @@ public class PizzaPlanetGui extends JFrame {
 	{
 
 		int x = 50;
+		final int X = 50;
 		int y = 50;
+		int Count = 1;
 		
 		for (int i = 0; i < buttons.size(); ++i)
 		{
@@ -270,16 +249,28 @@ public class PizzaPlanetGui extends JFrame {
 			//button.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Menu.jpg")));
 			button.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
 			button.setForeground(new Color(204, 0, 0));
+			button.setMargin(new Insets (0, 0, 0, 0));
 			button.setBackground(new Color(250, 240, 230));
 			pnlCat.add(button);
-					
-			x = x + 500;
+			
+			Count++;
+			
+			if (Count < 4){
+				x = x + 500;
+			}
+			
+			else if (Count >= 4){		
+				x = X;
+				y = y + 300;
+			}
+
 		}
 	}
 	
 	public void get2ndMenuPage(User user, Menu selectedMenu, PizzaPlanet pp)
 	{
 		/* This displays a menu. Consits of a Menu with a List<MenuItems> */
+		System.out.println(selectedMenu);
 		
 	}
 	
