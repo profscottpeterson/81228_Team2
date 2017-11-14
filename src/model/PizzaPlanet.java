@@ -46,17 +46,14 @@ public class PizzaPlanet {
 			if(validUser)
 			{
 				returnedUser = Api.CreateUserInformation(user.userName);
+
+				setUser(returnedUser);
+				this.displayFirstMenu();
 			}
 			
-			/* Invalid User or Password*/
-			if(returnedUser == null) {
-				/* Invalid = Return to same page*/
-				this.displyUserPage(); //TODO: if null, return error message
-			}
 			/* Valid User, go to next page*/
 			else {
-				setUser(returnedUser);
-				this.displayFirstMenu();	
+				this.displyUserPage(); //TODO: if null, return error message
 			}
 		}
 		
@@ -64,12 +61,15 @@ public class PizzaPlanet {
 	}
 	
 	
-	private Menu getMenu(String catMenu) 
+	public Menu getMenu(String catMenu) 
 	{
 		
 		if (catMenu != null) {
-			Menu menu = Api.GetMenu("1");
+			Menu menu = Api.GetMenu(catMenu);
+			displaySecondMenu(menu);
+			System.out.println(catMenu);
 		}
+		
 		return null;
 	}
 
@@ -85,7 +85,7 @@ public class PizzaPlanet {
 	/* Call to view - First Menu Page*/
 	private void displayFirstMenu() 
 	{
-		HashMap<String,String> foodTypes = foodTypes = Api.GetFoodTypes();
+		HashMap<String,String> foodTypes = Api.GetFoodTypes();
 		//TODO: if null, return error message
 		if(foodTypes != null)
 		{
@@ -94,10 +94,10 @@ public class PizzaPlanet {
 	}
 	
 	/* Call to view - Second Menu Page*/
-	private void displaySecondMenu() {
+	private void displaySecondMenu(Menu menu) {
 		Menu pizza = null;
 		
-		view.get2ndMenuPage(this.getUser(), pizza, this);
+		view.get2ndMenuPage(this.getUser(), menu, this);
 	}
 
 	/* Call to view - Menu Items Detail Page*/
@@ -129,7 +129,10 @@ public class PizzaPlanet {
 		return null;
 	}
 	
-	
+	/* Call to view - Sign Up Page */
+	private void displaySignUpPage() {
+		view.getSignUpPage(user, null);
+	}
 	
 	/* Call to view - Account Page*/
 	private void displayAccountPage() {
