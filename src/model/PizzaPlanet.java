@@ -46,6 +46,7 @@ public class PizzaPlanet {
 			if(validUser)
 			{
 				returnedUser = Api.CreateUserInformation(user.userName);
+
 				setUser(returnedUser);
 				this.displayFirstMenu();
 			}
