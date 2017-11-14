@@ -30,21 +30,22 @@ public class PizzaPlanet {
 	 * if its valid, return that User
 	 * else, return null
 	 */
-	public User apiValidateUser(String[] creds) {
+	public User apiValidateUser(User user) {
 		System.out.println("pp.apiValitateIUser");
 		/*we have a GUEST */
-		if (creds == null) {
+		if (user == null) {
 			this.displayFirstMenu();
 		} 
 		/*we have a USER */
 		else {
-			String u = creds[0];
-			String p = creds[1];
+//			String u = creds[0];
+//			String p = creds[1];
+			
 			User returnedUser = null;
-			boolean validUser = Api.IsThisValidUser(u,p);
+			boolean validUser = Api.IsThisValidUser(user.userName, user.password);
 			if(validUser)
 			{
-				returnedUser = Api.CreateUserInformation(u);
+				returnedUser = Api.CreateUserInformation(user.userName);
 			}
 			
 			/* Invalid User or Password*/
@@ -94,9 +95,9 @@ public class PizzaPlanet {
 	
 	/* Call to view - Second Menu Page*/
 	private void displaySecondMenu() {
-		List<Menu> Pizza = null;
+		Menu pizza = null;
 		
-		view.get2ndMenuPage(this.getUser(), Pizza, this);
+		view.get2ndMenuPage(this.getUser(), pizza, this);
 	}
 
 	/* Call to view - Menu Items Detail Page*/
@@ -128,7 +129,10 @@ public class PizzaPlanet {
 		return null;
 	}
 	
-	
+	/* Call to view - Sign Up Page */
+	private void displaySignUpPage() {
+		view.getSignUpPage(user, null);
+	}
 	
 	/* Call to view - Account Page*/
 	private void displayAccountPage() {

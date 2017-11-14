@@ -108,7 +108,7 @@ public class Api {
 					userId = rs.getString("UserId");
 					phone = rs.getString("PhoneNum");
 				}//while
-				u = new User(userType,firstName,lastName,street,city,state,zip,userId,phone);
+				//u = new User(userType,firstName,lastName,street,city,state,zip,userId,phone);
 			}else {u = null;}
 		}catch(SQLException s) {s.printStackTrace();}
 		CloseStuff();
