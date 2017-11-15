@@ -62,7 +62,9 @@ public class Api {
 		String uName = null;
 		String pass = null;
 		byte[] salt = null;
+		String StringOfSalt = "";
 		String HashedPassword = "";
+		String[] values = new String[2];
 		try {
 			if(rs != null) 
 			{
@@ -72,12 +74,14 @@ public class Api {
 					uName = rs.getString("Username");
 					pass = rs.getString("Password");
 					salt = rs.getBytes("Salt");
-					HashedPassword = Hash.md5Hash(password, salt);
+					
+					values = Hash.md5Hash(password, salt);
+					
 				}//while
 			}else {validUserPassCombo = false;} //turn this false because rs returned nothing so maybe incorrect casing for username
 		}catch(SQLException s) {s.printStackTrace();}
 		
-		if(uName.equals(username) && pass.equals(HashedPassword))		
+		if(uName.equals(username) && pass.equals(values[0]))		
 		{validUserPassCombo = true;}
 		else {validUserPassCombo = false;}
 		CloseStuff();//close the resultset

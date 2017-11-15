@@ -13,7 +13,7 @@ public class Hash {
 		return salt;
 	}
 
-public static String md5Hash(String password, byte[] salt) {
+public static String[] md5Hash(String password, byte[] salt) {
 	        String md5 = "";
 	        
 	                
@@ -38,7 +38,10 @@ public static String md5Hash(String password, byte[] salt) {
 	        } catch (NoSuchAlgorithmException e) {
 	            e.printStackTrace();
 	        }
-	        return md5; // md5 is what we will store in the password field of the user.
+	        String[] values = new String[2];
+	        values[0]= md5;
+	        values[1] = saltStart;
+	        return values; // md5 is what we will store in the password field of the user.
 	    }
 
 
