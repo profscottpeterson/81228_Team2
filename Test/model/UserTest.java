@@ -31,6 +31,23 @@ public class UserTest {
 
 	@Test
 	public void testUserNoPassword() {
+		User u = new User("abc123","REGISTERED","Henry","Illgen","sa@gmail.com","123 This Ave","Green Bay", "WI", "54301","abc123","9205558497");
+		equals(u.userName = "abc123");
+		equals(u.userType = "REGISTERED");
+		equals(u.firstName = "Henry");
+		equals(u.lastName = "Illgen");
+		equals(u.emailAddress = "sa@gmail.com");
+		equals(u.street = "123 This Ave");
+		equals(u.city= "Green Bay");
+		equals(u.state = "WI");
+		equals(u.zip = "54301");
+		equals(u.userId = "abc123");
+		equals(u.phone = "9205558497");
+		
+	}
+
+	@Test
+	public void testUserWithPassword(){
 		User u = new User("abc123","REGISTERED","Henry","Illgen","sa@gmail.com","123 This Ave","Green Bay", "WI", "54301","abc123","9205558497","abc123");
 		equals(u.userName = "abc123");
 		equals(u.userType = "REGISTERED");
@@ -44,22 +61,6 @@ public class UserTest {
 		equals(u.userId = "abc123");
 		equals(u.phone = "9205558497");
 		equals(u.password = "abc123");
-	}
-
-	@Test
-	public void testUserWithPassword(){
-		User u = new User("abc123","REGISTERED","Henry","Illgen","sa@gmail.com","123 This Ave","Green Bay", "WI", "54301","abc123","9205558497");
-		equals(u.userName = "abc123");
-		equals(u.userType = "REGISTERED");
-		equals(u.firstName = "Henry");
-		equals(u.lastName = "Illgen");
-		equals(u.emailAddress = "sa@gmail.com");
-		equals(u.street = "123 This Ave");
-		equals(u.city= "Green Bay");
-		equals(u.state = "WI");
-		equals(u.zip = "54301");
-		equals(u.userId = "abc123");
-		equals(u.phone = "9205558497");
 	}
 
 	@Test

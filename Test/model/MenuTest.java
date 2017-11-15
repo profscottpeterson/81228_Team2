@@ -8,23 +8,25 @@ import org.junit.Test;
 
 public class MenuTest {
 
-	private ArrayList<MenuItem> FullMenu = new ArrayList<MenuItem>();
-	
+	Menu m = new Menu();
+	MenuItem mi = new MenuItem();
 	
 	@Test
 	public void testGetFullMenu() {
-		Menu m = new Menu();
+		
 		m.getFullMenu();
 	}
 
 	@Test
 	public void testAddToMenu() {
-		fail("Not yet implemented");
+		
+		m.addToMenu(mi);
 	}
 
 	@Test
 	public void testRemoveFromMenu() {
-		fail("Not yet implemented");
+		m.addToMenu(mi);
+		m.removeFromMenu(mi);
 	}
 
 }
