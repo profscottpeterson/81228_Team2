@@ -434,10 +434,7 @@ public class PizzaPlanetGui extends JFrame {
 	@SuppressWarnings("rawtypes")
 	private void initComponents()
 	{
-		setIconImage(Toolkit.getDefaultToolkit().getImage(PizzaPlanetGui.class.getResource("/Resources/Planet.png")));
-		setTitle("Pizza Planet");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1920, 1080);
+
 		//setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 0));
@@ -729,11 +726,11 @@ public class PizzaPlanetGui extends JFrame {
 		
 		btnSignUp = new JButton("SIGN UP");
 		
-				btnSignUp.setForeground(new Color(204, 0, 0));
-				btnSignUp.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-				btnSignUp.setBackground(new Color(250, 240, 230));
-				btnSignUp.setBounds(444, 439, 121, 34);
-				pnlSubmit.add(btnSignUp);
+		btnSignUp.setForeground(new Color(204, 0, 0));
+		btnSignUp.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		btnSignUp.setBackground(new Color(250, 240, 230));
+		btnSignUp.setBounds(444, 439, 121, 34);
+		pnlSubmit.add(btnSignUp);
 				
 				// Setting lblSumbit Bounds/Icon/Name
 				lblSubmit = new JLabel("");

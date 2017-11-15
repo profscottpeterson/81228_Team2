@@ -2,6 +2,7 @@ package model;
 
 import view.PizzaPlanetGui;
 import view.Quinn;
+import view.View2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +12,8 @@ import java.util.Map;
 import model.*;
 
 public class PizzaPlanet {
-	PizzaPlanetGui view;
+	//PizzaPlanetGui view;
+	View2 view;
 	String name;
 	String address;
 	ShoppingCart cart;
@@ -20,7 +22,8 @@ public class PizzaPlanet {
 	User user = null;
 
 	public PizzaPlanet() {
-		view = new PizzaPlanetGui();
+		//view = new PizzaPlanetGui();
+		view = new View2(this);
 		this.displyUserPage();
 		System.out.println("This is Pizza Planet constructor, reporting for duty.");
 	}	
@@ -78,7 +81,7 @@ public class PizzaPlanet {
 	private void displyUserPage() 
 	{
 		
-		view.UserPage(this.user, this);
+		view.showUserPage();
 		//View callback = pp.apiValidateUser()
 	}
 	
@@ -89,7 +92,7 @@ public class PizzaPlanet {
 		//TODO: if null, return error message
 		if(foodTypes != null)
 		{
-			view.get1stMenuPage(this.getUser(), foodTypes, this);
+			//view.get1stMenuPage(this.getUser(), foodTypes, this);
 		}//if
 	}
 	
@@ -97,31 +100,31 @@ public class PizzaPlanet {
 	private void displaySecondMenu(Menu menu) {
 		Menu pizza = null;
 		
-		view.get2ndMenuPage(this.getUser(), menu, this);
+		//view.get2ndMenuPage(this.getUser(), menu, this);
 	}
 
 	/* Call to view - Menu Items Detail Page*/
 	private void displayMenuItemsDetail() {
 		MenuItem peperoniPizza = null;
 		
-		view.getMenuItemsDetailPage(this.getUser(), peperoniPizza, this);
+		//view.getMenuItemsDetailPage(this.getUser(), peperoniPizza, this);
 	}
 	
 	/* Call to view - Orders Page*/
 	private void displayOrders() {
-		view.getOrdersPage(this.getUser(), this.getCart(), this);
+		//view.getOrdersPage(this.getUser(), this.getCart(), this);
 	}
 
 	/* Call to view - Payment Page*/
 	private void displayPayment() {
-		view.getPaymentPage(this.getUser(), this.getCart(), this);
+		//view.getPaymentPage(this.getUser(), this.getCart(), this);
 	}
 	
 	/* Call to view - Confirmation Page*/
 	private void displayConfirmation() {
 		Payment pay = null;
 		
-		view.getConfirmationPage(this.getUser(), pay, this);
+		//view.getConfirmationPage(this.getUser(), pay, this);
 	}
 	
 	/* Payment Transaction */
@@ -131,12 +134,12 @@ public class PizzaPlanet {
 	
 	/* Call to view - Sign Up Page */
 	private void displaySignUpPage() {
-		view.getSignUpPage(user, null);
+		//view.getSignUpPage(user, null);
 	}
 	
 	/* Call to view - Account Page*/
 	private void displayAccountPage() {
-		view.getAccountPage(this.user, this);
+		//view.getAccountPage(this.user, this);
 	}
 	
 	public ShoppingCart getCart(){
