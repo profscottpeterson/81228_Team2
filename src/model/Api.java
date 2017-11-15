@@ -167,7 +167,7 @@ public class Api {
 		return null;
 	}//getAllMenuItems
 	
-	private static void CloseStuff()
+	protected static void CloseStuff()
 	{
 		try {
 			if(rs !=null)

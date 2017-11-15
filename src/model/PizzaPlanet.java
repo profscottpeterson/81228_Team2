@@ -30,13 +30,17 @@ public class PizzaPlanet {
 	 * if its valid, return that User
 	 * else, return null
 	 */
-	public User apiValidateUser(User user) {
+	public User apiValidateUser(User user, Boolean isNewSignUp) {
 		System.out.println("pp.apiValitateIUser");
 		/*we have a GUEST */
-		if (user == null) {
+		if (user == null && isNewSignUp == false) {
 			this.displayFirstMenu();
 		} 
-		/*we have a USER */
+		/*we have a new Signup*/
+		else if(user == null && isNewSignUp == true){
+			this.displaySignUpPage();
+		}
+		/*we have a registered USER */
 		else {
 //			String u = creds[0];
 //			String p = creds[1];
@@ -72,8 +76,7 @@ public class PizzaPlanet {
 		
 		return null;
 	}
-
-
+	
 	/* Call to view - User Page*/
 	private void displyUserPage() 
 	{
@@ -131,7 +134,7 @@ public class PizzaPlanet {
 	
 	/* Call to view - Sign Up Page */
 	private void displaySignUpPage() {
-		view.getSignUpPage(user, null);
+		view.getSignUpPage(this);
 	}
 	
 	/* Call to view - Account Page*/

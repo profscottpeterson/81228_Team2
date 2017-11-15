@@ -82,7 +82,7 @@ public class PizzaPlanetGui extends JFrame {
 	private JTextField txtLastSign;
 	private JLabel lblPhone;
 	private JTextField txtPhoneSign;
-	private static JButton btnSignUpSign;
+	private JButton btnSignUpSign;
 
 
 
@@ -111,7 +111,7 @@ public class PizzaPlanetGui extends JFrame {
 				User user = null;
 
 				//[username. password]
-				pp.apiValidateUser(user);
+				pp.apiValidateUser(user, false);
 
 				pnlMenuPage.setVisible(true);
 				pnlLoginPage.setVisible(false);
@@ -137,7 +137,7 @@ public class PizzaPlanetGui extends JFrame {
 				//creds[1] = txtPassword.getText();
 				
 				//Validate Username
-				if (username.length() < 5)
+				if (username.length() < 1)
 				{
 					String Error1 = "<html>Please Enter a Large Enough Username! <br>(Range 5 - 15)</html>";
 					lblUserError.setText(Error1);
@@ -155,7 +155,7 @@ public class PizzaPlanetGui extends JFrame {
 						System.out.println("USERNAME:" + " " + username);
 						
 						//Validate Password				
-						if (password.length() < 5) 
+						if (password.length() < 1) 
 						{
 							System.out.println("Please Enter a Large Enough Password!");
 							String Error3 = "<html>Please Enter a Large Enough Password! <br>(Range 5-25)</html>";
@@ -174,7 +174,7 @@ public class PizzaPlanetGui extends JFrame {
 							{
 								System.out.println("PASSWORD:" + " " + password);
 								//[username. password]
-								pp.apiValidateUser(user);
+								pp.apiValidateUser(user, false);
 								pnlMenuPage.setVisible(true);
 								pnlLoginPage.setVisible(false);
 								pnlTabs.setVisible(true);
@@ -190,13 +190,7 @@ public class PizzaPlanetGui extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				pnlTabs.setVisible(true);
-				pnlMenuPage.setVisible(false);
-				pnlLoginPage.setVisible(false);
-				pnlShoppingPage.setVisible(false);
-				pnlAccountPage.setVisible(false);
-				pnlSignUpPage.setVisible(true);
-				btnMenu.setVisible(false);
+				pp.apiValidateUser(null, true);
 			}
 		});
 	}
@@ -299,15 +293,31 @@ public class PizzaPlanetGui extends JFrame {
 
 	}
 	
-	public void getSignUpPage(User user, PizzaPlanet pp) {
+	public void getSignUpPage(PizzaPlanet pp) {	
 		
+		pnlTabs.setVisible(true);
+		pnlMenuPage.setVisible(false);
+		pnlLoginPage.setVisible(false);
+		pnlShoppingPage.setVisible(false);
+		pnlAccountPage.setVisible(false);
+		pnlSignUpPage.setVisible(true);
+		btnMenu.setVisible(false);
+		
+		JButton btnSignUpSign = new JButton("LOGIN");
+
+		btnSignUpSign.setForeground(new Color(204, 0, 0));
+		btnSignUpSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+		btnSignUpSign.setBackground(new Color(250, 240, 230));
+		btnSignUpSign.setBounds(1217, 929, 223, 74);
+		pnlSignUpPage.add(btnSignUpSign);
+	
 		btnSignUpSign.addActionListener(new ActionListener() 
 		{
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent e)
 			{
+				
 				String[] creds = new String[9];	
 				
-				creds[8] = txtPhoneSign.getText();
 				String User = txtUserSign.getText();
 				String Pass = txtPassSign.getText();
 				String Email = txtEmailSign.getText();
@@ -382,6 +392,16 @@ public class PizzaPlanetGui extends JFrame {
 											else 
 											{
 												creds[8] = txtPhoneSign.getText();
+												
+												//
+												User u = new User(creds[0], "C", creds[6] , creds[7], creds[2], creds[5], creds[3], creds[4], "54304", null, creds[8], creds[1]);
+												if(CreateUserDB.CreateUser(u) == true){
+													// no message needs to be diplayed
+												}
+												else
+												{
+													//Username is already in database
+												}
 											}
 										}
 
@@ -389,12 +409,8 @@ public class PizzaPlanetGui extends JFrame {
 								}
 							}
 						}
-						
-
 					}
 				}
-				
-				
 			}
 		});
 	}
@@ -523,14 +539,6 @@ public class PizzaPlanetGui extends JFrame {
 		lblNewLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 50));
 		lblNewLabel.setBounds(372, 371, 1222, 59);
 		pnlSignUpPage.add(lblNewLabel);
-		
-		JButton btnSignUpSign = new JButton("LOGIN");
-
-		btnSignUpSign.setForeground(new Color(204, 0, 0));
-		btnSignUpSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
-		btnSignUpSign.setBackground(new Color(250, 240, 230));
-		btnSignUpSign.setBounds(1217, 929, 223, 74);
-		pnlSignUpPage.add(btnSignUpSign);
 		
 		lblNewLabel_1 = new JLabel("Welcome Guest!");
 		lblNewLabel_1.setFont(new Font("Comic Sans MS", Font.BOLD, 70));
@@ -664,6 +672,14 @@ public class PizzaPlanetGui extends JFrame {
 		pnlSubmit.setBounds(560, 460, 750, 494);
 		pnlSubmit.setLayout(null);
 		
+		btnSignUp = new JButton("SIGN UP");
+		
+		btnSignUp.setForeground(new Color(204, 0, 0));
+		btnSignUp.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		btnSignUp.setBackground(new Color(250, 240, 230));
+		btnSignUp.setBounds(444, 439, 121, 34);
+		pnlSubmit.add(btnSignUp);
+		
 		// Adding Submit Panel to the Login Page
 	    pnlLoginPage.add(pnlSubmit);
 	    
@@ -726,14 +742,6 @@ public class PizzaPlanetGui extends JFrame {
 		
 		// Adding btnSignUp to pnlSubmit
 		pnlSubmit.add(btnGuest);
-		
-		btnSignUp = new JButton("SIGN UP");
-		
-				btnSignUp.setForeground(new Color(204, 0, 0));
-				btnSignUp.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-				btnSignUp.setBackground(new Color(250, 240, 230));
-				btnSignUp.setBounds(444, 439, 121, 34);
-				pnlSubmit.add(btnSignUp);
 				
 				// Setting lblSumbit Bounds/Icon/Name
 				lblSubmit = new JLabel("");
