@@ -47,7 +47,7 @@ public class PizzaPlanet {
 			
 			User returnedUser = null;
 			boolean validUser = Api.IsThisValidUser(user.userName, user.password);
-			if(validUser)
+			if(validUser == true)
 			{
 				returnedUser = Api.CreateUserInformation(user.userName);
 
@@ -88,7 +88,9 @@ public class PizzaPlanet {
 	/* Call to view - First Menu Page*/
 	private void displayFirstMenu() 
 	{
+		System.out.println("displaymenuItems is being called");
 		HashMap<String,String> foodTypes = Api.GetFoodTypes();
+		
 		//TODO: if null, return error message
 		if(foodTypes != null)
 		{

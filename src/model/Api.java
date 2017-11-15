@@ -57,10 +57,12 @@ public class Api {
 	
 	public static boolean IsThisValidUser(String username, String password)
 	{
-		rs = GetResultSet("Select u.Username, u.Password From Users u where u.Username = \'"+username+"\'");
+		rs = GetResultSet("Select u.Username, u.Password, u.Salt From Users u where u.Username = \'"+username+"\'");
 		boolean validUserPassCombo = false; //true only if they are equal to the username and password sent in;
 		String uName = null;
 		String pass = null;
+		byte[] salt = null;
+		String HashedPassword = "";
 		try {
 			if(rs != null) 
 			{
@@ -69,10 +71,13 @@ public class Api {
 					System.out.println("Testing UserName to database...");
 					uName = rs.getString("Username");
 					pass = rs.getString("Password");
+					salt = rs.getBytes("Salt");
+					HashedPassword = Hash.md5Hash(password, salt);
 				}//while
 			}else {validUserPassCombo = false;} //turn this false because rs returned nothing so maybe incorrect casing for username
 		}catch(SQLException s) {s.printStackTrace();}
-		if(uName.equals(username) && pass.equals(password))
+		
+		if(uName.equals(username) && pass.equals(HashedPassword))		
 		{validUserPassCombo = true;}
 		else {validUserPassCombo = false;}
 		CloseStuff();//close the resultset
@@ -167,7 +172,7 @@ public class Api {
 		return null;
 	}//getAllMenuItems
 	
-	protected static void CloseStuff()
+	public static void CloseStuff()
 	{
 		try {
 			if(rs !=null)

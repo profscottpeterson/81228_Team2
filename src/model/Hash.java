@@ -20,15 +20,15 @@ public static String md5Hash(String password, byte[] salt) {
 	        if(null == password) {
 	        	return null;
 	        }	            
-	        String Salt = "";
+	        String saltStart = "";
             for(int i=0; i< salt.length ;i++)
             {
-                Salt = Salt + salt[i];
+                saltStart = saltStart + salt[i];
             }
-            Salt = Salt.substring(0, 32); // created this so salt and password are same length
-	        System.out.println("The Salt is: " + Salt);
+            //saltStart = saltStart.substring(0, 32); // created this so salt and password are same length
+	        System.out.println("The Salt is: " + saltStart);
 	        System.out.println("The Password is: " + password);
-	        password = password+ Salt;//adding a salt to the string before it gets hashed.
+	        password = password+ saltStart;//adding a salt to the string before it gets hashed.
 	        
 	        try {
 	            MessageDigest digest = MessageDigest.getInstance("MD5");//Create MessageDigest object for MD5

@@ -10,6 +10,7 @@ public class CreateUserDB extends Api{
 			//method.
 			//generate new salt for the user
 			byte[] salt = Hash.getNewSalt();
+			
 			//hash the users password with the salt
 			u.password = Hash.md5Hash(u.password,salt);			
 			//rs = GetResultSet("Select * from Users where userName = " + "\'" + u.userName + "\'");
@@ -18,7 +19,7 @@ public class CreateUserDB extends Api{
 			if (rs == null) {
 				//if no users are found add them into our DB
 				//, Fname, Lname, Address, PhoneNum, City, State, zipCode, userType, salt
-				rs = GetResultSet("Insert into Users (userName, password)Values (\'" + u.userName + "\', \'" + u.password + "\')");
+				rs = GetResultSet("Insert into Users (userName, password, salt)Values (\'" + u.userName + "\', \'" + u.password + "\', \'" + salt.toString() + "\')");
 				if (rs == null) {
 					successful = true; //expecting commands completed successfully. That should be null I would think
 					//we will have to do some testing on this one. 
