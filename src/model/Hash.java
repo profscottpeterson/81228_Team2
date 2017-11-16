@@ -7,7 +7,7 @@ import java.security.SecureRandom;
 
 public class Hash {
 	public static byte[] getNewSalt() {
-		byte[] salt = new byte[32];
+		byte[] salt = new byte[8];
 		SecureRandom random = new SecureRandom();
 		random.nextBytes(salt);
 		return salt;
@@ -43,6 +43,31 @@ public static String[] md5Hash(String password, byte[] salt) {
 	        values[1] = saltStart;
 	        return values; // md5 is what we will store in the password field of the user.
 	    }
+public static String[] md5Hash(String password, String salt) {
+    String md5 = "";
+    
+            
+    if(null == password) {
+    	return null;
+    }	            
+    //saltStart = saltStart.substring(0, 32); // created this so salt and password are same length
+    System.out.println("The Salt is: " + salt);
+    System.out.println("The Password is: " + password);
+    password = password+ salt;//adding a salt to the string before it gets hashed.
+    
+    try {
+        MessageDigest digest = MessageDigest.getInstance("MD5");//Create MessageDigest object for MD5
+        digest.update(password.getBytes(), 0, password.length());//Update input string in message digest
+        md5 = new BigInteger(1, digest.digest()).toString(16);//Converts message digest value in base 16 (hex)
+
+    } catch (NoSuchAlgorithmException e) {
+        e.printStackTrace();
+    }
+    String[] values = new String[2];
+    values[0]= md5;
+    values[1] = salt;
+    return values; // md5 is what we will store in the password field of the user.
+}
 
 
 }

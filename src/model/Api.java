@@ -61,9 +61,11 @@ public class Api {
 		boolean validUserPassCombo = false; //true only if they are equal to the username and password sent in;
 		String uName = null;
 		String pass = null;
-		byte[] salt = null;
+		String salt = null;
+		
 		String StringOfSalt = "";
 		String HashedPassword = "";
+		
 		String[] values = new String[2];
 		try {
 			if(rs != null) 
@@ -73,7 +75,7 @@ public class Api {
 					System.out.println("Testing UserName to database...");
 					uName = rs.getString("Username");
 					pass = rs.getString("Password");
-					salt = rs.getBytes("Salt");
+					salt = rs.getString("Salt");
 					
 					values = Hash.md5Hash(password, salt);
 					
