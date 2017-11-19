@@ -1,4 +1,3 @@
-
 # Software Requirements Specification
 
 for Pizza Planet
@@ -49,7 +48,7 @@ _Revision History_
 
 ><Identify the product whose software requirements are specified in this document, including the revision or release number. Describe the scope of the product that is covered by this SRS, particularly if this SRS describes only part of the system or a single subsystem.>
 
-Ability for a Restaurant to create and track food orders by Users. A User is an employee(administrator or staff) or a customer(registered or guest). A customer can place and pay for an order of items like pizzas, subs, wings and more. An employee can take and clear orders placed by customers, and the admin can add new menu items and update pries. 
+This software provide the ability for a Restaurant to create and track food orders by Users. A User is an employee(administrator or staff) or a customer(registered or guest). A customer can place and pay for an order of items like pizzas, subs, wings and more. A registered customer can have their information (address and payment details) stored in our database in order to make the ordering process easier for customers. An employee can take and clear orders placed by customers, and the admin can add new menu items and update pries. 
 
 ### References
 
@@ -64,11 +63,13 @@ Ability for a Restaurant to create and track food orders by Users. A User is an 
 
 There are two primary users of this system: Employee and Customer. There are two subcatagories of each primary type.
 
-Employee - Admin: Has all abilities to add menu items, look at orders and reports and all abilities of Staff. Is the administer the system.
+Employee - Admin: Has the ability to add or remove menu items, look at orders and reports. Also can create and place orders, accept and validate payment, create and update user information. Administers the system.
 
-Employee - Staff – create and place orders, accept and validate payment, create and update user information.
+Employee - Staff: Can create and place orders, accept and validate payment, create and update user information.
 
-Customer: Create and place orders, and pay for the order with cash. If the Customer registers, we can keep track of their payment info and history. Registered Users will be able to update user information.
+Customer - Guest: Create and place orders, and pay for the order with cash or credit card that is not stored. 
+
+Customer - Registered - Can also create and place orders, as well as store their payment and address information. Customers can then use this stored information to make the ordering process an easier and more streamlined experience.
 
 ### Operating Environment
 
@@ -80,9 +81,18 @@ Mac, Windows and Linux. Ideally this will be used on a tablet or other device wi
 Design and Implementation Constraints
 <Describe any items or issues that will limit the options available to the developers. These might include: corporate or regulatory policies; hardware limitations (timing requirements, memory requirements); interfaces to other applications; specific technologies, tools, and databases to be used; parallel operations; language requirements; communications protocols; security considerations; design conventions or programming standards (for example, if the customer’s organization will be responsible for maintaining the delivered software).>
 
+Micrsoft SQL server will be used for all database needs on the application.
+
 Since we may be storing credit card info and other personal data, we will be employing encryption on the database and secure transmition technologies where applicable.
 
-Hardware requirements will be a 'modern' computer capable of running Java.
+Hardware requirements:
+1 gigahertz (GHz) or faster 32-bit (x86) or 64-bit (x64) processor*
+
+1 gigabyte (GB) RAM (32-bit) or 2 GB RAM (64-bit)
+
+16 GB available hard disk space (32-bit) or 20 GB (64-bit)
+
+DirectX 9 graphics device with WDDM 1.0 or higher driver
 
 ### Assumptions and Dependencies
 
@@ -120,7 +130,7 @@ Hardware for the minimum viable product is a standard computer, moniter, and key
 
 >These are internal connections to things like databases, web servers. You mainly need to explain that you have them, but I don’t expect detailed information about how you actually connect to them and use them. Just explain that you do connect to them and use them for storage of customer information, or to process incoming web requests, etc… These are internal components of your system.
 
-The software interfaces with a cloud-based database.
+The software interfaces with a cloud-based database, which will be managed by Microsoft SQL Server.
 
 ### Communications Interfaces
 
@@ -200,6 +210,8 @@ Since we may be storing credit card info and other personal data, we will be emp
 >In this section, just say “See section 7 requirements 55-62”. And I’ll assume those requirements are Software Quality related.
 
 Hardware will have to hold up to heavy use and greasy fingers. 
+
+The software interface will need to be easy to use and understand, since it will be used by customers. This will ensure the customer experience is as easy and streamlined as possible.
 
 ## 6. Other Requirements
 ><Define any other requirements not covered elsewhere in the SRS. This might include database requirements, internationalization requirements, legal requirements, reuse objectives for the project, and so on. Add any new sections that are pertinent to the project.>
