@@ -273,15 +273,15 @@ public class PizzaPlanetGui extends JFrame {
 		
 	}
 	
-	public void getOrdersPage(User user, ShoppingCart cart, PizzaPlanet pp)
-	{
-		
-	}
-	
-	public void getPaymentPage(User user, ShoppingCart cart, PizzaPlanet pp)
-	{
-		
-	}
+//	public void getOrdersPage(User user, ShoppingCart cart, PizzaPlanet pp)
+//	{
+//		
+//	}
+//	
+//	public void getPaymentPage(User user, ShoppingCart cart, PizzaPlanet pp)
+//	{
+//		
+//	}
 
 	public void getConfirmationPage(User user, Payment pay, PizzaPlanet pp)
 	{
