@@ -20,8 +20,9 @@ public class CreateUserDB extends Api{
 			//check to make sure no users have that userName already.
 			if (rs == null) {
 				//if no users are found add them into our DB
-				//, Fname, Lname, Address, PhoneNum, City, State, zipCode, userType, salt
-				rs = GetResultSet("Insert into Users (userName, password, salt)Values (\'" + u.userName + "\', \'" + tempArray[0] + "\', \'" + tempArray[1] + "\')");
+				// zipCode, userType, salt
+				rs = GetResultSet("Insert into Users (userName, password,Fname,Lname,Address,PhoneNum,City, salt)Values (\'" + u.userName + "\', \'" + tempArray[0] + 
+						"\',\'" + u.firstName + "\', \'" + u.lastName + "\',\'" + u.street + "\',\'" + u.phone + "\',\' " + u.city + "\',\'"  + tempArray[1] + "\')");
 				if (rs == null) {
 					successful = true; //expecting commands completed successfully. That should be null I would think
 					//we will have to do some testing on this one. 
