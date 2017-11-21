@@ -11,25 +11,26 @@ public class CreateUserDB extends Api{
 			//generate new salt for the user
 			String[] tempArray = new String[2];
 			byte[] salt = Hash.getNewSalt();
-			
+			u.userType = "C";
 			//hash the users password with the salt
 			tempArray = Hash.md5Hash(u.password,salt);	
 			
+			//have to get this statement working correctly. 
 			//rs = GetResultSet("Select * from Users where userName = " + "\'" + u.userName + "\'");
 			
-			//check to make sure no users have that userName already.
+			//check to make sure no users have that userName already. need to fix this if statement.
 			if (rs == null) {
 				//if no users are found add them into our DB
-				// zipCode, userType, salt
-				rs = GetResultSet("Insert into Users (userName, password,Fname,Lname,Address,PhoneNum,City, salt)Values (\'" + u.userName + "\', \'" + tempArray[0] + 
-						"\',\'" + u.firstName + "\', \'" + u.lastName + "\',\'" + u.street + "\',\'" + u.phone + "\',\' " + u.city + "\',\'"  + tempArray[1] + "\')");
-				if (rs == null) {
-					successful = true; //expecting commands completed successfully. That should be null I would think
-					//we will have to do some testing on this one. 
-				}
-			}	
+				rs = GetResultSet("Insert into Users (userName, password,Fname,Lname,Address,PhoneNum,City,state,usertype,salt)Values (\'" + u.userName + "\', \'" + tempArray[0] + 
+						"\',\'" + u.firstName + "\', \'" + u.lastName + "\',\'" + u.street + "\',\'" + u.phone + "\',\' " + u.city + "\',\'" + u.state + "\',\'" + u.userType  + "\',\'"  + tempArray[1] + "\')");			
+					successful = true; 
+					System.out.println("Creating new user");
+			}
+			else{				
+				System.out.println("Username already taken");
+			}
 		}
-		System.out.println("Creating new user");
+		
 		Api.CloseStuff();
 		return successful;		
 		
