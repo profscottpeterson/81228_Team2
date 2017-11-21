@@ -6,19 +6,24 @@ import org.junit.Test;
 
 public class OrderTest {
 
+	Order o = new Order();
+	MenuItem m = new MenuItem();
+	
 	@Test
 	public void testGetOrderItems() {
-		fail("Not yet implemented");
+		
+		o.getOrderItems();
 	}
 
 	@Test
 	public void testAddItem() {
-		fail("Not yet implemented");
+		o.addItem(m);
 	}
 
 	@Test
 	public void testRemoveItem() {
-		fail("Not yet implemented");
+		o.addItem(m);
+		o.removeItem(m);
 	}
 
 	@Test

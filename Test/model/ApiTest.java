@@ -2,33 +2,42 @@ package model;
 
 import static org.junit.Assert.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+
 import org.junit.Test;
 
 public class ApiTest {
 
+	
+	
 	@Test
 	public void testIsThisValidUser() {
-		fail("Not yet implemented");
+	
+	boolean test = Api.IsThisValidUser("abc123", "abc123");
+	assertTrue(test);
 	}
 
 	@Test
 	public void testCreateUserInformation() {
-		fail("Not yet implemented");
+		
+		User u = Api.CreateUserInformation("abc123");
 	}
 
 	@Test
 	public void testGetFoodTypes() {
-		fail("Not yet implemented");
+		HashMap<String,String> myMap = Api.GetFoodTypes();
 	}
 
 	@Test
 	public void testGetMenu() {
-		fail("Not yet implemented");
+		Menu m = Api.GetMenu("3");
 	}
 
 	@Test
 	public void testGetAllMenuItems() {
-		fail("Not yet implemented");
+		//returns null at the moment
 	}
 
 }

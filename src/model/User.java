@@ -42,7 +42,8 @@ public class User {
 	public User(String userName, String userT, String fName, String lName, String email,String strt, String cty, String stte, 
 			String zp, String uID, String phn, String pass)
 {
-	userType = userT;
+	this.userName = userName;
+	this.userType = userT;
 	firstName = fName;
 	lastName = lName;
 	this.emailAddress = email;

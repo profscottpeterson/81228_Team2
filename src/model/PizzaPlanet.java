@@ -1,3 +1,4 @@
+
 package model;
 
 //import view.Quinn;
@@ -14,7 +15,7 @@ public class PizzaPlanet {
 	static View2 view;
 	String name;
 	String address;
-	ShoppingCart cart;
+//	ShoppingCart cart;
 
 //	Menu menu;
 	User user = null;
@@ -37,6 +38,7 @@ public class PizzaPlanet {
 		if (user == null && isNewSignUp == false) {
 			this.displayFirstMenu();
 		} 
+    
 		/*we have a new SIGNUP*/
 		else if(user == null && isNewSignUp == true){
 			this.displaySignUpPage();
@@ -52,6 +54,7 @@ public class PizzaPlanet {
 			}
 		}
 		/*we have a registered LOGIN */
+
 		else {
 //			String u = creds[0];
 //			String p = creds[1];
@@ -89,8 +92,7 @@ public class PizzaPlanet {
 		
 		return null;
 	}
-
-
+	
 	/* Call to view - User Page*/
 	public static void displyUserPage() 
 	{	
@@ -101,7 +103,9 @@ public class PizzaPlanet {
 	/* Call to view - First Menu Page*/
 	private void displayFirstMenu() 
 	{
+		System.out.println("displaymenuItems is being called");
 		HashMap<String,String> foodTypes = Api.GetFoodTypes();
+		
 		//TODO: if null, return error message
 		if(foodTypes != null)
 		{
@@ -152,7 +156,9 @@ public class PizzaPlanet {
 	
 	/* Call to view - Sign Up Page */
 	private void displaySignUpPage() {
+
 		view.makeSignUpPage();
+
 	}
 	
 	/* Call to view - Account Page*/
@@ -161,13 +167,13 @@ public class PizzaPlanet {
 		view.makeAcountPage();
 	}
 	
-	public ShoppingCart getCart(){
-		return this.cart;
-	}
+//	public ShoppingCart getCart(){
+//		return this.cart;
+//	}
 	
-	public void setCart(ShoppingCart cart){
-		this.cart = cart;
-	}
+//	public void setCart(ShoppingCart cart){
+//		this.cart = cart;
+//	}
 	
 	public User getUser() {
 		return this.user;

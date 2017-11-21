@@ -57,10 +57,16 @@ public class Api {
 	
 	public static boolean IsThisValidUser(String username, String password)
 	{
-		rs = GetResultSet("Select u.Username, u.Password From Users u where u.Username = \'"+username+"\'");
+		rs = GetResultSet("Select u.Username, u.Password, u.Salt From Users u where u.Username = \'"+username+"\'");
 		boolean validUserPassCombo = false; //true only if they are equal to the username and password sent in;
 		String uName = null;
 		String pass = null;
+		String salt = null;
+		
+		String StringOfSalt = "";
+		String HashedPassword = "";
+		
+		String[] values = new String[2];
 		try {
 			if(rs != null) 
 			{
@@ -69,10 +75,15 @@ public class Api {
 					System.out.println("Testing UserName to database...");
 					uName = rs.getString("Username");
 					pass = rs.getString("Password");
+					salt = rs.getString("Salt");
+					
+					values = Hash.md5Hash(password, salt);
+					
 				}//while
 			}else {validUserPassCombo = false;} //turn this false because rs returned nothing so maybe incorrect casing for username
 		}catch(SQLException s) {s.printStackTrace();}
-		if(uName.equals(username) && pass.equals(password))
+		
+		if(uName.equals(username) && pass.equals(values[0]))		
 		{validUserPassCombo = true;}
 		else {validUserPassCombo = false;}
 		CloseStuff();//close the resultset
@@ -143,7 +154,8 @@ public class Api {
 	//All pizza's or all subs returned but not both
 	public static Menu GetMenu(String indexFoodWanted)
 	{
-		Menu dontuse = null;
+		Menu ourMenu = new Menu();
+		MenuItem m = new MenuItem();
 		rs = GetResultSet("Select f.Food_ID, f.Food_Name from Foods f where f.FType_ID =\'"+indexFoodWanted+"\'" );
 		HashMap<String,String> myMap = new HashMap<String,String>();
 		System.out.println("I'm looking it all the food categories");
@@ -155,19 +167,21 @@ public class Api {
 					String foodId = rs.getString("Food_ID");
 					String name = rs.getString("Food_Name");
 					myMap.put(foodId,name);
+					m.setName(name);
+					ourMenu.addToMenu(m);
+					
 				}//while
 			}else {myMap = null;}
 		}catch(SQLException s) {s.printStackTrace();}
-		CloseStuff();	
-		System.out.println(myMap);
-		return dontuse;
+		CloseStuff();			
+		return ourMenu;
 	}//GetPizza
 
 	public static String getAllMenuItems() {
 		return null;
 	}//getAllMenuItems
 	
-	private static void CloseStuff()
+	public static void CloseStuff()
 	{
 		try {
 			if(rs !=null)
