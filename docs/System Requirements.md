@@ -48,7 +48,7 @@ _Revision History_
 
 ><Identify the product whose software requirements are specified in this document, including the revision or release number. Describe the scope of the product that is covered by this SRS, particularly if this SRS describes only part of the system or a single subsystem.>
 
-This software provide the ability for a Restaurant to create and track food orders by Users. A User is an employee(administrator or staff) or a customer(registered or guest). A customer can place and pay for an order of items like pizzas, subs, wings and more. A registered customer can have their information (address and payment details) stored in our database in order to make the ordering process easier for customers. An employee can take and clear orders placed by customers, and the admin can add new menu items and update pries. 
+This software provide the ability for a Restaurant to create and track food orders by Users. A User is an employee(administrator or staff) or a customer(registered or guest) who wishes to place an order. A customer can place and pay for an order of items like pizzas, subs, wings and more. A registered customer can have their information (address and payment details) stored in our database in order to make the ordering process easier, improving the customer experience. An employee can take and clear orders placed by customers, and the admin can add new menu items and update pries. 
 
 ### References
 
@@ -62,8 +62,9 @@ This software provide the ability for a Restaurant to create and track food orde
 > <Identify the various user classes that you anticipate will use this product. User classes may be differentiated based on frequency of use, subset of product functions used, technical expertise, security or privilege levels, educational level, or experience. Describe the pertinent characteristics of each user class. Certain requirements may pertain only to certain user classes. Distinguish the most important user classes for this product from those who are less important to satisfy.>
 
 There are two primary users of this system: Employee and Customer. There are two subcatagories of each primary type.
+The system will be designed so that all users will not need any technical experience to operate. The system will be optimized to be as easy and user friendly as possible.
 
-Employee - Admin: Has the ability to add or remove menu items, look at orders and reports. Also can create and place orders, accept and validate payment, create and update user information. Administers the system.
+Employee - Admin: Has the ability to add or remove menu items, look at orders and reports. Also can create and place orders, accept and validate payment, create and update user information. The admin will have all security privileges within the system
 
 Employee - Staff: Can create and place orders, accept and validate payment, create and update user information.
 
@@ -105,7 +106,7 @@ _Dependencies:_
 
 _Assumptions_ 
 * Already valid business model in place.
-
+* Business is in need of the software.
 ## 3. External Interface Requirements
 ### User Interfaces
 ><Describe the logical characteristics of each interface between the software product and the users. This may include sample screen images, any GUI standards or product family style guides that are to be followed, screen layout constraints, standard buttons and functions (e.g., help) that will appear on every screen, keyboard shortcuts, error message display standards, and so on. Define the software components for which a user interface is needed. Details of the user interface design should be documented in a separate user interface specification.>
@@ -122,7 +123,7 @@ etc…
 
 >If you system doesn’t include hardware, then you’ll have none. If it has hardware components, then you should describe (at a high level) how you interface with that hardware.
 
-Hardware for the minimum viable product is a standard computer, moniter, and keyboard and mouse to provide the input for placing the order.
+Hardware for the minimum viable product is a standard computer, moniter, and keyboard and mouse to provide the input for placing the order. Ideally the system would work best with a touchscreen interface.
 
 ### Software Interfaces
 
