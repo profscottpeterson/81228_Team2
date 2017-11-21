@@ -2,7 +2,7 @@ package model;
 
 public class CreateUserDB extends Api{
 
-	public boolean CreateUser(User u) {					
+	public static boolean CreateUser(User u) {					
 		boolean successful = false;
 		if(c !=null) {
 			//the blue are the fields in the database, the black are variables passed into the

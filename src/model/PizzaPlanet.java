@@ -1,19 +1,17 @@
 package model;
 
-import view.PizzaPlanetGui;
-import view.Quinn;
+//import view.Quinn;
 import view.View2;
-
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+//import java.util.List;
+//import java.util.Map;
 
-import model.*;
+//import model.*;
 
 public class PizzaPlanet {
 	//PizzaPlanetGui view;
-	View2 view;
+	static View2 view;
 	String name;
 	String address;
 	ShoppingCart cart;
@@ -33,20 +31,36 @@ public class PizzaPlanet {
 	 * if its valid, return that User
 	 * else, return null
 	 */
-	public User apiValidateUser(User user) {
+	public User apiValidateUser(User user, Boolean isNewSignUp) {
 		System.out.println("pp.apiValitateIUser");
 		/*we have a GUEST */
-		if (user == null) {
+		if (user == null && isNewSignUp == false) {
 			this.displayFirstMenu();
 		} 
-		/*we have a USER */
+		/*we have a new SIGNUP*/
+		else if(user == null && isNewSignUp == true){
+			this.displaySignUpPage();
+		}
+		/*we have created a USER*/
+		else if(user != null && isNewSignUp == true){
+			Boolean success = CreateUserDB.CreateUser(user);
+			if (success == true){
+				this.displayFirstMenu();
+			}
+			else{
+				this.displaySignUpPage();
+			}
+		}
+		/*we have a registered LOGIN */
 		else {
 //			String u = creds[0];
 //			String p = creds[1];
 			
+			System.out.println("WE HAVE A NEW USER");
+			
 			User returnedUser = null;
 			boolean validUser = Api.IsThisValidUser(user.userName, user.password);
-			if(validUser)
+			if(validUser == true)
 			{
 				returnedUser = Api.CreateUserInformation(user.userName);
 
@@ -78,9 +92,8 @@ public class PizzaPlanet {
 
 
 	/* Call to view - User Page*/
-	private void displyUserPage() 
-	{
-		
+	public static void displyUserPage() 
+	{	
 		view.showUserPage();
 		//View callback = pp.apiValidateUser()
 	}
@@ -92,7 +105,7 @@ public class PizzaPlanet {
 		//TODO: if null, return error message
 		if(foodTypes != null)
 		{
-			//view.get1stMenuPage(this.getUser(), foodTypes, this);
+			view.makeFirstMenuPage(foodTypes);
 		}//if
 	}
 	
@@ -132,14 +145,20 @@ public class PizzaPlanet {
 		return null;
 	}
 	
+	/* Shopping Cart Page */
+	public static void displayShoppingPage(){
+		view.makeShoppingPage();
+	}
+	
 	/* Call to view - Sign Up Page */
 	private void displaySignUpPage() {
-		//view.getSignUpPage(user, null);
+		view.makeSignUpPage();
 	}
 	
 	/* Call to view - Account Page*/
-	private void displayAccountPage() {
+	public static void displayAccountPage() {
 		//view.getAccountPage(this.user, this);
+		view.makeAcountPage();
 	}
 	
 	public ShoppingCart getCart(){

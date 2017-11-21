@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -20,7 +19,6 @@ import view.PStyle;
 @SuppressWarnings("serial")
 public class UserPage extends PPanel {
 
-	PizzaPlanet pp;
 	JButton btnGuest;
 	JPanel pnlSubmit;
 	JButton btnLogin;
@@ -30,11 +28,19 @@ public class UserPage extends PPanel {
 	private JLabel lblUserError;
 	private JLabel lblPassError;
 	private JPasswordField txtPassword;
+	private JPanel pnlLoginPage;
 	
-	public UserPage(PizzaPlanet pp){
-		super();
+	public UserPage(PizzaPlanet pp, ExitTab exit){
+		super(pp);		
 		
-		this.pp = pp;
+		add(exit);
+		
+		// Login Page Panel 
+		pnlLoginPage = new JPanel();
+		pnlLoginPage.setVisible(false);
+		pnlLoginPage.setBounds(0, 0, 1914, 1091);
+		add(pnlLoginPage);
+		pnlLoginPage.setLayout(null);
 		
 		// Setting pnlSubmit Background/Border/Color/Bounds
 		pnlSubmit = new JPanel();
@@ -52,7 +58,7 @@ public class UserPage extends PPanel {
 		
 		btnGuest.setForeground(new Color(204, 0, 0));
 		btnGuest.setBackground(PStyle.primaryButtonColor);
-		btnGuest.setFont(PStyle.primaryFontStyle);
+		btnGuest.setFont(PStyle.secondaryFontStyle);
 		btnGuest.setBounds(196, 439, 121, 34);
 		
 		// Adding btnSignUp to pnlSubmit
@@ -65,10 +71,10 @@ public class UserPage extends PPanel {
 		btnLogin.setFont(PStyle.primaryFontStyle);
 		btnLogin.setBounds(274, 353, 223, 74);
 		
-		btnSignUp = new JButton("SIGN UP");
+		btnSignUp = new JButton("SIGN");
 		
 		btnSignUp.setForeground(new Color(204, 0, 0));
-		btnSignUp.setFont(PStyle.primaryFontStyle);
+		btnSignUp.setFont(PStyle.secondaryFontStyle);
 		btnSignUp.setBackground(PStyle.primaryButtonColor);
 		btnSignUp.setBounds(444, 439, 121, 34);
 		pnlSubmit.add(btnSignUp);
@@ -117,15 +123,15 @@ public class UserPage extends PPanel {
 		// Setting lblSumbit Bounds/Icon/Name
 		lblSubmit = new JLabel("");
 		lblSubmit.setBounds(6, 6, 738, 482);
-		lblSubmit.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Submit.jpg")));
+		lblSubmit.setIcon(new ImageIcon(UserPage.class.getResource("/Resources/Submit.jpg")));
 		
 		// Adding Lbl to Panel
 		pnlSubmit.add(lblSubmit);
 		
 		// Setting lblBackgroundLogin Bounds/Icon/Name
 		JLabel lblBackgroundLogin = new JLabel("");
-		lblBackgroundLogin.setBounds(-8, 0, 2000, 1103);
-		lblBackgroundLogin.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Login_Final.png")));
+		lblBackgroundLogin.setBounds(0, -11, 2000, 1103);
+		lblBackgroundLogin.setIcon(new ImageIcon(UserPage.class.getResource("/Resources/Login_Final.png")));
 		
 		// Adding Label to panel
 		add(lblBackgroundLogin);
@@ -142,10 +148,11 @@ public class UserPage extends PPanel {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				@SuppressWarnings("unused")
 				User user = null;
 
 				//[username. password]
-				pp.apiValidateUser(user);
+				pp.apiValidateUser(null, false);
 			}
 		});
 		
@@ -156,6 +163,7 @@ public class UserPage extends PPanel {
 			public void actionPerformed(ActionEvent e) 
 			{		
 				validateUserPass();
+				pp.apiValidateUser(null, false);
 			}
 		});
 		
@@ -163,7 +171,7 @@ public class UserPage extends PPanel {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-
+				pp.apiValidateUser(null, true);
 			}
 		});
 	}
@@ -171,6 +179,7 @@ public class UserPage extends PPanel {
 	public void validateUserPass(){
 		
 		String username = txtUserName.getText();
+		@SuppressWarnings("deprecation")
 		String password = txtPassword.getText();
 		
 		User user = new User(username, password);
@@ -216,7 +225,7 @@ public class UserPage extends PPanel {
 					else
 					{
 						System.out.println("PASSWORD:" + " " + password);
-						pp.apiValidateUser(user);
+						pp.apiValidateUser(user, false);
 					}
 				}
 			}
