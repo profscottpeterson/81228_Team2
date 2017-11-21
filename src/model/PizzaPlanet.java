@@ -15,7 +15,7 @@ public class PizzaPlanet {
 	PizzaPlanetGui view;
 	String name;
 	String address;
-	ShoppingCart cart;
+//	ShoppingCart cart;
 
 //	Menu menu;
 	User user = null;
@@ -115,12 +115,12 @@ public class PizzaPlanet {
 	
 	/* Call to view - Orders Page*/
 	private void displayOrders() {
-		view.getOrdersPage(this.getUser(), this.getCart(), this);
+		//view.getOrdersPage(this.getUser(), this.getCart(), this);
 	}
 
 	/* Call to view - Payment Page*/
 	private void displayPayment() {
-		view.getPaymentPage(this.getUser(), this.getCart(), this);
+		//view.getPaymentPage(this.getUser(), this.getCart(), this);
 	}
 	
 	/* Call to view - Confirmation Page*/
@@ -145,13 +145,13 @@ public class PizzaPlanet {
 		view.getAccountPage(this.user, this);
 	}
 	
-	public ShoppingCart getCart(){
-		return this.cart;
-	}
+//	public ShoppingCart getCart(){
+//		return this.cart;
+//	}
 	
-	public void setCart(ShoppingCart cart){
-		this.cart = cart;
-	}
+//	public void setCart(ShoppingCart cart){
+//		this.cart = cart;
+//	}
 	
 	public User getUser() {
 		return this.user;
