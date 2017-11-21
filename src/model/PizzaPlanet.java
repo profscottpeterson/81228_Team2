@@ -1,3 +1,4 @@
+
 package model;
 
 import view.PizzaPlanetGui;
@@ -14,7 +15,7 @@ public class PizzaPlanet {
 	PizzaPlanetGui view;
 	String name;
 	String address;
-	
+	ShoppingCart cart;
 
 //	Menu menu;
 	User user = null;
@@ -30,20 +31,24 @@ public class PizzaPlanet {
 	 * if its valid, return that User
 	 * else, return null
 	 */
-	public User apiValidateUser(User user) {
+	public User apiValidateUser(User user, Boolean isNewSignUp) {
 		System.out.println("pp.apiValitateIUser");
 		/*we have a GUEST */
-		if (user == null) {
+		if (user == null && isNewSignUp == false) {
 			this.displayFirstMenu();
 		} 
-		/*we have a USER */
+		/*we have a new Signup*/
+		else if(user == null && isNewSignUp == true){
+			this.displaySignUpPage();
+		}
+		/*we have a registered USER */
 		else {
 //			String u = creds[0];
 //			String p = creds[1];
 			
 			User returnedUser = null;
 			boolean validUser = Api.IsThisValidUser(user.userName, user.password);
-			if(validUser)
+			if(validUser == true)
 			{
 				returnedUser = Api.CreateUserInformation(user.userName);
 
@@ -72,8 +77,7 @@ public class PizzaPlanet {
 		
 		return null;
 	}
-
-
+	
 	/* Call to view - User Page*/
 	private void displyUserPage() 
 	{
@@ -85,7 +89,9 @@ public class PizzaPlanet {
 	/* Call to view - First Menu Page*/
 	private void displayFirstMenu() 
 	{
+		System.out.println("displaymenuItems is being called");
 		HashMap<String,String> foodTypes = Api.GetFoodTypes();
+		
 		//TODO: if null, return error message
 		if(foodTypes != null)
 		{
@@ -109,12 +115,12 @@ public class PizzaPlanet {
 	
 	/* Call to view - Orders Page*/
 	private void displayOrders() {
-		view.getOrdersPage(this.getUser(),this);
+		view.getOrdersPage(this.getUser(), this.getCart(), this);
 	}
 
 	/* Call to view - Payment Page*/
 	private void displayPayment() {
-		view.getPaymentPage(this.getUser(),this);
+		view.getPaymentPage(this.getUser(), this.getCart(), this);
 	}
 	
 	/* Call to view - Confirmation Page*/
@@ -131,7 +137,7 @@ public class PizzaPlanet {
 	
 	/* Call to view - Sign Up Page */
 	private void displaySignUpPage() {
-		view.getSignUpPage(user, null);
+		view.getSignUpPage(this);
 	}
 	
 	/* Call to view - Account Page*/
@@ -139,6 +145,13 @@ public class PizzaPlanet {
 		view.getAccountPage(this.user, this);
 	}
 	
+	public ShoppingCart getCart(){
+		return this.cart;
+	}
+	
+	public void setCart(ShoppingCart cart){
+		this.cart = cart;
+	}
 	
 	public User getUser() {
 		return this.user;
