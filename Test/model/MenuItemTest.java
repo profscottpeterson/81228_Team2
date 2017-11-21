@@ -8,12 +8,14 @@ public class MenuItemTest {
 
 	@Test
 	public void testGetItemIngred() {
-		fail("Not yet implemented");
+		MenuItem mi = new MenuItem();
+		mi.getItemIngred();
 	}
 
 	@Test
 	public void testGetPrice() {
-		fail("Not yet implemented");
+		MenuItem mi = new MenuItem();
+		mi.getPrice();
 	}
 
 }
