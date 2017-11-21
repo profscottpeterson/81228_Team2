@@ -154,7 +154,8 @@ public class Api {
 	//All pizza's or all subs returned but not both
 	public static Menu GetMenu(String indexFoodWanted)
 	{
-		Menu dontuse = null;
+		Menu ourMenu = new Menu();
+		MenuItem m = new MenuItem();
 		rs = GetResultSet("Select f.Food_ID, f.Food_Name from Foods f where f.FType_ID =\'"+indexFoodWanted+"\'" );
 		HashMap<String,String> myMap = new HashMap<String,String>();
 		System.out.println("I'm looking it all the food categories");
@@ -166,12 +167,14 @@ public class Api {
 					String foodId = rs.getString("Food_ID");
 					String name = rs.getString("Food_Name");
 					myMap.put(foodId,name);
+					m.setName(name);
+					ourMenu.addToMenu(m);
+					
 				}//while
 			}else {myMap = null;}
 		}catch(SQLException s) {s.printStackTrace();}
-		CloseStuff();	
-		System.out.println(myMap);
-		return dontuse;
+		CloseStuff();			
+		return ourMenu;
 	}//GetPizza
 
 	public static String getAllMenuItems() {

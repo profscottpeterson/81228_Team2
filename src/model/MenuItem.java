@@ -3,7 +3,8 @@ package model;
 import java.util.ArrayList;
 
 public class MenuItem {
-
+	
+	private String name;
 	private double price;
 	private ArrayList<Ingredient> ItemIngred = new ArrayList<Ingredient>();
 	private double extra = .6;
@@ -28,5 +29,11 @@ public class MenuItem {
 	{
 		ItemIngred.remove(i);
 		price =- extra;
+	}
+	public String getName(){
+		return this.name;
+	}
+	public void setName(String Name){
+		this.name =Name;
 	}
 }
