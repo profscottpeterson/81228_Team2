@@ -167,7 +167,8 @@ public class Api {
 					String name = rs.getString("Food_Name");
 					m.setmIndex(Integer.parseInt(foodId));
 					m.setName(name);
-					ourMenu.addToMenu(m);					
+					ourMenu.addToMenu(m);
+					//here is a new line ofcode	
 				}//while
 			}else {ourMenu = null;}
 		}catch(SQLException s) {s.printStackTrace();}
