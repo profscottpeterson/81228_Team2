@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import model.Menu;
 import model.PizzaPlanet;
 
 public class View2 {
@@ -48,8 +50,7 @@ public class View2 {
 		
 		frame.add(p);
 		
-		frame.setVisible(true);
-		
+		frame.setVisible(true);		
 		
 		map = new HashMap<String, PPanel>();
 		
@@ -115,8 +116,8 @@ public class View2 {
 		cl.show(p, "shoppingPage");
 	}
 	
-	public void makeSecondMenuPage(){
-		SecondMenuPage secondMenuPage = new SecondMenuPage(pp, exit, nav);
+	public void makeSecondMenuPage(Menu menu){
+		SecondMenuPage secondMenuPage = new SecondMenuPage(pp, exit, menu, nav);
 		map.put("secondMenuPage", secondMenuPage);
 		
 		p.add(secondMenuPage, "secondMenuPage");
