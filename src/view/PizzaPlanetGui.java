@@ -561,7 +561,7 @@ public class PizzaPlanetGui extends JFrame {
 		lblPassword2.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
 		lblPassword2.setBounds(372, 511, 238, 84);
 		pnlSignUpPage.add(lblPassword2);
-		
+
 		txtPassSign = new JPasswordField();
 		txtPassSign.setFont(new Font("Comic Sans MS", Font.PLAIN, 35));
 		txtPassSign.setColumns(10);
