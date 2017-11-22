@@ -117,7 +117,7 @@ public class PizzaPlanet {
 	private void displaySecondMenu(Menu menu) {
 		Menu pizza = null;
 		
-		//view.get2ndMenuPage(this.getUser(), menu, this);
+		view.makeSecondMenuPage(menu);
 	}
 
 	/* Call to view - Menu Items Detail Page*/

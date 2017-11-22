@@ -155,7 +155,6 @@ public class Api {
 	public static Menu GetMenu(String indexFoodWanted)
 	{
 		Menu ourMenu = new Menu();
-		MenuItem m = new MenuItem();
 		rs = GetResultSet("Select f.Food_ID, f.Food_Name from Foods f where f.FType_ID =\'"+indexFoodWanted+"\'" );
 		HashMap<String,String> myMap = new HashMap<String,String>();
 		System.out.println("I'm looking it all the food categories");
@@ -164,6 +163,7 @@ public class Api {
 			{
 				while(rs.next())
 				{
+					MenuItem m = new MenuItem();
 					String foodId = rs.getString("Food_ID");
 					String name = rs.getString("Food_Name");
 					myMap.put(foodId,name);
