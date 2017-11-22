@@ -1,8 +1,10 @@
 package model;
 
+import java.sql.SQLException;
+
 public class CreateUserDB extends Api{
 
-	public static boolean CreateUser(User u) {					
+	public static boolean CreateUser(User u) throws SQLException {					
 		boolean successful = false;
 		System.out.println("CreateUser Called");
 		if(c !=null) {
@@ -16,10 +18,10 @@ public class CreateUserDB extends Api{
 			tempArray = Hash.md5Hash(u.password,salt);	
 			
 			//have to get this statement working correctly. 
-			//rs = GetResultSet("Select * from Users where userName = " + "\'" + u.userName + "\'");
+			rs = GetResultSet("Select * from Users where userName = " + "\'" + u.userName + "\'");
 			
 			//check to make sure no users have that userName already. need to fix this if statement.
-			if (rs == null) {
+			if (!rs.next()) {
 				//if no users are found add them into our DB
 				rs = GetResultSet("Insert into Users (userName, password,Fname,Lname,Address,PhoneNum,City,state,usertype,salt)Values (\'" + u.userName + "\', \'" + tempArray[0] + 
 						"\',\'" + u.firstName + "\', \'" + u.lastName + "\',\'" + u.street + "\',\'" + u.phone + "\',\' " + u.city + "\',\'" + u.state + "\',\'" + u.userType  + "\',\'"  + tempArray[1] + "\')");			
