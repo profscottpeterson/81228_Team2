@@ -15,6 +15,7 @@ public class Api {
 	private static final String PASS = "XZ36KrMB}n";
 	protected static Connection c = CreateConnection();
 	protected static ResultSet rs = null;
+	protected static ResultSet rs1 = null;
 	protected static Statement st = null;
 	
 	public static Connection CreateConnection()
@@ -168,6 +169,7 @@ public class Api {
 					String name = rs.getString("Food_Name");
 					m.setmIndex(Integer.parseInt(foodId));
 					m.setName(name);
+					m = AddIngrToMenu(m);
 					ourMenu.addToMenu(m);
 					//to send update
 				}//while
@@ -177,24 +179,26 @@ public class Api {
 		return ourMenu;
 	}//GetPizza
 	
-	public static void AddIngrToMenu(MenuItem m)
+	public static MenuItem AddIngrToMenu(MenuItem mi) throws SQLException
 	{
-		String id = Integer.toString(m.getmIndex());
-		rs = GetResultSet("Select i.Ing_id, i.Ing_name, i.CI_id from Food_Ing_Qty q join Ingredients i on q.Ing_id = i.Ing_id where q.Food_id =\'"+id+"\'" );
+		String id = Integer.toString(mi.getmIndex());
+		rs1 = GetResultSet("Select i.Ing_id, i.Ing_name, i.CI_id from Food_Ing_Qty q join Ingredients i on q.Ing_id = i.Ing_id where q.Food_id =\'"+id+"\'" );
 		try {
 			if(rs != null) 
 			{
 				while(rs.next())
 				{
-					int ingId = rs.getInt("Ing_id");
-					String iName = rs.getString("Ing_name");
-					int catId = rs.getInt("CI_id");
+					int ingId = rs1.getInt("Ing_id");
+					String iName = rs1.getString("Ing_name");
+					int catId = rs1.getInt("CI_id");
 					Ingredient ing = new Ingredient(iName,catId, ingId); 
-					m.addIngred(ing);					
+					mi.addIngred(ing);					
 				}//while
 			}else {}
 		}catch(SQLException s) {s.printStackTrace();}
-		CloseStuff();		
+		rs1.close();
+		return mi;
+		
 	}//AddIngrToMenu
 
 	public static String getAllMenuItems() {
