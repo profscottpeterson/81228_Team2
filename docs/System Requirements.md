@@ -48,13 +48,11 @@ _Revision History_
 
 ><Identify the product whose software requirements are specified in this document, including the revision or release number. Describe the scope of the product that is covered by this SRS, particularly if this SRS describes only part of the system or a single subsystem.>
 
-This software provide the ability for a Restaurant to create and track food orders by Users. A User is an employee(administrator or staff) or a customer(registered or guest). A customer can place and pay for an order of items like pizzas, subs, wings and more. A registered customer can have their information (address and payment details) stored in our database in order to make the ordering process easier for customers. An employee can take and clear orders placed by customers, and the admin can add new menu items and update pries. 
+This software provide the ability for a Restaurant to create and track food orders by Users. A User is an employee(administrator or staff) or a customer(registered or guest). A customer can place and pay for an order of items like pizzas, subs, wings and more. A registered customer can have their information (address and payment details) stored in our database in order to make the ordering process easier for customers. An employee can take and clear orders placed by customers, and the admin can add new menu items and update pries. They both can also access the Shopping Cart to either delete or alter the items they've chosen.
 
 ### References
 
 ><List any other documents or Web addresses to which this SRS refers. These may include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.>
-
-
 
 ## 2. Overall Description
 
@@ -116,13 +114,15 @@ What screen resolutions will you support?
 Will you be Section 508 compliant? Are there any other standards you support?
 etc…
 
+The interface has many views which change given the certain input from the User, this will be layed out as a card layout to keep code simple and easy to use. Images are entirely created from the team and the style of the images stay consistent throughout the program. All styles and fonts stay consistent as well keeping it at a Bold Comic Sans. Buttons as well will have a change in background color to a type of a very faded peach color. No keyboard shortcuts will be implemented and error messages do display when wrong information is passed through text fields (ex. Username or Password). Throughout the program the user will be given the tabs that are a "Navigation Bar" and an "Exit Tab" this allows the user to freely navigate the program, back up if they forgot something or skip to a certain point in time, to change their information, and or view their shopping cart. This app is a Fullscreen app "ONLY" supporting the ratio of 1920/1080, any smaller screens will not show the program entirely. Going back to the views there are 8 views, those being User Login View, First Menu View, Detail Menu View, Account View, Sign Up View, Shopping View, Confirmation View, and Payment View. We will be coompliant to Section 508 but that will of course be implemented in later builds.
+
 ### Hardware Interfaces
 
 ><Describe the logical and physical characteristics of each interface between the software product and the hardware components of the system. This may include the supported device types, the nature of the data and control interactions between the software and the hardware, and communication protocols to be used.>
 
 >If you system doesn’t include hardware, then you’ll have none. If it has hardware components, then you should describe (at a high level) how you interface with that hardware.
 
-Hardware for the minimum viable product is a standard computer, moniter, and keyboard and mouse to provide the input for placing the order.
+Hardware for the minimum viable product is a standard computer preferably a desktop, the desktop will only need 1 screen but can support more, the desktop will of course have keyboard and mouse input to navigate around the program. Optionally the desktop can have touchscreen so it can immitate a possible Kiosk to provide the same input as the keyboard and mouse. 
 
 ### Software Interfaces
 
@@ -195,7 +195,7 @@ Place orders, shopping cart (checkout and payment, CRUD order), CRUD menu, CRUD 
 
 >In this section, just say “See section 7 requirements 25-32”. And I’ll assume those requirements are Safety related.
 
-There are no safety concerns related to the software.
+There are no safety concerns related to the software, the program produces no loud sounds to damage ears and flashing colors to cause possible damage to epileptic viewers. I assure you that this pizza program is very friendly.
 
 ### Security Requirements
 <Specify any requirements regarding security or privacy issues surrounding use of the product or protection of the data used or created by the product. Define any user identity authentication requirements. Refer to any external policies or regulations containing security issues that affect the product. Define any security or privacy certifications that must be satisfied.>
@@ -211,7 +211,7 @@ Since we may be storing credit card info and other personal data, we will be emp
 
 Hardware will have to hold up to heavy use and greasy fingers. 
 
-The software interface will need to be easy to use and understand, since it will be used by customers. This will ensure the customer experience is as easy and streamlined as possible.
+The software interface will need to be easy to use and understand, since it will be used by customers. This will ensure the customer experience is as easy and streamlined as possible. as goes for customers the softwar quality attributes are very adaptable for their use and always available given any time of day. maintaining this program should be a piece of cake as long as you have a wifi connection to connect to the database and grab the needed information. I assure you this program is 99% reliable. reusability is definately there these "kiosk computers" can probably be shifted around per PizzaPlanet store.
 
 ## 6. Other Requirements
 ><Define any other requirements not covered elsewhere in the SRS. This might include database requirements, internationalization requirements, legal requirements, reuse objectives for the project, and so on. Add any new sections that are pertinent to the project.>
