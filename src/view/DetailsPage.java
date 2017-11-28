@@ -13,10 +13,12 @@ public class DetailsPage extends PPanel {
 	private JPanel pnlDetailsPage;
 
 	public DetailsPage(PizzaPlanet pp, ExitTab exit, NavTab nav) {
-		super(pp);		
+
+		super(pp, exit, nav);		
 		
-		add(exit);
-		add(nav);
+		//add(exit);
+		//add(nav);
+
 		
 		pnlDetailsPage = new JPanel();
 		pnlDetailsPage.setBounds(0, 0, 1914, 1091);

@@ -18,6 +18,7 @@ public class CreateUserDB extends Api{
 			tempArray = Hash.md5Hash(u.password,salt);	
 			
 			//have to get this statement working correctly. 
+
 			rs = GetResultSet("Select * from Users where userName = " + "\'" + u.userName + "\'");
 			
 			//check to make sure no users have that userName already. need to fix this if statement.
@@ -35,6 +36,7 @@ public class CreateUserDB extends Api{
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+
 			}
 		}		
 		Api.CloseStuff();
