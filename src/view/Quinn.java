@@ -1,7 +1,6 @@
 package view;
 
 import model.PizzaPlanet;
-import model.User;
 
 public class Quinn {
 	/* Pass in the PizzaPlanet so we can call its methods to update the state */

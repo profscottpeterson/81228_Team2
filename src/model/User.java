@@ -4,17 +4,16 @@ import java.util.Map;
 
 public class User {
 
-	String userName;
+	private String userName;
 	String userType; /* Type of REGISTERED, GUEST, ADMIN, STAFF */
-	String firstName;
-	String lastName;
-	String emailAddress;
-	String street;
-	String city;
-	String state;
-	String zip;
+	private String firstName;
+	private String lastName;
+	private String emailAddress;
+	private String street;
+	private String city;
+	private String state;
 	String userId;
-	String phone;
+	private String phone;
 	Map <String, String> payment;
 	String password;
 	
@@ -24,47 +23,46 @@ public class User {
 	
 	//constructor without password
 	public User(String userName, String userT, String fName, String lName, String email, String strt, String cty, String stte, 
-				String zp, String uID, String phn)
+				 String uID, String phn)
 	{
-		this.userName = userName;
+		setUserName(userName);
 		userType = userT;
-		firstName = fName;
-		lastName = lName;
-		this.emailAddress = email;
-		street = strt;
-		city = cty;
-		state = stte;
-		zip = zp;
+		setFirstName(fName);
+		setLastName(lName);
+		setEmailAddress(email);
+		setStreet(strt);
+		setCity(cty);
+		setState(stte);
 		userId= uID;
-		phone = phn;
+		setPhone(phn);
 	}//User(all variables)
 	//constructor with password
 	public User(String userName, String userT, String fName, String lName, String email,String strt, String cty, String stte, 
-			String zp, String uID, String phn, String pass)
+			 String uID, String phn, String pass)
 {
+	setUserName(userName);
 	userType = userT;
-	firstName = fName;
-	lastName = lName;
-	this.emailAddress = email;
-	street = strt;
-	city = cty;
-	state = stte;
-	zip = zp;
+	setFirstName(fName);
+	setLastName(lName);
+	setEmailAddress(email);
+	setStreet(strt);
+	setCity(cty);
+	setState(stte);
 	userId= uID;
-	phone = phn;
+	setPhone(phn);
 	password = pass;
 }//User(all variables)
 
 	//constructor with only userName and password
 	public User(String userName, String pass)
 {
-	this.userName = userName;
+	this.setUserName(userName);
 	password = pass;
 }//User(all variables)
 	
 	public User(String name) {
 		// TODO Auto-generated constructor stub
-		this.firstName = name;
+		this.setFirstName(name);
 		this.userType = "REGISTERED";
 		this.payment.put("type", "value");
 		this.payment.put("number", "value");
@@ -77,6 +75,78 @@ public class User {
 	 */
 	public Map <String, String> getUserPayment(){
 		return payment;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public String setUserName(String userName) {
+		this.userName = userName;
+		return userName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String setFirstName(String firstName) {
+		this.firstName = firstName;
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String setLastName(String lastName) {
+		this.lastName = lastName;
+		return lastName;
+	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public String setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+		return emailAddress;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public String setStreet(String street) {
+		this.street = street;
+		return street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public String setCity(String city) {
+		this.city = city;
+		return city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public String setState(String state) {
+		this.state = state;
+		return state;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public String setPhone(String phone) {
+		this.phone = phone;
+		return phone;
 	}
 
 }
