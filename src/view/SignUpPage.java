@@ -47,6 +47,7 @@ public class SignUpPage extends PPanel {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public SignUpPage(PizzaPlanet pp, ExitTab exit, NavTab nav){
+
 		super(pp, exit, nav);
 		
 		//add(exit);

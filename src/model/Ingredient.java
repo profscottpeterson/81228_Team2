@@ -11,6 +11,7 @@ public class Ingredient {
 		setName(ingName);
 		setCategory(ingCat);
 		setIng_id(ingId);
+
 	}
 	
 	public Ingredient(){
@@ -20,6 +21,7 @@ public class Ingredient {
 	public String getName() {
 		return name;
 	}
+
 
 	public void setName(String name) {
 		this.name = name;

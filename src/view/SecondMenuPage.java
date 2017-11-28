@@ -26,10 +26,12 @@ public class SecondMenuPage extends PPanel {
 	private JPanel pnlCat2;
 
 	public SecondMenuPage(PizzaPlanet pp, ExitTab exit, Menu menu, NavTab nav) {
+
 		super(pp, exit, nav);
 
 		//add(exit);
 		//add(nav);
+
 		
 		//System.out.println(menu.getFullMenu().get(0).getName());
 		

@@ -58,12 +58,14 @@ public class View2 {
 	}
 	
 	public void makeUserPage(){
+
 			UserPage userPage = new UserPage(pp, exit);
 			map.put("userPage",  userPage);
 			
 			p.add(userPage,  "userPage");
 
 			showUserPage();
+
 
 	}
 	
@@ -72,13 +74,13 @@ public class View2 {
 	}
 	
 	public void makeFirstMenuPage(Map<String,String> foodtypes){
-
 			
 			FirstMenuPage firstMenuPage = new FirstMenuPage(foodtypes, pp, exit, nav);
 			map.put("firstMenuPage", firstMenuPage);
 			
 			p.add(firstMenuPage, "firstMenuPage");
 		
+
 		showFirstMenuPage();
 	}
 	
@@ -92,6 +94,7 @@ public class View2 {
 			map.put("signUpPage", signUpPage);
 			
 			p.add(signUpPage, "signUpPage");
+
 
 		showSignUpPage();
 	}

@@ -24,10 +24,12 @@ public class FirstMenuPage extends PPanel{
 	private JLabel lblBackgroundMenu;
 
 	public FirstMenuPage( Map<String,String> foodtypes, PizzaPlanet pp, ExitTab exit, NavTab nav){
+
 		super(pp, exit, nav);
 
 		//add(exit);
 		//add(nav);
+
 
 		pnlMenuPage = new JPanel();
 		pnlMenuPage.setBounds(0, 0, 1914, 1091);

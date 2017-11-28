@@ -1,4 +1,3 @@
-
 # Software Requirements Specification
 
 for Pizza Planet
@@ -49,13 +48,12 @@ _Revision History_
 
 ><Identify the product whose software requirements are specified in this document, including the revision or release number. Describe the scope of the product that is covered by this SRS, particularly if this SRS describes only part of the system or a single subsystem.>
 
-Ability for a Restaurant to create and track food orders by Users. A User is an employee(administrator or staff) or a customer(registered or guest). A customer can place and pay for an order of items like pizzas, subs, wings and more. An employee can take and clear orders placed by customers, and the admin can add new menu items and update pries. 
+
+This software provide the ability for a Restaurant to create and track food orders by Users. A User is an employee(administrator or staff) or a customer(registered or guest). A customer can place and pay for an order of items like pizzas, subs, wings and more. A registered customer can have their information (address and payment details) stored in our database in order to make the ordering process easier for customers. An employee can take and clear orders placed by customers, and the admin can add new menu items and update pries. They both can also access the Shopping Cart to either delete or alter the items they've chosen.
 
 ### References
 
 ><List any other documents or Web addresses to which this SRS refers. These may include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.>
-
-
 
 ## 2. Overall Description
 
@@ -63,12 +61,15 @@ Ability for a Restaurant to create and track food orders by Users. A User is an 
 > <Identify the various user classes that you anticipate will use this product. User classes may be differentiated based on frequency of use, subset of product functions used, technical expertise, security or privilege levels, educational level, or experience. Describe the pertinent characteristics of each user class. Certain requirements may pertain only to certain user classes. Distinguish the most important user classes for this product from those who are less important to satisfy.>
 
 There are two primary users of this system: Employee and Customer. There are two subcatagories of each primary type.
+The system will be designed so that all users will not need any technical experience to operate. The system will be optimized to be as easy and user friendly as possible.
 
-Employee - Admin: Has all abilities to add menu items, look at orders and reports and all abilities of Staff. Is the administer the system.
+Employee - Admin: Has the ability to add or remove menu items, look at orders and reports. Also can create and place orders, accept and validate payment, create and update user information. The admin will have all security privileges within the system
 
-Employee - Staff – create and place orders, accept and validate payment, create and update user information.
+Employee - Staff: Can create and place orders, accept and validate payment, create and update user information.
 
-Customer: Create and place orders, and pay for the order with cash. If the Customer registers, we can keep track of their payment info and history. Registered Users will be able to update user information.
+Customer - Guest: Create and place orders, and pay for the order with cash or credit card that is not stored. 
+
+Customer - Registered - Can also create and place orders, as well as store their payment and address information. Customers can then use this stored information to make the ordering process an easier and more streamlined experience.
 
 ### Operating Environment
 
@@ -80,9 +81,18 @@ Mac, Windows and Linux. Ideally this will be used on a tablet or other device wi
 Design and Implementation Constraints
 <Describe any items or issues that will limit the options available to the developers. These might include: corporate or regulatory policies; hardware limitations (timing requirements, memory requirements); interfaces to other applications; specific technologies, tools, and databases to be used; parallel operations; language requirements; communications protocols; security considerations; design conventions or programming standards (for example, if the customer’s organization will be responsible for maintaining the delivered software).>
 
+Micrsoft SQL server will be used for all database needs on the application.
+
 Since we may be storing credit card info and other personal data, we will be employing encryption on the database and secure transmition technologies where applicable.
 
-Hardware requirements will be a 'modern' computer capable of running Java.
+Hardware requirements:
+1 gigahertz (GHz) or faster 32-bit (x86) or 64-bit (x64) processor*
+
+1 gigabyte (GB) RAM (32-bit) or 2 GB RAM (64-bit)
+
+16 GB available hard disk space (32-bit) or 20 GB (64-bit)
+
+DirectX 9 graphics device with WDDM 1.0 or higher driver
 
 ### Assumptions and Dependencies
 
@@ -95,7 +105,7 @@ _Dependencies:_
 
 _Assumptions_ 
 * Already valid business model in place.
-
+* Business is in need of the software.
 ## 3. External Interface Requirements
 ### User Interfaces
 ><Describe the logical characteristics of each interface between the software product and the users. This may include sample screen images, any GUI standards or product family style guides that are to be followed, screen layout constraints, standard buttons and functions (e.g., help) that will appear on every screen, keyboard shortcuts, error message display standards, and so on. Define the software components for which a user interface is needed. Details of the user interface design should be documented in a separate user interface specification.>
@@ -106,13 +116,15 @@ What screen resolutions will you support?
 Will you be Section 508 compliant? Are there any other standards you support?
 etc…
 
+The interface has many views which change given the certain input from the User, this will be layed out as a card layout to keep code simple and easy to use. Images are entirely created from the team and the style of the images stay consistent throughout the program. All styles and fonts stay consistent as well keeping it at a Bold Comic Sans. Buttons as well will have a change in background color to a type of a very faded peach color. No keyboard shortcuts will be implemented and error messages do display when wrong information is passed through text fields (ex. Username or Password). Throughout the program the user will be given the tabs that are a "Navigation Bar" and an "Exit Tab" this allows the user to freely navigate the program, back up if they forgot something or skip to a certain point in time, to change their information, and or view their shopping cart. This app is a Fullscreen app "ONLY" supporting the ratio of 1920/1080, any smaller screens will not show the program entirely. Going back to the views there are 8 views, those being User Login View, First Menu View, Detail Menu View, Account View, Sign Up View, Shopping View, Confirmation View, and Payment View. We will be coompliant to Section 508 but that will of course be implemented in later builds.
+
 ### Hardware Interfaces
 
 ><Describe the logical and physical characteristics of each interface between the software product and the hardware components of the system. This may include the supported device types, the nature of the data and control interactions between the software and the hardware, and communication protocols to be used.>
 
 >If you system doesn’t include hardware, then you’ll have none. If it has hardware components, then you should describe (at a high level) how you interface with that hardware.
 
-Hardware for the minimum viable product is a standard computer, moniter, and keyboard and mouse to provide the input for placing the order.
+Hardware for the minimum viable product is a standard computer preferably a desktop, the desktop will only need 1 screen but can support more, the desktop will of course have keyboard and mouse input to navigate around the program. Optionally the desktop can have touchscreen so it can immitate a possible Kiosk to provide the same input as the keyboard and mouse. 
 
 ### Software Interfaces
 
@@ -120,7 +132,7 @@ Hardware for the minimum viable product is a standard computer, moniter, and key
 
 >These are internal connections to things like databases, web servers. You mainly need to explain that you have them, but I don’t expect detailed information about how you actually connect to them and use them. Just explain that you do connect to them and use them for storage of customer information, or to process incoming web requests, etc… These are internal components of your system.
 
-The software interfaces with a cloud-based database.
+The software interfaces with a cloud-based database, which will be managed by Microsoft SQL Server.
 
 ### Communications Interfaces
 
@@ -185,7 +197,7 @@ Place orders, shopping cart (checkout and payment, CRUD order), CRUD menu, CRUD 
 
 >In this section, just say “See section 7 requirements 25-32”. And I’ll assume those requirements are Safety related.
 
-There are no safety concerns related to the software.
+There are no safety concerns related to the software, the program produces no loud sounds to damage ears and flashing colors to cause possible damage to epileptic viewers. I assure you that this pizza program is very friendly.
 
 ### Security Requirements
 <Specify any requirements regarding security or privacy issues surrounding use of the product or protection of the data used or created by the product. Define any user identity authentication requirements. Refer to any external policies or regulations containing security issues that affect the product. Define any security or privacy certifications that must be satisfied.>
@@ -200,6 +212,8 @@ Since we may be storing credit card info and other personal data, we will be emp
 >In this section, just say “See section 7 requirements 55-62”. And I’ll assume those requirements are Software Quality related.
 
 Hardware will have to hold up to heavy use and greasy fingers. 
+
+The software interface will need to be easy to use and understand, since it will be used by customers. This will ensure the customer experience is as easy and streamlined as possible. as goes for customers the softwar quality attributes are very adaptable for their use and always available given any time of day. maintaining this program should be a piece of cake as long as you have a wifi connection to connect to the database and grab the needed information. I assure you this program is 99% reliable. reusability is definately there these "kiosk computers" can probably be shifted around per PizzaPlanet store.
 
 ## 6. Other Requirements
 ><Define any other requirements not covered elsewhere in the SRS. This might include database requirements, internationalization requirements, legal requirements, reuse objectives for the project, and so on. Add any new sections that are pertinent to the project.>

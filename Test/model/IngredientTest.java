@@ -6,14 +6,16 @@ import org.junit.Test;
 
 public class IngredientTest {
 
+	Ingredient i = new Ingredient();
+	
 	@Test
 	public void testGetName() {
-		fail("Not yet implemented");
+		i.getName();
 	}
 
 	@Test
 	public void testGetCategory() {
-		fail("Not yet implemented");
+		i.getCategory();
 	}
 
 }

@@ -7,6 +7,7 @@ import model.PizzaPlanet;
 @SuppressWarnings("serial")
 public class PPanel extends JPanel {
 
+
 	ExitTab exit;
 	NavTab nav;
 	PizzaPlanet pp;
