@@ -15,6 +15,7 @@ public class Api {
 	private static final String PASS = "XZ36KrMB}n";
 	protected static Connection c = CreateConnection();
 	protected static ResultSet rs = null;
+	protected static ResultSet rs1 = null;
 	protected static Statement st = null;
 	
 	public static Connection CreateConnection()
@@ -57,10 +58,16 @@ public class Api {
 	
 	public static boolean IsThisValidUser(String username, String password)
 	{
-		rs = GetResultSet("Select u.Username, u.Password From Users u where u.Username = \'"+username+"\'");
+		rs = GetResultSet("Select u.Username, u.Password, u.Salt From Users u where u.Username = \'"+username+"\'");
 		boolean validUserPassCombo = false; //true only if they are equal to the username and password sent in;
 		String uName = null;
 		String pass = null;
+		String salt = null;
+		
+		String StringOfSalt = "";
+		String HashedPassword = "";
+		
+		String[] values = new String[2];
 		try {
 			if(rs != null) 
 			{
@@ -69,10 +76,13 @@ public class Api {
 					System.out.println("Testing UserName to database...");
 					uName = rs.getString("Username");
 					pass = rs.getString("Password");
+					salt = rs.getString("Salt");					
+					values = Hash.md5Hash(password, salt);					
 				}//while
 			}else {validUserPassCombo = false;} //turn this false because rs returned nothing so maybe incorrect casing for username
 		}catch(SQLException s) {s.printStackTrace();}
-		if(uName.equals(username) && pass.equals(password))
+		
+		if(uName.equals(username) && pass.equals(values[0]))		
 		{validUserPassCombo = true;}
 		else {validUserPassCombo = false;}
 		CloseStuff();//close the resultset
@@ -82,16 +92,16 @@ public class Api {
 	public static User CreateUserInformation(String username)
 	{
 		User u = null;
-		rs = GetResultSet("Select UserId,FName,LName,Address,PhoneNum,City,State,ZipCode,UserType From Users where Username =\'" +username+"\'");
+		rs = GetResultSet("Select UserId,FName,LName,Address,PhoneNum,City,State,Email,UserType From Users where Username =\'" +username+"\'");
 		String userType = null;
 		String firstName = null;
 		String lastName = null;
 		String street = null;
 		String city = null;
 		String state = null;
-		String zip = null;
 		String userId = null;
 		String phone = null;
+		String emal = null;
 		System.out.println("Creating User Name");
 		try {
 			if(rs != null) 
@@ -104,11 +114,11 @@ public class Api {
 					street = rs.getString("Address");
 					city = rs.getString("City");
 					state = rs.getString("State");
-					zip = rs.getString("ZipCode");
 					userId = rs.getString("UserId");
 					phone = rs.getString("PhoneNum");
+					emal = rs.getString("Email");
 				}//while
-				//u = new User(userType,firstName,lastName,street,city,state,zip,userId,phone);
+				u = new User(username,userType,firstName,lastName,emal,street,city,state,userId,phone);
 			}else {u = null;}
 		}catch(SQLException s) {s.printStackTrace();}
 		CloseStuff();
@@ -143,31 +153,71 @@ public class Api {
 	//All pizza's or all subs returned but not both
 	public static Menu GetMenu(String indexFoodWanted)
 	{
-		Menu dontuse = null;
-		rs = GetResultSet("Select f.Food_ID, f.Food_Name from Foods f where f.FType_ID =\'"+indexFoodWanted+"\'" );
-		HashMap<String,String> myMap = new HashMap<String,String>();
+		Menu ourMenu = new Menu();
+		
+		rs = GetResultSet("Select f.Food_ID, f.Food_Name from Foods f where f.FType_ID =\'"+indexFoodWanted+"\'" );		
 		System.out.println("I'm looking it all the food categories");
 		try {
 			if(rs != null) 
 			{
 				while(rs.next())
 				{
+					MenuItem m = new MenuItem();					
 					String foodId = rs.getString("Food_ID");
 					String name = rs.getString("Food_Name");
-					myMap.put(foodId,name);
+					System.out.println(name);
+					m.setmIndex(Integer.parseInt(foodId));
+					m.setName(name);
+
+					//m = AddIngrToMenu(m);
+
+					ourMenu.addToMenu(m);
 				}//while
-			}else {myMap = null;}
+			}else {ourMenu = null;}
 		}catch(SQLException s) {s.printStackTrace();}
-		CloseStuff();	
-		System.out.println(myMap);
-		return dontuse;
+		
+		ArrayList<MenuItem> copyMenuIng = ourMenu.getFullMenu();
+//		for(int i = 0; i < copyMenuIng.size(); i++)
+//		{
+//			
+//			copyMenuIng.get(i).se = AddIngrToMenu(copyMenuIng.get(i));			
+//		}
+		CloseStuff();			
+		return ourMenu;
 	}//GetPizza
+	
+
+	public static MenuItem AddIngrToMenu(MenuItem mi) 
+	{
+		
+		String id = Integer.toString(mi.getmIndex());
+		rs1 = GetResultSet("Select i.Ing_id, i.Ing_name, i.CI_id from Food_Ing_Qty q join Ingredients i on q.Ing_id = i.Ing_id where q.Food_id =\'"+id+"\'" );
+		try {
+			if(rs != null) 
+			{
+				System.out.println("I'm in Ing");
+				while(rs1.next())
+				{
+					int ingId = rs1.getInt("Ing_id");
+					String iName = rs1.getString("Ing_name");
+					int catId = rs1.getInt("CI_id");
+					Ingredient ing = new Ingredient(iName,catId, ingId); 
+
+					mi.addIngred(ing);	
+					System.out.println(iName);
+				}//while
+			}else {}
+		}catch(SQLException s) {s.printStackTrace();}
+		System.out.println(mi);
+		return mi;
+
+	}//AddIngrToMenu
 
 	public static String getAllMenuItems() {
 		return null;
 	}//getAllMenuItems
 	
-	private static void CloseStuff()
+	public static void CloseStuff()
 	{
 		try {
 			if(rs !=null)
