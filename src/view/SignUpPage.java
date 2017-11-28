@@ -291,13 +291,13 @@ public class SignUpPage extends PPanel {
 										creds[8] = txtPhoneSign.getText();
 
 										//
-										User u = new User(creds[0], "C", creds[6] , creds[7], creds[2], creds[5], creds[3], creds[4], "54304", null, creds[8], creds[1]);
+										User u = new User(creds[0], "C", creds[6] , creds[7], creds[2], creds[5], creds[3], creds[4], null, creds[8], creds[1]);
 											// no message needs to be diplayed			
 											pp.apiValidateUser(u, true);
 
-									}
-								}
-							}
+									}//else
+								}//else
+							}//else
 						}
 					}
 				}

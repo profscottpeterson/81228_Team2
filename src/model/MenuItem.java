@@ -6,8 +6,12 @@ public class MenuItem {
 	private int mIndex;
 	private String name;
 	private double price;
-	private ArrayList<Ingredient> ItemIngred = new ArrayList<Ingredient>();
+	private ArrayList<Ingredient> ItemIngred;
 	private double extra = .6;
+	
+	public MenuItem(){
+		ItemIngred = new ArrayList<Ingredient>();
+	}
 	
 	public ArrayList<Ingredient> getItemIngred()
 	{

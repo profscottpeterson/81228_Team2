@@ -36,11 +36,8 @@ public class CreateUserDB extends Api{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
+		}		
 		Api.CloseStuff();
-		return successful;		
-		
+		return successful;				
 	}
-
 }
