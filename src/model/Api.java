@@ -154,7 +154,7 @@ public class Api {
 	public static Menu GetMenu(String indexFoodWanted)
 	{
 		Menu ourMenu = new Menu();
-
+		
 		rs = GetResultSet("Select f.Food_ID, f.Food_Name from Foods f where f.FType_ID =\'"+indexFoodWanted+"\'" );		
 		System.out.println("I'm looking it all the food categories");
 		try {
@@ -162,41 +162,55 @@ public class Api {
 			{
 				while(rs.next())
 				{
-					MenuItem m = new MenuItem();
+					MenuItem m = new MenuItem();					
 					String foodId = rs.getString("Food_ID");
 					String name = rs.getString("Food_Name");
+					System.out.println(name);
 					m.setmIndex(Integer.parseInt(foodId));
 					m.setName(name);
-					m = AddIngrToMenu(m);
+
+					//m = AddIngrToMenu(m);
+
 					ourMenu.addToMenu(m);
-					//to send update
 				}//while
 			}else {ourMenu = null;}
 		}catch(SQLException s) {s.printStackTrace();}
+		
+		ArrayList<MenuItem> copyMenuIng = ourMenu.getFullMenu();
+//		for(int i = 0; i < copyMenuIng.size(); i++)
+//		{
+//			
+//			copyMenuIng.get(i).se = AddIngrToMenu(copyMenuIng.get(i));			
+//		}
 		CloseStuff();			
 		return ourMenu;
 	}//GetPizza
 	
-	public static MenuItem AddIngrToMenu(MenuItem mi) throws SQLException
+
+	public static MenuItem AddIngrToMenu(MenuItem mi) 
 	{
+		
 		String id = Integer.toString(mi.getmIndex());
 		rs1 = GetResultSet("Select i.Ing_id, i.Ing_name, i.CI_id from Food_Ing_Qty q join Ingredients i on q.Ing_id = i.Ing_id where q.Food_id =\'"+id+"\'" );
 		try {
 			if(rs != null) 
 			{
-				while(rs.next())
+				System.out.println("I'm in Ing");
+				while(rs1.next())
 				{
 					int ingId = rs1.getInt("Ing_id");
 					String iName = rs1.getString("Ing_name");
 					int catId = rs1.getInt("CI_id");
 					Ingredient ing = new Ingredient(iName,catId, ingId); 
-					mi.addIngred(ing);					
+
+					mi.addIngred(ing);	
+					System.out.println(iName);
 				}//while
 			}else {}
 		}catch(SQLException s) {s.printStackTrace();}
-		rs1.close();
+		System.out.println(mi);
 		return mi;
-		
+
 	}//AddIngrToMenu
 
 	public static String getAllMenuItems() {

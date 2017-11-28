@@ -74,7 +74,7 @@ public class SecondMenuPage extends PPanel {
 		//menu.getFullMenu().forEach((menuItem) ->
 		{
 			String id = menuItem.getName();
-			System.out.println(menuItem.getName());
+			//System.out.println(menuItem.getName());
 			JButton btn = new JButton(id);
 
 			btn.addActionListener(new ActionListener() 

@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public class CreateUserDB extends Api{
 
-	public static boolean CreateUser(User u) throws SQLException {					
+	public static boolean CreateUser(User u) {					
 		boolean successful = false;
 		System.out.println("CreateUser Called");
 		if(c !=null) {
@@ -21,15 +21,22 @@ public class CreateUserDB extends Api{
 			rs = GetResultSet("Select * from Users where userName = " + "\'" + u.userName + "\'");
 			
 			//check to make sure no users have that userName already. need to fix this if statement.
-			if (!rs.next()) {
-				//if no users are found add them into our DB
-				rs = GetResultSet("Insert into Users (userName, password,Fname,Lname,Address,PhoneNum,City,state,usertype,salt)Values (\'" + u.getUserName() + "\', \'" + tempArray[0] + 
-						"\',\'" + u.getFirstName() + "\', \'" + u.getLastName() + "\',\'" + u.getStreet() + "\',\'" + u.getPhone() + "\',\' " + u.getCity() + "\',\'" + u.getState() + "\',\'" + u.userType  + "\',\'"  + tempArray[1] + "\')");			
-					successful = true; 
-					System.out.println("Creating new user");
-			}
-			else{				
-				System.out.println("Username already taken");
+
+			try {
+				if (!rs.next()) {
+					//if no users are found add them into our DB
+					rs = GetResultSet("Insert into Users (userName, password,Fname,Lname,Address,PhoneNum,City,state,usertype,salt)Values (\'" + u.userName + "\', \'" + tempArray[0] + 
+							"\',\'" + u.firstName + "\', \'" + u.lastName + "\',\'" + u.street + "\',\'" + u.phone + "\',\' " + u.city + "\',\'" + u.state + "\',\'" + u.userType  + "\',\'"  + tempArray[1] + "\')");			
+						successful = true; 
+						System.out.println("Creating new user");
+				}
+				else{				
+					System.out.println("Username already taken");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+
 			}
 		}		
 		Api.CloseStuff();
