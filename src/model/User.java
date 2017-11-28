@@ -5,20 +5,20 @@ import java.util.Map;
 public class User {
 
 	private String userName;
-	String userType; /* Type of REGISTERED, GUEST, ADMIN, STAFF */
+	private String userType; /* Type of REGISTERED, GUEST, ADMIN, STAFF */
 	private String firstName;
 	private String lastName;
 	private String emailAddress;
 	private String street;
 	private String city;
 	private String state;
-	String userId;
+	private String userId;
 	private String phone;
-	Map <String, String> payment;
+	private Map <String, String> payment;
 	String password;
 	
 	public User() {
-		this.userType = "GUEST";
+		this.setUserType("GUEST");
 	}
 	
 	//constructor without password
@@ -26,14 +26,14 @@ public class User {
 				 String uID, String phn)
 	{
 		setUserName(userName);
-		userType = userT;
+		setUserType(userT);
 		setFirstName(fName);
 		setLastName(lName);
 		setEmailAddress(email);
 		setStreet(strt);
 		setCity(cty);
 		setState(stte);
-		userId= uID;
+		setUserId(uID);
 		setPhone(phn);
 	}//User(all variables)
 	//constructor with password
@@ -41,14 +41,14 @@ public class User {
 			 String uID, String phn, String pass)
 {
 	setUserName(userName);
-	userType = userT;
+	setUserType(userT);
 	setFirstName(fName);
 	setLastName(lName);
 	setEmailAddress(email);
 	setStreet(strt);
 	setCity(cty);
 	setState(stte);
-	userId= uID;
+	setUserId(uID);
 	setPhone(phn);
 	password = pass;
 }//User(all variables)
@@ -63,7 +63,7 @@ public class User {
 	public User(String name) {
 		// TODO Auto-generated constructor stub
 		this.setFirstName(name);
-		this.userType = "REGISTERED";
+		this.setUserType("REGISTERED");
 		this.payment.put("type", "value");
 		this.payment.put("number", "value");
 		this.payment.put("CVC", "value");
@@ -147,6 +147,24 @@ public class User {
 	public String setPhone(String phone) {
 		this.phone = phone;
 		return phone;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public String setUserType(String userType) {
+		this.userType = userType;
+		return userType;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public String setUserId(String userId) {
+		this.userId = userId;
+		return userId;
 	}
 
 }

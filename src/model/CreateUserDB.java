@@ -13,33 +13,24 @@ public class CreateUserDB extends Api{
 			//generate new salt for the user
 			String[] tempArray = new String[2];
 			byte[] salt = Hash.getNewSalt();
-			u.userType = "C";
+			u.setUserType("C");
 			//hash the users password with the salt
 			tempArray = Hash.md5Hash(u.password,salt);	
-			
-			//have to get this statement working correctly. 
-
-			rs = GetResultSet("Select * from Users where userName = " + "\'" + u.userName + "\'");
-			
-			//check to make sure no users have that userName already. need to fix this if statement.
+			rs = GetResultSet("Select * from Users where userName = " + "\'" + u.getUserName() + "\'");
 			try {
 				if (!rs.next()) {
 					//if no users are found add them into our DB
-					rs = GetResultSet("Insert into Users (userName, password,Fname,Lname,Address,PhoneNum,City,state,usertype,salt)Values (\'" + u.userName + "\', \'" + tempArray[0] + 
-							"\',\'" + u.firstName + "\', \'" + u.lastName + "\',\'" + u.street + "\',\'" + u.phone + "\',\' " + u.city + "\',\'" + u.state + "\',\'" + u.userType  + "\',\'"  + tempArray[1] + "\')");			
+					rs = GetResultSet("Insert into Users (userName, password,Fname,Lname,Address,PhoneNum,City,state,usertype,salt)Values (\'" + u.getUserName() + "\', \'" + tempArray[0] + 
+							"\',\'" + u.getFirstName() + "\', \'" + u.getLastName() + "\',\'" + u.getStreet() + "\',\'" + u.getPhone() + "\',\' " + u.getCity() + "\',\'" + u.getState() + "\',\'" + u.getUserType()  + "\',\'"  + tempArray[1] + "\')");			
 						successful = true; 
 						System.out.println("Creating new user");
 				}
 				else{				
 					System.out.println("Username already taken");
 				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-
-			}
-		}		
+			} catch (SQLException e) {e.printStackTrace();}
+		}//if		
 		Api.CloseStuff();
 		return successful;				
-	}
-}
+	}//CreateUser(User u)
+}//CreateUserDB
