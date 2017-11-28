@@ -26,7 +26,7 @@ public class UserPage extends PPanel {
 	JLabel lblSubmit;
 	private JTextField txtUserName;
 	private JLabel lblUserError;
-	private JLabel lblPassError;
+	private static JLabel lblPassError;
 	private JPasswordField txtPassword;
 	private JPanel pnlLoginPage;
 	
@@ -106,10 +106,10 @@ public class UserPage extends PPanel {
 		lblPassword.setBounds(68, 203, 200, 82);
 		pnlSubmit.add(lblPassword);
 		
-		lblPassError = new JLabel("");
-		lblPassError.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		lblPassError.setBounds(311, 282, 383, 64);
-		pnlSubmit.add(lblPassError);
+		setLblPassError(new JLabel(""));
+		getLblPassError().setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		getLblPassError().setBounds(311, 282, 383, 64);
+		pnlSubmit.add(getLblPassError());
 		
 		// Setting txtPassword Name/Font/Bounds
 		txtPassword = new JPasswordField();
@@ -163,7 +163,6 @@ public class UserPage extends PPanel {
 			public void actionPerformed(ActionEvent e) 
 			{		
 				validateUserPass();
-				pp.apiValidateUser(null, false);
 			}
 		});
 		
@@ -211,7 +210,7 @@ public class UserPage extends PPanel {
 				{
 					System.out.println("Please Enter a Large Enough Password!");
 					String Error3 = "<html>Please Enter a Large Enough Password! <br>(Range 5-25)</html>";
-					lblPassError.setText(Error3);
+					getLblPassError().setText(Error3);
 					lblUserError.setText("");
 				}
 				else
@@ -220,7 +219,7 @@ public class UserPage extends PPanel {
 					{
 						System.out.println("Your Password is too Large! (Range 5 - 25)");
 						String Error4 = "<html>Your Password is too Large! <br>(Range 5 - 25)</html>";
-						lblPassError.setText(Error4);
+						getLblPassError().setText(Error4);
 					}
 					else
 					{
@@ -230,5 +229,13 @@ public class UserPage extends PPanel {
 				}
 			}
 		}
+	}
+
+	public static JLabel getLblPassError() {
+		return lblPassError;
+	}
+
+	public void setLblPassError(JLabel lblPassError) {
+		this.lblPassError = lblPassError;
 	}
 }

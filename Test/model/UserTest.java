@@ -17,7 +17,6 @@ public class UserTest {
 	String street;
 	String city;
 	String state;
-	String zip;
 	String userId;
 	String phone;
 	Map <String, String> payment;
@@ -32,41 +31,39 @@ public class UserTest {
 	@Test
 	public void testUserNoPassword() {
 		User u = new User("abc123","REGISTERED","Henry","Illgen","sa@gmail.com","123 This Ave","Green Bay", "WI", "54301","abc123","9205558497");
-		equals(u.userName = "abc123");
+		equals(u.setUserName("abc123"));
 		equals(u.userType = "REGISTERED");
-		equals(u.firstName = "Henry");
-		equals(u.lastName = "Illgen");
-		equals(u.emailAddress = "sa@gmail.com");
-		equals(u.street = "123 This Ave");
-		equals(u.city= "Green Bay");
-		equals(u.state = "WI");
-		equals(u.zip = "54301");
+		equals(u.setFirstName("Henry"));
+		equals(u.setLastName("Illgen"));
+		equals(u.setEmailAddress("sa@gmail.com"));
+		equals(u.setStreet("123 This Ave"));
+		equals(u.setCity("Green Bay"));
+		equals(u.setState("WI"));
 		equals(u.userId = "abc123");
-		equals(u.phone = "9205558497");
+		equals(u.setPhone("9205558497"));
 		
 	}
 
 	@Test
 	public void testUserWithPassword(){
-		User u = new User("abc123","REGISTERED","Henry","Illgen","sa@gmail.com","123 This Ave","Green Bay", "WI", "54301","abc123","9205558497","abc123");
-		equals(u.userName = "abc123");
+		User u = new User("abc123","REGISTERED","Henry","Illgen","sa@gmail.com","123 This Ave","Green Bay", "WI","abc123","9205558497","abc123");
+		equals(u.setUserName("abc123"));
 		equals(u.userType = "REGISTERED");
-		equals(u.firstName = "Henry");
-		equals(u.lastName = "Illgen");
-		equals(u.emailAddress = "sa@gmail.com");
-		equals(u.street = "123 This Ave");
-		equals(u.city= "Green Bay");
-		equals(u.state = "WI");
-		equals(u.zip = "54301");
+		equals(u.setFirstName("Henry"));
+		equals(u.setLastName("Illgen"));
+		equals(u.setEmailAddress("sa@gmail.com"));
+		equals(u.setStreet("123 This Ave"));
+		equals(u.setCity("Green Bay"));
+		equals(u.setState("WI"));
 		equals(u.userId = "abc123");
-		equals(u.phone = "9205558497");
+		equals(u.setPhone("9205558497"));
 		equals(u.password = "abc123");
 	}
 
 	@Test
 	public void testUserStringString() {
 		User u = new User("abc123","abc123");
-		equals(u.userName = "abc123");
+		equals(u.setUserName("abc123"));
 		equals(u.password = "abc123");
 	}
 

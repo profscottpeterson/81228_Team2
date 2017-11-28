@@ -92,10 +92,13 @@ public class View2 {
 	}
 	
 	public void makeAcountPage(){
-		AcountPage acountPage = new AcountPage(pp, exit, nav);
-		map.put("acountPage", acountPage);
+		if(map.get("acountPage") == null){
+			AcountPage acountPage = new AcountPage(pp, exit, nav);
+			map.put("acountPage", acountPage);
+			
+			p.add(acountPage, "acountPage");	
+		}
 		
-		p.add(acountPage, "acountPage");
 		showAcountPage();
 	}
 	

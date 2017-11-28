@@ -21,19 +21,16 @@ public class CreateUserDB extends Api{
 			//check to make sure no users have that userName already. need to fix this if statement.
 			if (rs == null) {
 				//if no users are found add them into our DB
-				rs = GetResultSet("Insert into Users (userName, password,Fname,Lname,Address,PhoneNum,City,state,usertype,salt)Values (\'" + u.userName + "\', \'" + tempArray[0] + 
-						"\',\'" + u.firstName + "\', \'" + u.lastName + "\',\'" + u.street + "\',\'" + u.phone + "\',\' " + u.city + "\',\'" + u.state + "\',\'" + u.userType  + "\',\'"  + tempArray[1] + "\')");			
+				rs = GetResultSet("Insert into Users (userName, password,Fname,Lname,Address,PhoneNum,City,state,usertype,salt)Values (\'" + u.getUserName() + "\', \'" + tempArray[0] + 
+						"\',\'" + u.getFirstName() + "\', \'" + u.getLastName() + "\',\'" + u.getStreet() + "\',\'" + u.getPhone() + "\',\' " + u.getCity() + "\',\'" + u.getState() + "\',\'" + u.userType  + "\',\'"  + tempArray[1] + "\')");			
 					successful = true; 
 					System.out.println("Creating new user");
 			}
 			else{				
 				System.out.println("Username already taken");
 			}
-		}
-		
+		}		
 		Api.CloseStuff();
-		return successful;		
-		
+		return successful;				
 	}
-
 }

@@ -1,13 +1,12 @@
-
 package model;
 
+import view.UserPage;
 //import view.Quinn;
 import view.View2;
 //import java.util.ArrayList;
 import java.util.HashMap;
 //import java.util.List;
 //import java.util.Map;
-
 //import model.*;
 
 public class PizzaPlanet {
@@ -37,11 +36,13 @@ public class PizzaPlanet {
 		/*we have a GUEST */
 		if (user == null && isNewSignUp == false) {
 			this.displayFirstMenu();
+			System.out.println("Guest/null");
 		} 
     
 		/*we have a new SIGNUP*/
 		else if(user == null && isNewSignUp == true){
 			this.displaySignUpPage();
+			System.out.println("new sign up");
 		}
 		/*we have created a USER*/
 		else if(user != null && isNewSignUp == true){
@@ -62,10 +63,12 @@ public class PizzaPlanet {
 			System.out.println("WE HAVE A NEW USER");
 			
 			User returnedUser = null;
-			boolean validUser = Api.IsThisValidUser(user.userName, user.password);
+			System.out.println(user.getUserName()+ " " + user.password);
+			boolean validUser = Api.IsThisValidUser(user.getUserName(), user.password);
+			System.out.println(validUser);
 			if(validUser == true)
 			{
-				returnedUser = Api.CreateUserInformation(user.userName);
+				returnedUser = Api.CreateUserInformation(user.getUserName());
 
 				setUser(returnedUser);
 				this.displayFirstMenu();
@@ -73,7 +76,9 @@ public class PizzaPlanet {
 			
 			/* Valid User, go to next page*/
 			else {
-				this.displyUserPage(); //TODO: if null, return error message
+				this.displyUserPage(); 
+				String Error5 = "<html>Username/password is incorrect</html>";
+				UserPage.getLblPassError().setText(Error5);//TODO: if null, return error message
 			}
 		}
 		
@@ -166,21 +171,13 @@ public class PizzaPlanet {
 		//view.getAccountPage(this.user, this);
 		view.makeAcountPage();
 	}
-	
-//	public ShoppingCart getCart(){
-//		return this.cart;
-//	}
-	
-//	public void setCart(ShoppingCart cart){
-//		this.cart = cart;
-//	}
+		
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 	public User getUser() {
 		return this.user;
 	}
 	
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 }
