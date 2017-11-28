@@ -76,10 +76,8 @@ public class Api {
 					System.out.println("Testing UserName to database...");
 					uName = rs.getString("Username");
 					pass = rs.getString("Password");
-					salt = rs.getString("Salt");
-					
-					values = Hash.md5Hash(password, salt);
-					
+					salt = rs.getString("Salt");					
+					values = Hash.md5Hash(password, salt);					
 				}//while
 			}else {validUserPassCombo = false;} //turn this false because rs returned nothing so maybe incorrect casing for username
 		}catch(SQLException s) {s.printStackTrace();}
@@ -94,16 +92,16 @@ public class Api {
 	public static User CreateUserInformation(String username)
 	{
 		User u = null;
-		rs = GetResultSet("Select UserId,FName,LName,Address,PhoneNum,City,State,ZipCode,UserType From Users where Username =\'" +username+"\'");
+		rs = GetResultSet("Select UserId,FName,LName,Address,PhoneNum,City,State,Email,UserType From Users where Username =\'" +username+"\'");
 		String userType = null;
 		String firstName = null;
 		String lastName = null;
 		String street = null;
 		String city = null;
 		String state = null;
-		String zip = null;
 		String userId = null;
 		String phone = null;
+		String emal = null;
 		System.out.println("Creating User Name");
 		try {
 			if(rs != null) 
@@ -116,11 +114,11 @@ public class Api {
 					street = rs.getString("Address");
 					city = rs.getString("City");
 					state = rs.getString("State");
-					zip = rs.getString("ZipCode");
 					userId = rs.getString("UserId");
 					phone = rs.getString("PhoneNum");
+					emal = rs.getString("Email");
 				}//while
-				//u = new User(userType,firstName,lastName,street,city,state,zip,userId,phone);
+				u = new User(username,userType,firstName,lastName,emal,street,city,state,userId,phone);
 			}else {u = null;}
 		}catch(SQLException s) {s.printStackTrace();}
 		CloseStuff();
@@ -170,7 +168,9 @@ public class Api {
 					System.out.println(name);
 					m.setmIndex(Integer.parseInt(foodId));
 					m.setName(name);
+
 					//m = AddIngrToMenu(m);
+
 					ourMenu.addToMenu(m);
 				}//while
 			}else {ourMenu = null;}
@@ -186,6 +186,7 @@ public class Api {
 		return ourMenu;
 	}//GetPizza
 	
+
 	public static MenuItem AddIngrToMenu(MenuItem mi) 
 	{
 		
@@ -201,6 +202,7 @@ public class Api {
 					String iName = rs1.getString("Ing_name");
 					int catId = rs1.getInt("CI_id");
 					Ingredient ing = new Ingredient(iName,catId, ingId); 
+
 					mi.addIngred(ing);	
 					System.out.println(iName);
 				}//while
@@ -208,6 +210,7 @@ public class Api {
 		}catch(SQLException s) {s.printStackTrace();}
 		System.out.println(mi);
 		return mi;
+
 	}//AddIngrToMenu
 
 	public static String getAllMenuItems() {
