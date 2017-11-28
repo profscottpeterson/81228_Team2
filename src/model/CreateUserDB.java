@@ -21,7 +21,6 @@ public class CreateUserDB extends Api{
 			rs = GetResultSet("Select * from Users where userName = " + "\'" + u.userName + "\'");
 			
 			//check to make sure no users have that userName already. need to fix this if statement.
-
 			try {
 				if (!rs.next()) {
 					//if no users are found add them into our DB
@@ -36,7 +35,6 @@ public class CreateUserDB extends Api{
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-
 			}
 		}		
 		Api.CloseStuff();

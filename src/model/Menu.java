@@ -20,4 +20,8 @@ public class Menu {
 	{
 		FullMenu.remove(m);
 	}
+	public void setMenu(ArrayList<MenuItem> m){
+		this.FullMenu = m;
+	}
+
 }
