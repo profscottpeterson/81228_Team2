@@ -396,17 +396,12 @@ public class PizzaPlanetGui extends JFrame {
 												
 												//
 												User u = new User(creds[0], "C", creds[6] , creds[7], creds[2], creds[5], creds[3], creds[4], "54304", null, creds[8], creds[1]);
-												try {
-													if(CreateUserDB.CreateUser(u) == true){
-														// no message needs to be diplayed
-													}
-													else
-													{
-														//Username is already in database
-													}
-												} catch (SQLException e1) {
-													// TODO Auto-generated catch block
-													e1.printStackTrace();
+												if(CreateUserDB.CreateUser(u) == true){
+													// no message needs to be diplayed
+												}
+												else
+												{
+													//Username is already in database
 												}
 											}
 										}
