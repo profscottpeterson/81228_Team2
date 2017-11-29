@@ -179,6 +179,44 @@ public class Api {
 		return null;
 	}//getAllMenuItems
 	
+	public static boolean UpdateToUsers(String sql)
+	{
+		boolean didUpdate = false;
+		int count = -1;
+		if(c !=null)
+		{
+			System.out.println("Into the database...");
+			try {
+				st = c.createStatement(); //Creates the ability for statement to be created
+				count = st.executeUpdate(sql);
+			}catch(SQLException se) {
+				System.out.println("You got this SQL error: " +se);
+				rs = null;
+			}catch(Exception e){
+				System.out.println("You got this error: " +e);
+				rs = null;
+			}//catch
+		}//if
+		if(count == -1 || count == 0)
+		{
+			didUpdate = false; 
+		}
+		else if(count == 1)
+		{
+			didUpdate = true;
+		}
+		System.out.println(didUpdate);
+		return didUpdate;
+	}//GetResults
+	
+	public static Boolean UpdateUserInfo(String s)
+	{
+		boolean flag = false;
+		flag = UpdateToUsers(s);
+		CloseStuff();
+		return flag;
+	}
+	
 	public static void CloseStuff()
 	{
 		try {
