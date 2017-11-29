@@ -31,9 +31,11 @@ public class UserPage extends PPanel {
 	private JPanel pnlLoginPage;
 	
 	public UserPage(PizzaPlanet pp, ExitTab exit){
-		super(pp);		
+
+		super(pp, exit);		
 		
-		add(exit);
+		//add(exit);
+
 		
 		// Login Page Panel 
 		pnlLoginPage = new JPanel();

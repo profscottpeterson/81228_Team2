@@ -30,11 +30,13 @@ public class AcountPage extends PPanel {
 	protected User currentUser = 	new User();
 	
 	public AcountPage(PizzaPlanet pp, ExitTab exit, NavTab nav) {
-		super(pp);
+
+		super(pp, exit, nav);
+		
 		add(exit);
-		add(nav);
-		
-		
+		add(nav);	
+		User currentUser = 	new User();
+    
 		if (pp.getUser() != null)
 		{
 			currentUser = pp.getUser();
@@ -61,6 +63,7 @@ public class AcountPage extends PPanel {
 		//pnlAccountPage.setLayout(null);
 		
 		lblUserNameLabel = new JLabel("User Name: ");
+
 		lblUserNameLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 50));
 		lblUserNameLabel.setBounds(374, 306, 343, 65);
 		pnlAccountPage.add(lblUserNameLabel);

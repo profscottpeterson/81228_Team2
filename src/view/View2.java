@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import model.Menu;
 import model.PizzaPlanet;
 
 public class View2 {
@@ -48,8 +50,7 @@ public class View2 {
 		
 		frame.add(p);
 		
-		frame.setVisible(true);
-		
+		frame.setVisible(true);		
 		
 		map = new HashMap<String, PPanel>();
 		
@@ -57,10 +58,15 @@ public class View2 {
 	}
 	
 	public void makeUserPage(){
-		UserPage userPage = new UserPage(pp, exit);
-		map.put("userPage",  userPage);
-		
-		p.add(userPage,  "userPage");
+
+			UserPage userPage = new UserPage(pp, exit);
+			map.put("userPage",  userPage);
+			
+			p.add(userPage,  "userPage");
+
+			showUserPage();
+
+
 	}
 	
 	public void showUserPage(){
@@ -68,10 +74,13 @@ public class View2 {
 	}
 	
 	public void makeFirstMenuPage(Map<String,String> foodtypes){
-		FirstMenuPage firstMenuPage = new FirstMenuPage(foodtypes, pp, exit, nav);
-		map.put("firstMenuPage", firstMenuPage);
+			
+			FirstMenuPage firstMenuPage = new FirstMenuPage(foodtypes, pp, exit, nav);
+			map.put("firstMenuPage", firstMenuPage);
+			
+			p.add(firstMenuPage, "firstMenuPage");
 		
-		p.add(firstMenuPage, "firstMenuPage");
+
 		showFirstMenuPage();
 	}
 	
@@ -80,10 +89,13 @@ public class View2 {
 	}
 	
 	public void makeSignUpPage(){
-		SignUpPage signUpPage = new SignUpPage(pp, exit, nav);
-		map.put("signUpPage", signUpPage);
-		
-		p.add(signUpPage, "signUpPage");
+			
+			SignUpPage signUpPage = new SignUpPage(pp, exit, nav);
+			map.put("signUpPage", signUpPage);
+			
+			p.add(signUpPage, "signUpPage");
+
+
 		showSignUpPage();
 	}
 	
@@ -92,12 +104,11 @@ public class View2 {
 	}
 	
 	public void makeAcountPage(){
-		if(map.get("acountPage") == null){
+
 			AcountPage acountPage = new AcountPage(pp, exit, nav);
 			map.put("acountPage", acountPage);
 			
 			p.add(acountPage, "acountPage");	
-		}
 		
 		showAcountPage();
 	}
@@ -118,8 +129,8 @@ public class View2 {
 		cl.show(p, "shoppingPage");
 	}
 	
-	public void makeSecondMenuPage(){
-		SecondMenuPage secondMenuPage = new SecondMenuPage(pp, exit, nav);
+	public void makeSecondMenuPage(Menu menu){
+		SecondMenuPage secondMenuPage = new SecondMenuPage(pp, exit, menu, nav);
 		map.put("secondMenuPage", secondMenuPage);
 		
 		p.add(secondMenuPage, "secondMenuPage");

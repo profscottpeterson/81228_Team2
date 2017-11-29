@@ -47,8 +47,15 @@ public class PizzaPlanet {
 		/*we have created a USER*/
 		else if(user != null && isNewSignUp == true){
 			Boolean success = CreateUserDB.CreateUser(user);
+
+			User returnedUser = null;
 			if (success == true){
+				returnedUser = Api.CreateUserInformation(user.getUserName());
+				
+				setUser(returnedUser);
 				this.displayFirstMenu();
+				
+
 			}
 			else{
 				this.displaySignUpPage();
@@ -122,7 +129,7 @@ public class PizzaPlanet {
 	private void displaySecondMenu(Menu menu) {
 		Menu pizza = null;
 		
-		//view.get2ndMenuPage(this.getUser(), menu, this);
+		view.makeSecondMenuPage(menu);
 	}
 
 	/* Call to view - Menu Items Detail Page*/

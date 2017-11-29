@@ -15,6 +15,7 @@ public class Api {
 	private static final String PASS = "XZ36KrMB}n";
 	protected static Connection c = CreateConnection();
 	protected static ResultSet rs = null;
+	protected static ResultSet rs1 = null;
 	protected static Statement st = null;
 	
 	public static Connection CreateConnection()
@@ -153,27 +154,57 @@ public class Api {
 	public static Menu GetMenu(String indexFoodWanted)
 	{
 		Menu ourMenu = new Menu();
-		MenuItem m = new MenuItem();
-		rs = GetResultSet("Select f.Food_ID, f.Food_Name from Foods f where f.FType_ID =\'"+indexFoodWanted+"\'" );
-		HashMap<String,String> myMap = new HashMap<String,String>();
+
+		ArrayList<MenuItem> ListOfMenuItems = new ArrayList<MenuItem>();
+		rs = GetResultSet("Select f.Food_ID, f.Food_Name from Foods f where f.FType_ID =\'"+indexFoodWanted+"\'" );		
 		System.out.println("I'm looking it all the food categories");
 		try {
 			if(rs != null) 
 			{
 				while(rs.next())
 				{
+					MenuItem m = new MenuItem();					
 					String foodId = rs.getString("Food_ID");
 					String name = rs.getString("Food_Name");
-					myMap.put(foodId,name);
-					m.setName(name);
-					ourMenu.addToMenu(m);
-					
+					System.out.println(name);
+					m.setmIndex(Integer.parseInt(foodId));
+					m.setName(name);								
+					ListOfMenuItems.add(m);				
+					//to send update
 				}//while
-			}else {myMap = null;}
+			}else {ourMenu = null;}
 		}catch(SQLException s) {s.printStackTrace();}
-		CloseStuff();			
+		for (MenuItem m : ListOfMenuItems) {
+		    System.out.println(m.getName());
+		    m = AddIngrToMenu(m);
+		}
+		ourMenu.setMenu(ListOfMenuItems);
+		
+		CloseStuff();	
 		return ourMenu;
 	}//GetPizza
+	
+	public static MenuItem AddIngrToMenu(MenuItem mi)
+	{
+		String id = Integer.toString(mi.getmIndex());
+		rs1 = GetResultSet("Select i.Ing_id, i.Ing_name, i.CI_id from Food_Ing_Qty q join Ingredients i on q.Ing_id = i.Ing_id where q.Food_id =\'"+id+"\'" );
+		try {
+			if(rs != null) 
+			{
+				while(rs.next())
+				{								
+					int ingId = rs1.getInt("Ing_id");
+					String iName = rs1.getString("Ing_name");
+					int catId = rs1.getInt("CI_id");
+					Ingredient ing = new Ingredient(iName,catId, ingId); 
+					mi.addIngred(ing);		
+					System.out.println(ing.getName());
+				}//while
+			}else {}
+		}catch(SQLException s) {s.printStackTrace();}
+		return mi;		
+
+	}//AddIngrToMenu
 
 	public static String getAllMenuItems() {
 		return null;

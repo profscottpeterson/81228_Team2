@@ -47,10 +47,11 @@ public class SignUpPage extends PPanel {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public SignUpPage(PizzaPlanet pp, ExitTab exit, NavTab nav){
-		super(pp);
+
+		super(pp, exit, nav);
 		
-		add(exit);
-		add(nav);
+		//add(exit);
+		//add(nav);
 
 		pnlSignUpPage = new JPanel();
 		pnlSignUpPage.setBounds(0, -11, 1914, 1091);
