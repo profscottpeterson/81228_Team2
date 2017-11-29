@@ -47,7 +47,7 @@ public class FirstMenuPage extends PPanel{
 		
 		// Setting Background/Name/Source/Bounds for Background Menu
 		lblBackgroundMenu = new JLabel("");
-		lblBackgroundMenu.setBounds(0, -11, 2000, 1103);
+		lblBackgroundMenu.setBounds(0, 0, 2000, 1103);
 		lblBackgroundMenu.setIcon(new ImageIcon(FirstMenuPage.class.getResource("/Resources/Menu_Final.png")));
 		lblBackgroundMenu.setBackground(new Color(250, 240, 230));
 		pnlMenuPage.add(lblBackgroundMenu);
