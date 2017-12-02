@@ -27,7 +27,7 @@ public class AcountPage extends PPanel {
 	private JLabel lblUserNameLabel;
 	private JLabel lblFirstNameLabel;
 	private JLabel lblSubmitLabel;
-	protected User currentUser = 	new User();
+	protected User currentUser = new User();
 	
 	public AcountPage(PizzaPlanet pp, ExitTab exit, NavTab nav) {
 
@@ -35,7 +35,7 @@ public class AcountPage extends PPanel {
 		
 		add(exit);
 		add(nav);	
-		User currentUser = 	new User();
+		
     
 		if (pp.getUser() != null)
 		{

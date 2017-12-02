@@ -36,6 +36,8 @@ public class ShoppingPage extends PPanel {
 		
 		setLayout(null);
 		
+		
+		
 	}
 
 }
