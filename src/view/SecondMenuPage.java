@@ -245,7 +245,7 @@ public class SecondMenuPage extends PPanel {
 						//System.out.println(orderM.getName());
 						orderM.addIngred(mu.getOrderIngred(j.getName()));
 						//System.out.println(mu.getOrderIngred(j.getName()).getName());
-					}//if
+					}//ifa
 				}
 				currentOrder.addItem(orderM);	
 				currentOrder.displayEverything();
