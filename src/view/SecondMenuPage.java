@@ -30,6 +30,7 @@ public class SecondMenuPage extends PPanel {
 	private JLabel lblBack;
 	private JLabel lblBack2;
 	ArrayList<MenuItem> FullMenu;
+	private JButton btnSubmit;
 
 	public SecondMenuPage(PizzaPlanet pp, ExitTab exit, Menu menu, NavTab nav) {
 
@@ -40,6 +41,13 @@ public class SecondMenuPage extends PPanel {
 
 		
 		//System.out.println(menu.getFullMenu().get(0).getName());
+		
+		btnSubmit = new JButton("ADD");
+		btnSubmit.setForeground(new Color(204, 0, 0));
+		btnSubmit.setBackground(PStyle.primaryButtonColor);
+		btnSubmit.setFont(PStyle.primaryFontStyle);
+		btnSubmit.setBounds(1687, 800, 200, 74);
+		add(btnSubmit);
 		
 		pnlMenuPage2 = new JPanel();
 		pnlMenuPage2.setBounds(0, 0, 1914, 1091);
@@ -107,7 +115,7 @@ public class SecondMenuPage extends PPanel {
 		
 		placeButtons(buttonList);
 		//populateIng(0);
-		
+	
 		// Setting Background/Name/Source/Bounds for Background Menu
 		lblBackgroundMenu2 = new JLabel("");
 		lblBackgroundMenu2.setBounds(0, -11, 2000, 1103);
@@ -198,6 +206,19 @@ public class SecondMenuPage extends PPanel {
 	}
 	
 	public void updateIngredients(){
+		
+	}
+	
+	public void AddEvent() {
+		
+		btnSubmit.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				
+			}
+		});
+		
 		
 	}
 
