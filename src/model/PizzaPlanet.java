@@ -99,7 +99,6 @@ public class PizzaPlanet {
 		if (catMenu != null) {
 			Menu menu = Api.GetMenu(catMenu);
 			displaySecondMenu(menu);
-			System.out.println(catMenu);
 		}
 		
 		return null;

@@ -22,6 +22,7 @@ public class FirstMenuPage extends PPanel{
 	private JPanel pnlMenuPage;
 	private JPanel pnlCat;
 	private JLabel lblBackgroundMenu;
+	private JLabel lblBackBack;
 
 	public FirstMenuPage( Map<String,String> foodtypes, PizzaPlanet pp, ExitTab exit, NavTab nav){
 
@@ -41,17 +42,10 @@ public class FirstMenuPage extends PPanel{
 		// Category Panel
 		pnlCat = new JPanel();
 		pnlCat.setBackground(new Color(165, 42, 42));
-		pnlCat.setBounds(322, 262, 1297, 779);
+		pnlCat.setBounds(322, 252, 1297, 779);
 		pnlCat.setLayout(null);
 		add(pnlCat);
-		
-		// Setting Background/Name/Source/Bounds for Background Menu
-		lblBackgroundMenu = new JLabel("");
-		lblBackgroundMenu.setBounds(0, -11, 2000, 1103);
-		lblBackgroundMenu.setIcon(new ImageIcon(FirstMenuPage.class.getResource("/Resources/Menu_Final.png")));
-		lblBackgroundMenu.setBackground(new Color(250, 240, 230));
-		pnlMenuPage.add(lblBackgroundMenu);
-		
+	
 		// Adding Panel to the Content Pane
 		pnlMenuPage.add(pnlCat);
 		
@@ -77,6 +71,18 @@ public class FirstMenuPage extends PPanel{
 
 		});
 		placeButtons(buttonList);
+		
+		// Setting Background/Name/Source/Bounds for Background Menu
+		lblBackgroundMenu = new JLabel("");
+		lblBackgroundMenu.setBounds(0, -11, 2000, 1103);
+		lblBackgroundMenu.setIcon(new ImageIcon(FirstMenuPage.class.getResource("/Resources/Menu_Final.png")));
+		lblBackgroundMenu.setBackground(new Color(250, 240, 230));
+		pnlMenuPage.add(lblBackgroundMenu);
+		
+		lblBackBack = new JLabel("");
+		lblBackBack.setBounds(0, 0, 1297, 779);
+		lblBackBack.setIcon(new ImageIcon(FirstMenuPage.class.getResource("/Resources/MenuInside_Final.png")));
+		pnlCat.add(lblBackBack);
 	}
 
 	public void placeButtons(List<JButton> buttons)

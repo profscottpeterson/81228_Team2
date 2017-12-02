@@ -37,7 +37,7 @@ public class NavTab extends JPanel{
 
 		// Adding the Button to the Panel
 		add(btnMenu);
-
+		
 		// Account Button (Top Right of the UI)
 		btnAccount = new JButton("New button");
 		btnAccount.setIcon(new ImageIcon(NavTab.class.getResource("/Resources/Account.png")));
