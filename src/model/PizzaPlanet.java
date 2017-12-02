@@ -112,7 +112,7 @@ public class PizzaPlanet {
 	}
 	
 	/* Call to view - First Menu Page*/
-	private void displayFirstMenu() 
+	public static void displayFirstMenu() 
 	{
 		System.out.println("displaymenuItems is being called");
 		HashMap<String,String> foodTypes = Api.GetFoodTypes();

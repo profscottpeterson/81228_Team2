@@ -71,6 +71,7 @@ public class NavTab extends JPanel{
 			public void actionPerformed(ActionEvent e) 
 			{
 				// Connect to Menu Page
+				PizzaPlanet.displayFirstMenu();
 			}
 		});
 		
