@@ -49,7 +49,7 @@ _Revision History_
 
 ><Identify the product whose software requirements are specified in this document, including the revision or release number. Describe the scope of the product that is covered by this SRS, particularly if this SRS describes only part of the system or a single subsystem.>
 
-Ability for a Restaurant to create and track food orders by Users. A User is an employee(administrator or staff) or a customer(registered or guest). A customer can place and pay for an order of items like pizzas, subs, wings and more. An employee can take and clear orders placed by customers, and the admin can add new menu items and update pries. 
+Ability for a Restaurant to create and track food orders by Users. A User is an employee or a customer(registered or guest). A customer can place and pay for an order of items like pizzas, subs, wings and more. An employee can take and clear orders placed by customers.
 
 ### References
 
@@ -112,7 +112,7 @@ etc…
 
 >If you system doesn’t include hardware, then you’ll have none. If it has hardware components, then you should describe (at a high level) how you interface with that hardware.
 
-Hardware for the minimum viable product is a standard computer, moniter, and keyboard and mouse to provide the input for placing the order.
+Hardware for the minimum viable product is a standard computer, moniter, and keyboard and mouse to provide the input for placing the order. Could even be accomplished with touchscreen monitor/computer. 
 
 ### Software Interfaces
 
@@ -152,21 +152,7 @@ The software interfaces with a cloud-based database.
 * enable User(Customer) to pay for the order with a credit card 12
 * enable User(Customer) to pay for the order with cash 13
 * enable User(Customer) to receive a confirmation after completing the transaction 14
-* enable Employee(Staff) to read order 15
-* enable Employee(Staff) to update order 16
-* enable Employee(Staff) to delete order 17
-* enable Employee(Admin) to create menu 18
-* enable Employee(Admin) to update menu 19
-* enable Employee(Admin) to delete menu 20
-* enable Employee(Admin) to create menu items 21
-* enable Employee(Admin) to update menu items 22
-* enable Employee(Admin) to delete menu items 23
-* enable Employee(Admin) to create Customer 24
-* enable Employee(Admin) to update Customer 25
-* enable Employee(Admin) to delete Customer 26
-* enable Employee(Admin) to create report 27
-* enable Employee(Admin) to update report 28
-* enable Employee(Admin) to delete report 29
+
 
 See appendix I Use Cases.
 
@@ -185,14 +171,14 @@ Place orders, shopping cart (checkout and payment, CRUD order), CRUD menu, CRUD 
 
 >In this section, just say “See section 7 requirements 25-32”. And I’ll assume those requirements are Safety related.
 
-There are no safety concerns related to the software.
+There is only data security for storing users passwords. We have implemented a salted hash with Message Digest 5 on users passwords.
 
 ### Security Requirements
 <Specify any requirements regarding security or privacy issues surrounding use of the product or protection of the data used or created by the product. Define any user identity authentication requirements. Refer to any external policies or regulations containing security issues that affect the product. Define any security or privacy certifications that must be satisfied.>
 
 >In this section, just say “See section 7 requirements 35-42”. And I’ll assume those requirements are Security related.
 
-Since we may be storing credit card info and other personal data, we will be employing encryption on the database and secure transmition technologies where applicable.
+There is only data security for storing users passwords. We have implemented a salted hash with Message Digest 5 on users passwords.
 
 ### Software Quality Attributes
 ><Specify any additional quality characteristics for the product that will be important to either the customers or the developers. Some to consider are: adaptability, availability, correctness, flexibility, interoperability, maintainability, portability, reliability, reusability, robustness, testability, and usability. Write these to be specific, quantitative, and verifiable when possible. At the least, clarify the relative preferences for various attributes, such as ease of use over ease of learning.>
