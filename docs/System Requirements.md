@@ -173,7 +173,7 @@ See appendix I Use Cases.
 
 ><If there are performance requirements for the product under various circumstances, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specify the timing relationships for real time systems. Make such requirements as specific as possible. You may need to state performance requirements for individual functional requirements or features.>
 
-Place orders, shopping cart (checkout and payment, CRUD order), CRUD menu, CRUD category, login (admin, customer, employee), CRUD Users, CRUD ingredients
+Place orders, shopping cart (checkout and payment, CRUD order), CRUD menu, CRUD category, login (customer, employee), CRUD Users, CRUD ingredients
 
 ### Safety Requirements
 
