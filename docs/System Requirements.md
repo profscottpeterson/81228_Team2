@@ -63,7 +63,6 @@ This software provide the ability for a Restaurant to create and track food orde
 There are two primary users of this system: Employee and Customer. There are two subcatagories of each primary type.
 The system will be designed so that all users will not need any technical experience to operate. The system will be optimized to be as easy and user friendly as possible.
 
-Employee - Admin: Has the ability to add or remove menu items, look at orders and reports. Also can create and place orders, accept and validate payment, create and update user information. The admin will have all security privileges within the system
 
 Employee - Staff: Can create and place orders, accept and validate payment, create and update user information.
 
@@ -164,21 +163,6 @@ The software interfaces with a cloud-based database, which will be managed by Mi
 * enable User(Customer) to pay for the order with a credit card 12
 * enable User(Customer) to pay for the order with cash 13
 * enable User(Customer) to receive a confirmation after completing the transaction 14
-* enable Employee(Staff) to read order 15
-* enable Employee(Staff) to update order 16
-* enable Employee(Staff) to delete order 17
-* enable Employee(Admin) to create menu 18
-* enable Employee(Admin) to update menu 19
-* enable Employee(Admin) to delete menu 20
-* enable Employee(Admin) to create menu items 21
-* enable Employee(Admin) to update menu items 22
-* enable Employee(Admin) to delete menu items 23
-* enable Employee(Admin) to create Customer 24
-* enable Employee(Admin) to update Customer 25
-* enable Employee(Admin) to delete Customer 26
-* enable Employee(Admin) to create report 27
-* enable Employee(Admin) to update report 28
-* enable Employee(Admin) to delete report 29
 
 See appendix I Use Cases.
 
