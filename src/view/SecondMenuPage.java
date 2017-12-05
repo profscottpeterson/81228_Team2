@@ -15,9 +15,12 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.sun.xml.internal.ws.api.Component;
+
 import model.Ingredient;
 import model.Menu;
 import model.MenuItem;
+import model.Order;
 import model.PizzaPlanet;
 
 @SuppressWarnings("serial")
@@ -31,6 +34,9 @@ public class SecondMenuPage extends PPanel {
 	private JLabel lblBack2;
 	ArrayList<MenuItem> FullMenu;
 	private JButton btnSubmit;
+	private int foodIndex;
+	private ArrayList<Integer> ingIndexes = new ArrayList<Integer>();
+	private Order currentOrder = new Order();
 
 	public SecondMenuPage(PizzaPlanet pp, ExitTab exit, Menu menu, NavTab nav) {
 
@@ -67,6 +73,7 @@ public class SecondMenuPage extends PPanel {
 		pnlCat2.setBackground(new Color(165, 42, 42));
 		pnlCat2.setBounds(980, 248, 647, 781);
 		pnlCat2.setLayout(null);
+		pnlCat2.setName("panel 2");
 		add(pnlCat2);
 		
 		// Adding Panel to the Content Pane
@@ -102,7 +109,9 @@ public class SecondMenuPage extends PPanel {
 					pnlCat2.setLayout(null);
 					
 					pnlMenuPage2.add(pnlCat2);
+					ingIndexes.clear();
 					populateIng(index);
+					foodIndex = index;
 					
 					btn.revalidate();
 					pnlCat2.repaint();
@@ -128,6 +137,8 @@ public class SecondMenuPage extends PPanel {
 		lblBack.setIcon(new ImageIcon(SecondMenuPage.class.getResource("/Resources/MenuInside_Final.png")));
 		pnlCat1.add(lblBack);
 		
+		AddEventsToAddButton();
+		
 	}
 	
 	public void populateIng(int index) {
@@ -135,10 +146,11 @@ public class SecondMenuPage extends PPanel {
 		MenuItem menuIndex = FullMenu.get(index);
 		int y = 40;
 		for(Ingredient ingItem : menuIndex.getItemIngred()){
-			JPanel ingPanel = new JPanel();
+			//JPanel ingPanel = new JPanel();
 			//pnlCat2 is where these are getting added
 			
 			String id = ingItem.getName();
+			
 			
 			JCheckBox button = new JCheckBox(id);
 			button.setBounds(0, 0, 500, 100);
@@ -146,14 +158,19 @@ public class SecondMenuPage extends PPanel {
 			//button.setIcon(new ImageIcon(PizzaPlanetGui.class.getResource("/Resources/Menu.jpg")));
 			button.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
 			button.setForeground(new Color(204, 0, 0));
+			button.setSelected(true);
 			//button.setMargin(new Insets (0, 0, 0, 0));
 			button.setBackground(new Color(250, 240, 230));
-			ingPanel.setBounds(0, y, 500, 100);
-			ingPanel.add(button);
-			ingPanel.setBackground(new Color(165, 42, 42));
-			ingPanel.setAlignmentX(LEFT_ALIGNMENT);
+			button.setName(Integer.toString(ingItem.getIng_id()));
+			ingIndexes.add(ingItem.getIng_id());
+			//System.out.println(button.getName());
+			button.setBounds(0, y, 500, 100);
+//			ingPanel.add(button);
+//			ingPanel.setBackground(new Color(165, 42, 42));
+			button.setAlignmentX(LEFT_ALIGNMENT);
 			pnlCat2.setAlignmentX(LEFT_ALIGNMENT);
-			pnlCat2.add(ingPanel);
+			pnlCat2.add(button);
+			
 			
 			y = y + 100;
 				
@@ -209,17 +226,30 @@ public class SecondMenuPage extends PPanel {
 		
 	}
 	
-	public void AddEvent() {
+	public void AddEventsToAddButton() {
 		
 		btnSubmit.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
 				
-			}
-		});
-		
-		
-	}
-
+				MenuItem mu = FullMenu.get(foodIndex);
+				MenuItem orderM = new MenuItem();
+				orderM.setName(mu.getName());
+				orderM.setmIndex(mu.getmIndex());
+				for (java.awt.Component c : pnlCat2.getComponents()){
+					JCheckBox j = (JCheckBox)c;
+					if(j.isSelected())
+					{
+						//System.out.println(orderM.getmIndex());
+						//System.out.println(orderM.getName());
+						orderM.addIngred(mu.getOrderIngred(j.getName()));
+						//System.out.println(mu.getOrderIngred(j.getName()).getName());
+					}//ifa
+				}
+				currentOrder.addItem(orderM);	
+				currentOrder.displayEverything();
+			}//actionPerformed
+		});//addActionListner	
+	}//AddEvents
 }

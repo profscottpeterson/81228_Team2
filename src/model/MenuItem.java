@@ -13,10 +13,25 @@ public class MenuItem {
 		ItemIngred = new ArrayList<Ingredient>();
 	}
 	
+	
 	public ArrayList<Ingredient> getItemIngred()
 	{
 		return ItemIngred;
 	}
+	
+	public Ingredient getOrderIngred(String i)
+	{
+		Ingredient myIng = new Ingredient();
+		int index = Integer.parseInt(i);
+		for(Ingredient ig: ItemIngred)
+		{
+			if(ig.getIng_id() == index)
+			{
+				myIng = ig;
+			}//if
+		}
+		return myIng;
+	}//getOrderIngred
 	
 	public double getPrice()
 	{

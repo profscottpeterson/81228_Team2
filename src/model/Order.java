@@ -31,5 +31,13 @@ public class Order {
 		double grand = sub + deliveryCharge + (sub * tax);
 		return grand;
 	}
+	public void displayEverything(){
+		for (MenuItem m : this.OrderItems){
+			System.out.println(m.getName() + " " + m.getmIndex());
+			for (Ingredient i : m.getItemIngred()){
+				System.out.println(m.getName() + " " + i.getName()+":" + i.getIng_id());
+			}
+		}
+	}
 	
 }
