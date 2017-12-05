@@ -62,9 +62,7 @@ Ability for a Restaurant to create and track food orders by Users. A User is an 
 ### User Classes and Characteristics
 > <Identify the various user classes that you anticipate will use this product. User classes may be differentiated based on frequency of use, subset of product functions used, technical expertise, security or privilege levels, educational level, or experience. Describe the pertinent characteristics of each user class. Certain requirements may pertain only to certain user classes. Distinguish the most important user classes for this product from those who are less important to satisfy.>
 
-There are two primary users of this system: Employee and Customer. There are two subcatagories of each primary type.
-
-Employee - Admin: Has all abilities to add menu items, look at orders and reports and all abilities of Staff. Is the administer the system.
+There are two primary users of this system: Employee and Customer. 
 
 Employee - Staff – create and place orders, accept and validate payment, create and update user information.
 
