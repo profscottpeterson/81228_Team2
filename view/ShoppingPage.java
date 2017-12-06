@@ -27,6 +27,7 @@ public class ShoppingPage extends PPanel {
 	private JButton btnDelete; 
 	private int foodIndex = -1;
 	private JPanel pnlCat1;
+	private JLabel lblSubTotal;
 
 	public ShoppingPage(PizzaPlanet pp, ExitTab exit, NavTab nav) {
 		super(pp);
@@ -40,6 +41,11 @@ public class ShoppingPage extends PPanel {
 		pnlShoppingPage.setBounds(0, 0, 1914, 1091);
 		add(pnlShoppingPage);
 		pnlShoppingPage.setLayout(null);
+		
+		lblSubTotal = new JLabel("SubTotal");
+		lblSubTotal.setBounds(1687, 600, 200, 74);
+		lblSubTotal.setBackground(new Color(250, 240, 230));
+		add(pnlShoppingPage);
 		
 		pnlCat1 = new JPanel();
 		pnlCat1.setBackground(new Color(165, 42, 42));
@@ -137,6 +143,7 @@ public class ShoppingPage extends PPanel {
 					btnDelete.revalidate();
 				}
 				pnlShoppingPage.repaint();
+				pnlCat1.repaint();
 			}//actionPerformed
 		});//addActionListner	
 		

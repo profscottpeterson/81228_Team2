@@ -87,7 +87,7 @@ public class FirstMenuPage extends PPanel{
 
 	public void placeButtons(List<JButton> buttons)
 	{
-
+	
 		int x = 50;
 		final int X = 50;
 		int y = 50;
