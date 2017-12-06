@@ -11,8 +11,7 @@ public class MenuItem {
 	
 	public MenuItem(){
 		ItemIngred = new ArrayList<Ingredient>();
-	}
-	
+	}//MenuItem
 	
 	public ArrayList<Ingredient> getItemIngred()
 	{
@@ -33,11 +32,6 @@ public class MenuItem {
 		return myIng;
 	}//getOrderIngred
 	
-	public double getPrice()
-	{
-		return price;
-	}
-	
 	public void addIngred(Ingredient I)
 	{
 		ItemIngred.add(I);
@@ -47,7 +41,7 @@ public class MenuItem {
 	private void removeIngred(Ingredient i)
 	{
 		ItemIngred.remove(i);
-		price =- extra;
+		setPrice(- extra);
 	}
 	public String getName(){
 		return this.name;
@@ -62,5 +56,14 @@ public class MenuItem {
 
 	public void setmIndex(int mIndex) {
 		this.mIndex = mIndex;
+	}
+	
+	public double getPrice()
+	{
+		return price;
+	}
+
+	protected void setPrice(double price) {
+		this.price = price;
 	}
 }

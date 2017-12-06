@@ -119,14 +119,19 @@ public class View2 {
 	}
 	
 	public void makeShoppingPage(){
-		ShoppingPage shoppingPage = new ShoppingPage(pp, exit, nav);
-		map.put("shoppingPage", shoppingPage);
+//		if(map.get("shoppingPage") == null){
+			ShoppingPage shoppingPage = new ShoppingPage(pp, exit, nav);
+			map.put("shoppingPage", shoppingPage);
+			p.add(shoppingPage, "shoppingPage");
+//		}		
 		
-		p.add(shoppingPage, "shoppingPage");
 		showShoppingPage();
 	}
 	
 	public void showShoppingPage(){
+		PPanel po =  map.get("shoppingPage");
+		ShoppingPage sp = (ShoppingPage) po; 
+		sp.repaintCart();
 		cl.show(p, "shoppingPage");
 	}
 	

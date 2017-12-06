@@ -25,6 +25,8 @@ public class NavTab extends JPanel{
 		
 		// Shopping Cart Button (Top Right of the UI)
 		btnShopping = new JButton("New button");
+		btnShopping.setHorizontalAlignment(JButton.CENTER);
+		btnShopping.setVerticalAlignment(JButton.BOTTOM);
 		btnShopping.setIcon(new ImageIcon(NavTab.class.getResource("/Resources/Shopping Cart.jpg")));
 		btnShopping.setBounds(409, 6, 104, 89);
 		// Adding the Button to the Panel

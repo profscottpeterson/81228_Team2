@@ -3,9 +3,9 @@ package view;
 import model.PizzaPlanet;
 
 @SuppressWarnings("serial")
-public class ConfermationPage extends PPanel {
+public class ConfirmationPage extends PPanel {
 
-	public ConfermationPage(PizzaPlanet pp) {
+	public ConfirmationPage(PizzaPlanet pp) {
 		super(pp);
 
 	}
