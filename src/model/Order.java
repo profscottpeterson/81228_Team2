@@ -9,6 +9,11 @@ public class Order {
 	private double deliveryCharge = 2;
 	private double tax = .05;
 	
+	public Order()
+	{
+		//System.out.println("big garbage");	
+	}
+	
 	public ArrayList<MenuItem> getOrderItems()
 	{
 		return OrderItems;
@@ -17,13 +22,13 @@ public class Order {
 	public void addItem(MenuItem m)
 	{
 		OrderItems.add(m);
-		subtotal =+m.getPrice();
+		subtotal += m.getPrice();
 	}
 	
-	public void removeItem(MenuItem m)
+	public void removeItem(int m)
 	{
 		OrderItems.remove(m);
-		subtotal =-m.getPrice();
+		//subtotal -= m.getPrice();
 	}
 
 	public double addGrandTotal(double sub)
@@ -31,6 +36,7 @@ public class Order {
 		double grand = sub + deliveryCharge + (sub * tax);
 		return grand;
 	}
+	
 	public void displayEverything(){
 		for (MenuItem m : this.OrderItems){
 			System.out.println(m.getName() + " " + m.getmIndex());

@@ -23,7 +23,7 @@ public class OrderTest {
 	@Test
 	public void testRemoveItem() {
 		o.addItem(m);
-		o.removeItem(m);
+		o.removeItem(0);
 	}
 
 	@Test

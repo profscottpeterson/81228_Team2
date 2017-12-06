@@ -156,7 +156,7 @@ public class Api {
 		Menu ourMenu = new Menu();
 
 		ArrayList<MenuItem> ListOfMenuItems = new ArrayList<MenuItem>();
-		rs = GetResultSet("Select f.Food_ID, f.Food_Name from Foods f where f.FType_ID =\'"+indexFoodWanted+"\'" );		
+		rs = GetResultSet("Select f.Food_ID, f.Food_Name, f.Price from Foods f where f.FType_ID =\'"+indexFoodWanted+"\'" );		
 		System.out.println("I'm looking it all the food categories");
 		try {
 			if(rs != null) 
@@ -166,9 +166,11 @@ public class Api {
 					MenuItem m = new MenuItem();					
 					String foodId = rs.getString("Food_ID");
 					String name = rs.getString("Food_Name");
+					double price = rs.getDouble("Price");
 					System.out.println(name);
 					m.setmIndex(Integer.parseInt(foodId));
-					m.setName(name);								
+					m.setName(name);	
+					m.setPrice(price);
 					ListOfMenuItems.add(m);				
 					//to send update
 				}//while

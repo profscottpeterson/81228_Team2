@@ -14,7 +14,7 @@ public class PizzaPlanet {
 	static View2 view;
 	String name;
 	String address;
-//	ShoppingCart cart;
+	static Order orders = new Order();
 
 //	Menu menu;
 	User user = null;
@@ -92,6 +92,19 @@ public class PizzaPlanet {
 		return null;
 	}
 	
+	public void setOrder(Order o)
+	{
+		for(MenuItem m : o.getOrderItems())
+		{
+			orders.addItem(m);
+		}
+		
+		//orders.displayEverything();
+	}
+	
+	public Order getOrder(){
+		return this.orders;
+	}
 	
 	public Menu getMenu(String catMenu) 
 	{
