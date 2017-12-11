@@ -154,7 +154,6 @@ public class Api {
 	public static Menu GetMenu(String indexFoodWanted)
 	{
 		Menu ourMenu = new Menu();
-
 		ArrayList<MenuItem> ListOfMenuItems = new ArrayList<MenuItem>();
 		rs = GetResultSet("Select f.Food_ID, f.Food_Name, f.Price from Foods f where f.FType_ID =\'"+indexFoodWanted+"\'" );		
 		System.out.println("I'm looking it all the food categories");
