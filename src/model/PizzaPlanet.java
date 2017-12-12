@@ -12,8 +12,6 @@ import java.util.HashMap;
 public class PizzaPlanet {
 	//PizzaPlanetGui view;
 	static View2 view;
-	String name;
-	String address;
 	static Order orders = new Order();
 
 //	Menu menu;
@@ -36,6 +34,8 @@ public class PizzaPlanet {
 		/*we have a GUEST */
 		if (user == null && isNewSignUp == false) {
 			this.displayFirstMenu();
+			User u = new User("4",false);
+			this.user = u;
 			System.out.println("Guest/null");
 		} 
     
@@ -101,6 +101,9 @@ public class PizzaPlanet {
 		
 		//orders.displayEverything();
 	}
+	public void resetOrder(){
+		this.orders = new Order();
+	}
 	
 	public Order getOrder(){
 		return this.orders;
@@ -162,10 +165,10 @@ public class PizzaPlanet {
 	}
 	
 	/* Call to view - Confirmation Page*/
-	private void displayConfirmation() {
+	public void displayConfirmation(Order o) {
 		Payment pay = null;
 		
-		//view.getConfirmationPage(this.getUser(), pay, this);
+		view.makeConfirmPage(o);
 	}
 	
 	/* Payment Transaction */
@@ -197,6 +200,11 @@ public class PizzaPlanet {
 	
 	public User getUser() {
 		return this.user;
+	}
+	public void voidOrder() {
+		orders = new Order();
+		user = null;
+		displyUserPage();
 	}
 	
 }

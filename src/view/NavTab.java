@@ -15,8 +15,9 @@ public class NavTab extends JPanel{
 	private JButton btnMenu;
 	private JButton btnAccount;
 	private JButton btnHome;
+	private PizzaPlanet pp;
 	
-	public NavTab(){
+	public NavTab(PizzaPlanet pp){
 		
 		this.setBackground(new Color(250, 240, 230));
 		this.setBounds(1359, 6, 531, 101);
@@ -53,6 +54,7 @@ public class NavTab extends JPanel{
 		btnHome.setBounds(14, 6, 104, 89);
 		add(btnHome);
 		
+		this.pp = pp;
 		Event();
 		setLayout(null);
 	}
@@ -64,8 +66,12 @@ public class NavTab extends JPanel{
 			public void actionPerformed(ActionEvent e) 
 			{
 				// Connect to Acount Page
+				if(pp.getUser().getUserId() != "4")
+				{
 				PizzaPlanet.displayAccountPage();
+				}
 			}
+				
 		});
 		
 		btnMenu.addActionListener(new ActionListener() 

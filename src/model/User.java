@@ -68,6 +68,9 @@ public class User {
 		this.payment.put("number", "value");
 		this.payment.put("CVC", "value");
 	}
+	public User(String id,boolean bs){
+		this.userId = id;
+	}
 	
 	/**
 	 * When its time to pay, get this info...

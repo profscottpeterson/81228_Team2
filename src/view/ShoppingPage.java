@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import model.MenuItem;
 import model.Order;
+import model.Payment;
 import model.PizzaPlanet;
 
 @SuppressWarnings("serial")
@@ -25,14 +26,17 @@ public class ShoppingPage extends PPanel {
 	private JPanel pnlShoppingPage;
 	private JLabel lblBackgroundShop;
 	private JButton btnDelete; 
+	private JButton btnSubmit;
 	private int foodIndex = -1;
+	private JPanel pnlCat;
 
 	public ShoppingPage(PizzaPlanet pp, ExitTab exit, NavTab nav) {
 		super(pp);
 
 		add(exit);
 		add(nav);
-		
+		btnDelete = new JButton("CLEAR");
+		btnSubmit = new JButton("Submit");
 		pnlShoppingPage = new JPanel();
 		pnlShoppingPage.setVisible(true);
 		
@@ -40,22 +44,31 @@ public class ShoppingPage extends PPanel {
 		add(pnlShoppingPage);
 		pnlShoppingPage.setLayout(null);
 
-		// Setting Background/bounds/Icon
-		lblBackgroundShop = new JLabel("");
-		lblBackgroundShop.setBounds(0, -11, 2000, 1103);
-		lblBackgroundShop.setIcon(new ImageIcon(ShoppingPage.class.getResource("/Resources/MenuCat_Final.png")));
-		lblBackgroundShop.setBackground(Color.LIGHT_GRAY);
-		add(lblBackgroundShop);	
-		
-		btnDelete = new JButton("DELETE");
 		btnDelete.setForeground(new Color(204, 0, 0));
 		btnDelete.setBackground(PStyle.primaryButtonColor);
 		btnDelete.setFont(PStyle.primaryFontStyle);
 		btnDelete.setBounds(1687, 800, 200, 74);
 		add(btnDelete);
-		AddEventsToAddButton();
+		AddEventsToDeleteButton();
 		
-		setLayout(null);
+		btnSubmit.setForeground(new Color(204, 0, 0));
+		btnSubmit.setBackground(PStyle.primaryButtonColor);
+		btnSubmit.setFont(PStyle.primaryFontStyle);
+		btnSubmit.setBounds(1687, 500, 200, 74);
+		add(btnSubmit);
+		AddEventsToSubmitButton();
+		
+		pnlCat = new JPanel();
+		pnlCat.setBackground(new Color(165, 42, 42));
+		pnlCat.setBounds(322, 252, 1297, 779);
+		pnlCat.setLayout(null);
+		add(pnlCat);		
+		setLayout(null);	
+		// Setting Background/bounds/Icon
+		lblBackgroundShop = new JLabel("");
+		lblBackgroundShop.setBounds(0, -11, 2000, 1103);
+		lblBackgroundShop.setIcon(new ImageIcon(ShoppingPage.class.getResource("/Resources/Menu_Final.png")));
+		pnlShoppingPage.add(lblBackgroundShop);	
 			
 	}
 	
@@ -95,9 +108,10 @@ public class ShoppingPage extends PPanel {
 				}
 			});
 			buttonList.add(btn);
-		}
+		}	
 		placeButtons(buttonList);
 		pnlShoppingPage.repaint();
+		
 	}
 	public void placeButtons(List<JButton> buttons)
 	{
@@ -115,23 +129,38 @@ public class ShoppingPage extends PPanel {
 			button.setForeground(new Color(204, 0, 0));
 			button.setMargin(new Insets (0, 0, 0, 0));
 			button.setBackground(new Color(250, 240, 230));
-			pnlShoppingPage.add(button);
+			pnlCat.add(button);
 
 			y = y + 120;
 
 		}
 	}
 	
-	public void AddEventsToAddButton() {
+	public void AddEventsToDeleteButton() {
 
 		btnDelete.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				pnlShoppingPage.invalidate();
-				if (foodIndex != -1){
-					pp.getOrder().removeItem(foodIndex);
-					btnDelete.revalidate();
+				
+				pp.resetOrder();
+				pp.displayFirstMenu();
+			}//actionPerformed
+		});//addActionListner	
+	}//AddEvents
+	
+	public void AddEventsToSubmitButton() {
+
+		btnSubmit.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				{
+					double price = 0;
+					
+					Order o = pp.getOrder();
+					Payment.CreateOrder(Integer.parseInt(pp.getUser().getUserId()),o.getSubtotal(), pp.getOrder());
+					pp.displayConfirmation(o);
 				}
 				pnlShoppingPage.repaint();
 			}//actionPerformed

@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import model.Menu;
+import model.Order;
 import model.PizzaPlanet;
 
 public class View2 {
@@ -40,7 +41,7 @@ public class View2 {
 		
 		exit = new ExitTab();
 		
-		nav = new NavTab();
+		nav = new NavTab(pp);
 		
 		cl = new CardLayout();
 		
@@ -77,7 +78,6 @@ public class View2 {
 	
 	public void makeFirstMenuPage(Map<String,String> foodtypes){
 
-			
 			FirstMenuPage firstMenuPage = new FirstMenuPage(foodtypes, pp, exit, nav);
 			map.put("firstMenuPage", firstMenuPage);
 			
@@ -86,6 +86,21 @@ public class View2 {
 		showFirstMenuPage();
 	}
 	
+	public void makeConfirmPage(Order o){
+		ConfirmationPage cp = new ConfirmationPage(pp, exit);
+		map.put("cp",cp);
+		
+		p.add(cp, "cp");
+	
+	showConfirmPage();
+}
+	
+
+	private void showConfirmPage() {
+		// TODO Auto-generated method stub
+		cl.show(p, "cp");
+	}
+
 	public void showFirstMenuPage(){
 		cl.show(p,  "firstMenuPage");
 	}

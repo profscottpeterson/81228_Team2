@@ -13,6 +13,9 @@ public class Order {
 	{
 		//System.out.println("big garbage");	
 	}
+	public double getSubtotal(){
+		return this.subtotal;
+	}
 	
 	public ArrayList<MenuItem> getOrderItems()
 	{

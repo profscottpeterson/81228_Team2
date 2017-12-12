@@ -225,6 +225,7 @@ public class SecondMenuPage extends PPanel {
 					MenuItem orderM = new MenuItem();
 					orderM.setName(mu.getName());
 					orderM.setmIndex(mu.getmIndex());
+					orderM.setPrice(mu.getPrice());
 					for (java.awt.Component c : pnlCat2.getComponents())
 					{
 						JCheckBox j = (JCheckBox)c;
@@ -233,7 +234,8 @@ public class SecondMenuPage extends PPanel {
 							orderM.addIngred(mu.getOrderIngred(j.getName()));
 						}//if
 					}
-					currentOrder.addItem(orderM);		
+					currentOrder.addItem(orderM);
+					System.out.println(orderM.getPrice());
 					pp.setOrder(currentOrder);
 					//currentOrder.displayEverything();
 					currentOrder = null;

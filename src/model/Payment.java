@@ -5,9 +5,10 @@ import java.util.ArrayList;
 
 public class Payment extends Api {
 	
-	public void CreateOrder(int userID,double price, Order ordr) {
+	public static void CreateOrder(int userID,double price, Order ordr) {
 		price = price * 1.05;
-		rs = GetResultSet("Insert into Orders(userID,date,orderTotal) values('" + userID + "',GETDATE()," + price + ")");
+		System.out.println("About to insert");
+		rs = GetResultSet("Insert into Orders(userID,orderPlaced,orderTotal) values('" + userID + "',GETDATE()," + price + ")");
 		//we need to get orders id that was placed into the db and pass to 
 		rs = GetResultSet("select max(orderID) from orders");
 		int value = -1;
@@ -16,14 +17,14 @@ public class Payment extends Api {
 			{
 				while(rs.next())
 				{					
-					value = rs.getInt(0);	
+					value = rs.getInt(1);	
 					System.out.println(value);
 				}//while
 			}else {} 
 		}catch(SQLException s) {s.printStackTrace();}
 		InsertFoodIngQtyInDB(ordr,value);
 	}
-	private void InsertFoodIngQtyInDB(Order o, int orderID) {
+	private static void InsertFoodIngQtyInDB(Order o, int orderID) {
 		System.out.println("Trying to get the FIQ list");
 		ArrayList<FoodIngQty> fullListFIQ = GetMyFIQList(); //the database returns the full table of FIQ
 		ArrayList<OrderIntoDB> orderPutIntoDB = new ArrayList<OrderIntoDB>();
@@ -49,14 +50,14 @@ public class Payment extends Api {
 		SendToDatabase(orderPutIntoDB);
 	}//insertFoodIngQtyInDB
 	
-	private void SendToDatabase(ArrayList<OrderIntoDB> dbStuff){
+	private static void SendToDatabase(ArrayList<OrderIntoDB> dbStuff){
 		for(OrderIntoDB oDB : dbStuff)
 		{
 			rs = GetResultSet("Insert into Order_Food(OrderId, FIQ_id, LineItem) values("+oDB.getOrderID()+","+oDB.getFiqID()+","+oDB.getLineOrderNum()+")");
 		}//for
 	}//SendToDatbase
 	
-	private ArrayList<FoodIngQty> GetMyFIQList() {
+	private static ArrayList<FoodIngQty> GetMyFIQList() {
 		ArrayList<FoodIngQty> myFullList = new ArrayList<FoodIngQty>();
 		rs = GetResultSet("Select * from Food_Ing_Qty");
 		int fiqID;
@@ -66,8 +67,7 @@ public class Payment extends Api {
 			if(rs != null) 
 			{
 				while(rs.next())
-				{
-					System.out.println("Trying to gather all the FIQ table");
+				{					
 					fiqID = rs.getInt("FIQ_id");
 					fID = rs.getInt("Food_id");
 					iID = rs.getInt("Ing_id");					
