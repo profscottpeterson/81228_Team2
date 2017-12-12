@@ -38,7 +38,7 @@ public class ShoppingPage extends PPanel {
 		btnDelete = new JButton("CLEAR");
 		btnSubmit = new JButton("Submit");
 		pnlShoppingPage = new JPanel();
-		pnlShoppingPage.setVisible(true);
+		
 		
 		pnlShoppingPage.setBounds(0, 0, 1914, 1091);
 		add(pnlShoppingPage);
@@ -48,30 +48,31 @@ public class ShoppingPage extends PPanel {
 		btnDelete.setBackground(PStyle.primaryButtonColor);
 		btnDelete.setFont(PStyle.primaryFontStyle);
 		btnDelete.setBounds(1687, 800, 200, 74);
-		add(btnDelete);
+		pnlShoppingPage.add(btnDelete);
 		AddEventsToDeleteButton();
 		
 		btnSubmit.setForeground(new Color(204, 0, 0));
 		btnSubmit.setBackground(PStyle.primaryButtonColor);
 		btnSubmit.setFont(PStyle.primaryFontStyle);
 		btnSubmit.setBounds(1687, 500, 200, 74);
-		add(btnSubmit);
+		pnlShoppingPage.add(btnSubmit);
 		AddEventsToSubmitButton();
 		
 		pnlCat = new JPanel();
 		pnlCat.setBackground(new Color(165, 42, 42));
 		pnlCat.setBounds(322, 252, 1297, 779);
 		pnlCat.setLayout(null);
-		add(pnlCat);		
+		pnlShoppingPage.add(pnlCat);		
 		setLayout(null);	
 		// Setting Background/bounds/Icon
 		lblBackgroundShop = new JLabel("");
 		lblBackgroundShop.setBounds(0, -11, 2000, 1103);
 		lblBackgroundShop.setIcon(new ImageIcon(ShoppingPage.class.getResource("/Resources/Menu_Final.png")));
 		pnlShoppingPage.add(lblBackgroundShop);	
-			
+		pnlShoppingPage.setVisible(true);
+		pnlCat.setVisible(true);
 	}
-	
+
 	public void repaintCart(){
 		List<JButton> buttonList = new ArrayList<>();
 		System.out.println("THIS IS BEING REPAINTED");
@@ -156,16 +157,23 @@ public class ShoppingPage extends PPanel {
 			public void actionPerformed(ActionEvent e)
 			{
 				{
-					double price = 0;
-					
 					Order o = pp.getOrder();
+					
+					if(o.getOrderItems().size() > 0)
+					{
+					double price = 0;
 					Payment.CreateOrder(Integer.parseInt(pp.getUser().getUserId()),o.getSubtotal(), pp.getOrder());
 					pp.displayConfirmation(o);
+					}
+					else
+					{
+						pp.displayFirstMenu();
+					}
 				}
 				pnlShoppingPage.repaint();
 			}//actionPerformed
 		});//addActionListner	
 	}//AddEvents
 	
-
+	
 }

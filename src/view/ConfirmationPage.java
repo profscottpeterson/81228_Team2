@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,6 +21,7 @@ public class ConfirmationPage extends PPanel {
 	private JLabel lblThanks;
 	private JLabel lblBackgroundShop;
 	private JButton btnSubmit;
+	private static DecimalFormat df = new DecimalFormat(".##");
 	
 	public ConfirmationPage(PizzaPlanet pp, ExitTab exit) {
 		super(pp);
@@ -32,7 +34,7 @@ public class ConfirmationPage extends PPanel {
 		pnlShoppingPage.setLayout(null);
 		add(pnlShoppingPage);
 		
-		lblThanks = new JLabel("Thank you for your order! Your total is $" + pp.getOrder().getSubtotal());
+		lblThanks = new JLabel("Thank you for your order! Your total is $" + df.format(pp.getOrder().getSubtotal()));
 		lblThanks.setBounds(450, 400, 1600, 100);
 		lblThanks.setFont(new Font("Comic Sans MS", Font.PLAIN, 50));
 		pnlShoppingPage.add(lblThanks);
@@ -42,7 +44,7 @@ public class ConfirmationPage extends PPanel {
 		btnSubmit.setBackground(PStyle.primaryButtonColor);
 		btnSubmit.setFont(PStyle.primaryFontStyle);
 		btnSubmit.setBounds(700, 600, 500, 74);
-		add(btnSubmit);		
+		pnlShoppingPage.add(btnSubmit);		
 		AddEventsToSubmitButton();	
 		setLayout(null);
 		
