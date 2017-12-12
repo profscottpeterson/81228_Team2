@@ -4,22 +4,57 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Payment extends Api {
-	public void createOrder(int userID,double price) {
+	
+	public void CreateOrder(int userID,double price, Order ordr) {
 		price = price * 1.05;
-		rs = GetResultSet("insert into Orders(userID,date,orderTotal) values ('" + userID + "',GETDATE()," + price + ")");
+		rs = GetResultSet("Insert into Orders(userID,date,orderTotal) values('" + userID + "',GETDATE()," + price + ")");
+		//we need to get orders id that was placed into the db and pass to 
+		rs = GetResultSet("select max(orderID) from orders");
+		int value = -1;
+		try {
+			if(rs != null) 
+			{
+				while(rs.next())
+				{					
+					value = rs.getInt(0);	
+					System.out.println(value);
+				}//while
+			}else {} 
+		}catch(SQLException s) {s.printStackTrace();}
+		InsertFoodIngQtyInDB(ordr,value);
 	}
-	public void insertFoodIngQtyInDB(Order o) {
+	private void InsertFoodIngQtyInDB(Order o, int orderID) {
 		System.out.println("Trying to get the FIQ list");
 		ArrayList<FoodIngQty> fullListFIQ = GetMyFIQList(); //the database returns the full table of FIQ
-		//need to build a way for the order to look through the fullListFIQ and determine which ones it needs to insert for the order
-		for (MenuItem m : o.getOrderItems()) {
-			rs = GetResultSet("insert into Order_Food(foodID,price ) Values (" + m.getItemIngred() + "," + m.getPrice() + ")");
-			double price = 0;
-			price = price + m.getPrice();
-			
-			//createOrder(pp.user.Id, price);
-		}//for
+		ArrayList<OrderIntoDB> orderPutIntoDB = new ArrayList<OrderIntoDB>();
+		int counter = 0;
+		//Go into order and get all menu items
+		for(MenuItem mi : o.getOrderItems())
+		{
+			counter++;
+			for(Ingredient ig : mi.getItemIngred())
+			{
+				for(FoodIngQty qt : fullListFIQ)
+				{
+					if(mi.getmIndex() == qt.getFoodID() && ig.getIng_id() == qt.getIngID())
+					{
+						int fiqID = qt.getFoodIngID(); //this gets what FIQ table has for the food and ing combination. Need to create the Order, FIQ, LineItem in SQL
+						OrderIntoDB db = new OrderIntoDB(orderID,fiqID,counter);
+						orderPutIntoDB.add(db);
+						break;
+					}//if
+				}//for qt
+			}//for ing
+		}//for mi
+		SendToDatabase(orderPutIntoDB);
 	}//insertFoodIngQtyInDB
+	
+	private void SendToDatabase(ArrayList<OrderIntoDB> dbStuff){
+		for(OrderIntoDB oDB : dbStuff)
+		{
+			rs = GetResultSet("Insert into Order_Food(OrderId, FIQ_id, LineItem) values("+oDB.getOrderID()+","+oDB.getFiqID()+","+oDB.getLineOrderNum()+")");
+		}//for
+	}//SendToDatbase
 	
 	private ArrayList<FoodIngQty> GetMyFIQList() {
 		ArrayList<FoodIngQty> myFullList = new ArrayList<FoodIngQty>();
